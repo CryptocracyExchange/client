@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Graph extends React.Component {
+class History extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,11 +10,11 @@ class Graph extends React.Component {
 
   render() {
     return (
-      <div className="graph">
-      Graph
+      <div className="history">
+      History
       </div>
       )
   }
 }
 
-export default Graph;
+export default History;

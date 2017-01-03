@@ -1,5 +1,12 @@
-body {
+@font-face {
+  font-family: 'DecimaMonoPro';
+  font-style: normal;
+  src: local('DecimaMonoPro'), url(./fonts/DecimaMonoPro.ttf) format('ttf');
+}
 
+
+body {
+  font-family: 'DecimaMonoPro', sans-serif;
 }
 
 .landing {
@@ -33,5 +40,46 @@ body {
   left:0;
   position:fixed;
   height:8%;
-  background-color: red;
+  background-color: white;
+  color: #21CE99;
+}
+
+.exchangeBar {
+  padding:0;
+  width:100%;
+  top:8%;
+  left:0;
+  position:fixed;
+  height:10%;
+  background-color: green;
+}
+
+.transaction {
+  padding:0;
+  width:25%;
+  top:18%;
+  left:0;
+  position:fixed;
+  height:42%;
+  background-color: blue;
+}
+
+.history {
+  padding:0;
+  width:25%;
+  top:60%;
+  left:0;
+  position:fixed;
+  height:42%;
+  background-color: grey;
+}
+
+.graph {
+  padding:0;
+  width:75%;
+  top:18%;
+  left:25%;
+  position:fixed;
+  height:84%;
+  background-color: pink;
 }

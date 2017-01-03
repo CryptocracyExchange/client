@@ -6,12 +6,16 @@ class Nav extends React.Component {
     super(props);
   }
 
-
+  componentDidMount() {
+    console.log('nav props', this.props.deepstream);
+  }
 
   render() {
     return (
       <div className="navBar">
-      Nav
+      <h1>  
+        Cryptocracy
+      </h1>
       </div>
       )
   }
