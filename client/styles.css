@@ -1,0 +1,12 @@
+body {
+  height:100%;
+  width:100%;
+  color:red;
+}
+
+.landingBanner {
+  height:70%;
+  left:20%;
+  top:15%;
+  position:absolute;
+}
