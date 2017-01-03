@@ -1,4 +1,8 @@
 import React from 'react';
+import Nav from './Nav.jsx';
+// import Transaction from './Transaction.jsx';
+// import Graph from './Graph.jsx';
+// import TransHistory from './TransHistory.jsx';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -10,6 +14,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
+      <Nav />
       Dashboard
       </div>
       )

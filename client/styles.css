@@ -1,7 +1,16 @@
 body {
+
+}
+
+.landing {
   height:100%;
   width:100%;
-  color:red;
+  top:0;
+  left:0;
+  margin:0;
+  padding:0;
+  position: fixed;
+  background-color: #21CE99;
 }
 
 .landingBanner {
@@ -9,4 +18,20 @@ body {
   left:20%;
   top:15%;
   position:absolute;
+}
+
+.loginForm {
+  position: absolute;
+  left:60%;
+  top:40%;
+}
+
+.navBar {
+  padding:0;
+  width:100%;
+  top:0;
+  left:0;
+  position:fixed;
+  height:8%;
+  background-color: red;
 }

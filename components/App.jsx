@@ -1,21 +1,27 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-class Landing extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    console.log('its alive');
-  }
+
 
 
   render() {
+    let test = ['a', 'b'];
+    const childrenWithProps = React.Children.map(this.props.children,
+     (child) => React.cloneElement(child, {
+       deepstream: test
+     })
+    );
+
     return (
       <div>
-      Hello, World!
+        {childrenWithProps}
       </div>
-      )
+    );
   }
 }
 
-export default Landing;
+export default App;
