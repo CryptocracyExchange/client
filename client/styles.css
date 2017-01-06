@@ -33,15 +33,44 @@ body {
   top:40%;
 }
 
+.createUser {
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  margin:0;
+  padding:0;
+  position: fixed;
+  background-color: #FDFDFD;
+}
+
+.createUserBanner {
+  height:100%;
+  left:20%;
+  top:0;
+  position:absolute;
+}
+
+
 .navBar {
   padding:0;
   width:100%;
   top:0;
   left:0;
   position:fixed;
+  display:flex;
   height:8%;
-  background-color: white;
+  background-color: #FDFDFD;
   color: #21CE99;
+}
+
+.navBar a {
+  padding-top:2%;
+}
+
+.navBar a:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .exchangeBar {
@@ -51,7 +80,8 @@ body {
   left:0;
   position:fixed;
   height:10%;
-  background-color: green;
+  background-color: grey;
+  border: 1px solid black;
 }
 
 .transaction {
@@ -61,7 +91,8 @@ body {
   left:0;
   position:fixed;
   height:42%;
-  background-color: blue;
+  background-color: grey;
+  border: 1px solid black;
 }
 
 .history {
@@ -72,6 +103,7 @@ body {
   position:fixed;
   height:42%;
   background-color: grey;
+  border: 1px solid black;
 }
 
 .graph {
@@ -81,5 +113,6 @@ body {
   left:25%;
   position:fixed;
   height:84%;
-  background-color: pink;
+  background-color: grey;
+  border: 1px solid black;
 }

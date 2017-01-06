@@ -23,11 +23,7 @@ class Nav extends React.Component {
         <h1>  
           Cryptocracy
         </h1>
-
-        <a className='' onClick={this.clickHandler.bind(this, '/settings')}> BTC </a>
-        <a className='' onClick={this.clickHandler.bind(this, '/settings')}> ETH </a>
-        <a className='' onClick={this.clickHandler.bind(this, '/settings')}> LTC </a>
-        <a className='' onClick={this.clickHandler.bind(this, '/settings')}> Settings </a>
+        <a className='' onClick={this.clickHandler.bind(this, '/dashboard')}> Home </a>
       </div>
       )
   }

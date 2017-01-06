@@ -6,7 +6,9 @@ class Transaction extends React.Component {
     super(props);
   }
 
-
+  componentDidMount() {
+    console.log('tr', this.props);
+  }
 
   render() {
     return (

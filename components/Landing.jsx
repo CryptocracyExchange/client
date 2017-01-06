@@ -2,17 +2,36 @@ import React from 'react';
 import request from 'superagent';
 import { Router, Route, browserHistory } from 'react-router';
 
+
+let options = {
+  userID: '00',
+  currency: 'BTC'
+}
+
 class Landing extends React.Component {
   constructor(props) {
     super(props);
+
+ 
+    
   }
+
+
   componentDidMount() {
-    console.log('its alive', this.props);
+    const url = 'localhost:6020';
+    const deepstream = this.props.deepstream;
+    const client = deepstream(url).login();
+    console.log('its alive', this.props, client.event.emit('checkBalance', options));
   }
 
   submitHandler(e) {
     e.preventDefault();
     this.props.router.push('/dashboard');
+  }
+
+  clickHandler(e) {
+    e.preventDefault();
+    this.props.router.push('/signup');
   }
 
 
@@ -30,7 +49,8 @@ class Landing extends React.Component {
               <input type="text" placeholder="password" name="name" />
             </label>
             <br /><br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Log In" />&nbsp;&nbsp;
+            <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
           </form>
         </div>
       </div>
