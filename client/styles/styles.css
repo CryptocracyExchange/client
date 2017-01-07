@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'DecimaMonoPro';
   font-style: normal;
-  src: local('DecimaMonoPro'), url(./fonts/DecimaMonoPro.ttf) format('ttf');
+  src: url("/fonts/DecimaMonoPro.ttf");
 }
 
 

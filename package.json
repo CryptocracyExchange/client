@@ -7,14 +7,10 @@
     "start": "node server/server.js",
     "start-watch": "nodemon server/server.js",
     "start-webpack": "node_modules/webpack/bin/webpack.js --config webpack.config.js --progress --colors --watch",
+    "build": "node_modules/webpack/bin/webpack.js --config webpack.config.js --progress --colors",
     "start-dev": "npm run start-watch & npm run start-webpack",
-<<<<<<< HEAD
     "start-prod": "NODE_ENV=prod node server/server.js",
-=======
-    "start-prod": "NODE_ENV=prod npm run start-watch & npm run start-webpack",
->>>>>>> Starts refactor for docker
-    "webpack": "node node_modules/webpack/bin/webpack.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test"
   },
   "repository": {
     "type": "git",
@@ -57,8 +53,10 @@
     "morgan": "^1.7.0"
   },
   "devDependencies": {
-    "superagent": "^3.1.0",
-    "nodemon": "^1.11.0"
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "superagent": "^3.1.0"
   },
   "homepage": "https://github.com/KN3LL2K/client#readme"
 }
