@@ -23,6 +23,22 @@ class Dashboard extends React.Component {
     this.props.deep.event.subscribe('returnBalance', this._setUserBalance.bind(this));
 
     this._setUserData.bind(this);
+    let closedTransactions = this.props.deep.record.getList('transactionHistory');
+    // closedTransactions.whenReady().getEntries();
+    console.log('closed', closedTransactions)
+    const queryString = JSON.stringify({
+      table: 'open',
+      query: [
+        [ 'userID', 'match', 'harry' ]
+      ]
+    })
+
+    let openBuyList = this.props.deep.record.getList('search?' + queryString);
+    let openBuyEntries;
+    openBuyList.whenReady((list) => {
+      openBuyEntries = list.getEntries();
+      console.log('open', openBuyEntries)
+    });
   }
 
   _setUserData() {

@@ -39,9 +39,6 @@ class Transaction extends React.Component {
     }
   }
 
-
-
-
   selectCurrency(e) {
     console.log(e.target.value);
     const change = _.extend({}, this.state);
@@ -91,6 +88,7 @@ class Transaction extends React.Component {
           <br />
           <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
         </Modal>
+        &nbsp;&nbsp;&nbsp;
         <Modal
           header='Confirmation'
           fixedFooter

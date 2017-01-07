@@ -7,11 +7,15 @@ class History extends React.Component {
   }
 
 
+  componentDidMount() {
+    
+  }
+
   render() {
   const openTable = (
     <div>
       <Row>
-        <Table>
+        <Table className='responsive striped'>
           <thead>
             <tr>
               <th data-field="type">Buy/Sell</th>
@@ -58,7 +62,7 @@ class History extends React.Component {
   const closedTable = (
   <div>
       <Row>
-      <Table>
+      <Table className='responsive striped'>
         <thead>
           <tr>
             <th data-field="type">Buy/Sell</th>
