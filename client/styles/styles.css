@@ -7,6 +7,7 @@
 
 body {
   font-family: 'DecimaMonoPro', sans-serif;
+  background-color: #FDFDFD;
 }
 
 .landing {
@@ -53,55 +54,81 @@ body {
 
 
 .navBar {
-  padding:0;
+  color: #21CE99 !important;
+/*  padding:0;
   width:100%;
   top:0;
-  left:0;
-  position:fixed;
-  display:flex;
-  height:8%;
-  background-color: #FDFDFD;
-  color: #21CE99;
+  left:0;*/
+  /*position:fixed;*/
+  /*display:flex;*/
+  /*height:auto;*/
+  /*background-color: #FDFDFD;*/
+  /*color: #21CE99;*/
 }
 
-.navBar i {
+/*.navBar i {
   position: absolute;
   top:40%;
   right:1%;
 }
+.navBar ul li a {
+  color: #21CE99;
+}
+nav a {
+   color: #21CE99;
+}
+nav ul li a {
+  color: #21CE99;
+}
+.tabs.tabs-transparent .tab a:hover, .tabs.tabs-transparent .tab a.active {
+  color: #21CE99;
+}
+
+.brand-logo {
+  color: #21CE99;
+}
+
+.tab a {
+  color: #21CE99;
+}*/
 
 .navBar a:hover {
-  cursor: pointer;
-  text-decoration: underline;
+/*  cursor: pointer;
+  text-decoration: underline;*/
 }
 
 .navBar h1 {
-  top:37%;
+/*  top:37%;
   left:1%;
   position:relative;
   margin:0;
-  font-size: 2em;
+  font-size: 2em;*/
 }
 
 .exchangeBar {
   padding:0;
-  width:100%;
-  top:8%;
+/*  width:100%;
+  top:8%;*/
+  display:none;
   left:0;
-  position:fixed;
+  /*position:fixed;*/
   height:10%;
   background-color: grey;
   border: 1px solid black;
 }
+.tabs .indicator { display: none; }
+.tabs .tab a.active { border-bottom: 2px solid #DA4E28; }
 
 .transaction {
   padding:0;
   width:25%;
-  top:18%;
+  /*top:18%;*/
   left:0;
-  position:fixed;
-  height:42%;
-  /*background-color: grey;*/
+  /*position:fixed;*/
+  /*height:42%;*/
+  min-height: auto;
+  /*padding-bottom:60%;*/
+  background-color: #FDFDFD !important;
   /*border: 1px solid black;*/
 }
 
@@ -110,10 +137,11 @@ body {
   width:25%;
   top:60%;
   left:0;
-  position:fixed;
-  height:42%;
-  background-color: grey;
-  border: 1px solid black;
+  /*position:fixed;*/
+  min-height: auto;
+  /*height:42%;*/
+  background-color: #FDFDFD !important;
+  /*border: 1px solid black;*/
 }
 
 .graph {

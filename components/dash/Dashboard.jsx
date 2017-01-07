@@ -5,6 +5,7 @@ import Transaction from './Transaction.jsx';
 import Graph from './Graph.jsx';
 import History from './History.jsx';
 import _ from 'lodash';
+import { Row } from 'react-materialize';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -47,9 +48,11 @@ class Dashboard extends React.Component {
       <div>
         <Nav toRoute={this.changeRoute.bind(this)} />
         <ExchangeRates deep={this.props.deep} />
+        <Row>
         <Transaction userData={this.props.userData} userBalance={this.state.userBalance} deep={this.props.deep} />
         <History deep={this.props.deep} />
         <Graph deep={this.props.deep} />
+        </Row>
       </div>
       )
   }

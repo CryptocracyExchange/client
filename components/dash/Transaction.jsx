@@ -46,7 +46,7 @@ class Transaction extends React.Component {
     console.log(e.target.value);
     const change = _.extend({}, this.state);
     change.currency = e.target.value;
-    if (e.target.value !== 1) {
+    if (e.target.value !== '1') {
       change.currencySelected = true;
     }
     this.setState(change);
@@ -73,6 +73,24 @@ class Transaction extends React.Component {
           <Input id='amount' onChange={(e) => this.formChange(e)} s={12} label='Qty:' defaultValue="1" />
         </Row>
         <Row>
+          <Modal
+          header='Confirmation'
+          fixedFooter
+          trigger={
+          <Button className={this.state.currencySelected ? 'red' : 'disabled'} waves='light'>
+          Sell
+          </Button>
+          }
+          actions={
+            [<Button waves='light' onClick={(e) => this.clickHandler(e, 'Sell')} modal='close' flat>Confirm</Button>,
+            <Button waves='light' modal='close' flat>Cancel</Button>]
+          }
+          >
+          <p>Do you wish to sell:</p>
+          <p>{this.state.amount} &nbsp; {this.state.currency} for {(this.state.price || this.state.marketValue)} ea.</p>
+          <br />
+          <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
+        </Modal>
         <Modal
           header='Confirmation'
           fixedFooter
@@ -91,6 +109,7 @@ class Transaction extends React.Component {
           <br />
           <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
         </Modal>
+      
         </Row>
       </div>
     );
@@ -108,37 +127,23 @@ class Transaction extends React.Component {
           <Input id='amount' onChange={(e) => this.formChange(e)} s={12} label='Qty:' defaultValue="1" />
         </Row>
         <Row>
-        <Modal
-          header='Confirmation'
-          fixedFooter
-          trigger={
-          <Button className={this.state.currencySelected ? '' : 'disabled'} waves='light'>
-          Sell
-          </Button>
-          }
-          actions={
-            [<Button waves='light' onClick={(e) => this.clickHandler(e, 'Sell')} modal='close' flat>Confirm</Button>,
-            <Button waves='light' modal='close' flat>Cancel</Button>]
-          }
-          >
-          <p>Do you wish to sell:</p>
-          <p>{this.state.amount} &nbsp; {this.state.currency} for {(this.state.price || this.state.marketValue)} ea.</p>
-          <br />
-          <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
-        </Modal>
+        
         </Row>
       </div>
     );
 
     return (
       <div className="transaction z-depth-0">
-        <Tabs className=''>
-          <Tab title="Buy" active >{buyForm}</Tab>
-          <Tab title="Sell" >{sellForm}</Tab>
-        </Tabs>
+      <p>Buy/Sell</p>
+        {buyForm}
       </div>
       )
   }
 }
 
 export default Transaction;
+
+ // <Tabs className=''>
+          // <Tab id='buy' title="Buy" active >{buyForm}</Tab>
+          // <Tab id='sell' title="Sell" >{sellForm}</Tab>
+        // </Tabs>
