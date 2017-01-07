@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-const url = process.env.NODE_ENV === 'prod' ? 'deepstream' : 'localhost';
-const client = require('deepstream.io-client-js')(url + ':6020');
+// const url = process.env.NODE_ENV === 'prod' ? 'deepstream' : 'localhost';
+const url = 'deepstream';
+const client = require('deepstream.io-client-js')(`${url}:6020`);
 
 class App extends React.Component {
   constructor(props) {
