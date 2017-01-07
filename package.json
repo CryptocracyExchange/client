@@ -8,7 +8,11 @@
     "start-watch": "nodemon server/server.js",
     "start-webpack": "node_modules/webpack/bin/webpack.js --config webpack.config.js --progress --colors --watch",
     "start-dev": "npm run start-watch & npm run start-webpack",
+<<<<<<< HEAD
     "start-prod": "NODE_ENV=prod node server/server.js",
+=======
+    "start-prod": "NODE_ENV=prod npm run start-watch & npm run start-webpack",
+>>>>>>> Starts refactor for docker
     "webpack": "node node_modules/webpack/bin/webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -49,10 +53,10 @@
     "react-router": "^3.0.0",
     "style-loader": "^0.13.1",
     "victory": "^0.15.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "morgan": "^1.7.0"
   },
   "devDependencies": {
-    "morgan": "^1.7.0",
     "superagent": "^3.1.0",
     "nodemon": "^1.11.0"
   },
