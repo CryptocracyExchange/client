@@ -64,13 +64,23 @@ body {
   color: #21CE99;
 }
 
-.navBar a {
-  padding-top:2%;
+.navBar i {
+  position: absolute;
+  top:40%;
+  right:1%;
 }
 
 .navBar a:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.navBar h1 {
+  top:37%;
+  left:1%;
+  position:relative;
+  margin:0;
+  font-size: 2em;
 }
 
 .exchangeBar {
@@ -91,8 +101,8 @@ body {
   left:0;
   position:fixed;
   height:42%;
-  background-color: grey;
-  border: 1px solid black;
+  /*background-color: grey;*/
+  /*border: 1px solid black;*/
 }
 
 .history {

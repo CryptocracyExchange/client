@@ -16,7 +16,7 @@ ReactDom.render(
       <Route path="/" component={App}>
         <IndexRoute component={Landing} />
         <Route path="/signup" component={CreateUser} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" userData={{hello: 'hi'}} component={Dashboard} />
         <Route path="/settings" component={Settings} />
       </Route>
     </Router>

@@ -12,21 +12,20 @@ class Landing extends React.Component {
   constructor(props) {
     super(props);
 
- 
-    
-  }
-
-
-  componentDidMount() {
-    const url = 'localhost:6020';
-    const deepstream = this.props.deepstream;
-    const client = deepstream(url).login();
-    console.log('its alive', this.props, client.event.emit('checkBalance', options));
   }
 
   submitHandler(e) {
     e.preventDefault();
-    this.props.router.push('/dashboard');
+    //sign in
+    this.props.deep.login({}, (success, data) => {
+      if (success) {
+        data = {userID: 'kai'};
+        this.props.getUserData(data);
+        this.props.router.push('/dashboard');
+      } else {
+        console.log('incorrect login')
+      }
+    });
   }
 
   clickHandler(e) {
