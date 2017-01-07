@@ -1,0 +1,156 @@
+@font-face {
+  font-family: 'DecimaMonoPro';
+  font-style: normal;
+  src: local('DecimaMonoPro'), url(./fonts/DecimaMonoPro.ttf) format('ttf');
+}
+
+
+body {
+  font-family: 'DecimaMonoPro', sans-serif;
+  background-color: #FDFDFD;
+}
+
+.landing {
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  margin:0;
+  padding:0;
+  position: fixed;
+  background-color: #21CE99;
+}
+
+.landingBanner {
+  height:70%;
+  left:20%;
+  top:15%;
+  position:absolute;
+}
+
+.loginForm {
+  position: absolute;
+  left:60%;
+  top:40%;
+}
+
+.createUser {
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  margin:0;
+  padding:0;
+  position: fixed;
+  background-color: #FDFDFD;
+}
+
+.createUserBanner {
+  height:100%;
+  left:20%;
+  top:0;
+  position:absolute;
+}
+
+
+.navBar {
+  color: #21CE99 !important;
+/*  padding:0;
+  width:100%;
+  top:0;
+  left:0;*/
+  /*position:fixed;*/
+  /*display:flex;*/
+  /*height:auto;*/
+  /*background-color: #FDFDFD;*/
+  /*color: #21CE99;*/
+}
+
+/*.navBar i {
+  position: absolute;
+  top:40%;
+  right:1%;
+}
+.navBar ul li a {
+  color: #21CE99;
+}
+nav a {
+   color: #21CE99;
+}
+nav ul li a {
+  color: #21CE99;
+}
+.tabs.tabs-transparent .tab a:hover, .tabs.tabs-transparent .tab a.active {
+  color: #21CE99;
+}
+
+.brand-logo {
+  color: #21CE99;
+}
+
+.tab a {
+  color: #21CE99;
+}*/
+
+.navBar a:hover {
+/*  cursor: pointer;
+  text-decoration: underline;*/
+}
+
+.navBar h1 {
+/*  top:37%;
+  left:1%;
+  position:relative;
+  margin:0;
+  font-size: 2em;*/
+}
+
+.exchangeBar {
+  padding:0;
+/*  width:100%;
+  top:8%;*/
+  display:none;
+  left:0;
+  /*position:fixed;*/
+  height:10%;
+  background-color: grey;
+  border: 1px solid black;
+}
+.tabs .indicator { display: none; }
+.tabs .tab a.active { border-bottom: 2px solid #DA4E28; }
+
+.transaction {
+  padding:0;
+  width:25%;
+  /*top:18%;*/
+  left:0;
+  /*position:fixed;*/
+  /*height:42%;*/
+  min-height: auto;
+  /*padding-bottom:60%;*/
+  background-color: #FDFDFD !important;
+  /*border: 1px solid black;*/
+}
+
+.history {
+  padding:0;
+  width:25%;
+  top:60%;
+  left:0;
+  /*position:fixed;*/
+  min-height: auto;
+  /*height:42%;*/
+  background-color: #FDFDFD !important;
+  /*border: 1px solid black;*/
+}
+
+.graph {
+  padding:0;
+  width:75%;
+  top:18%;
+  left:25%;
+  position:fixed;
+  height:84%;
+  background-color: grey;
+  border: 1px solid black;
+}
