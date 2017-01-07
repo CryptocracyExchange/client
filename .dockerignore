@@ -1,0 +1,7 @@
+node_modules
+test
+.vscode
+components
+*.log
+build/
+bundle.js
