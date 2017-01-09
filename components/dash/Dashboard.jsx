@@ -60,8 +60,8 @@ class Dashboard extends React.Component {
   _setCurrency(selector) {
     console.log('curr', selector);
     const pairs = [['BTC', 'LTC'],
-      ['LTC', 'DOGE'],
-      ['DOGE', 'BTC']]
+                   ['LTC', 'DOGE'],
+                   ['DOGE', 'BTC']]
     const change = _.extend({}, this.state);
     change.selectedCurrencies = pairs[selector];
     this.setState(change);
@@ -86,8 +86,14 @@ class Dashboard extends React.Component {
       const change = _.extend({}, this.state);
       change.userBalances = record.get();
       this.setState(change);
+      balances.subscribe((data) => {
+        console.log('newBal', data);
+        // const change = _.extend({}, this.state);
+        // change.userBalances = data;
+        // this.setState(change);
+      })
     });
-    balances.discard();
+    // balances.discard();
   }
 
   changeRoute(route) {

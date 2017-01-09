@@ -4770,7 +4770,7 @@ small {
 }
 
 .tabs.tabs-transparent .indicator {
-  border-bottom: 2px solid #DA4E28;
+  /*border-bottom: 2px solid #DA4E28;*/
   background-color: #DA4E28;
 }
 
