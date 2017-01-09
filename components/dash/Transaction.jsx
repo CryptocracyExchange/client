@@ -41,7 +41,7 @@ class Transaction extends React.Component {
     } else {
     const options = {
       userID: this.props.userData.userID,
-      currency: this.state.currency,
+      currency: this.state.currencySelected,
       price: this.state.price || this.state.marketValue,
       amount: this.state.amount || 1
     };
@@ -111,7 +111,7 @@ class Transaction extends React.Component {
         }
         >
         <p>Do you wish to buy:</p>
-        <p>{this.state.amount} &nbsp; {this.state.currency} for {(this.state.price || this.state.marketValue)} ea.</p>
+        <p>{this.state.amount} &nbsp; {this.state.currencySelected} for {(this.state.price || this.state.marketValue)} ea.</p>
         <br />
         <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
       </Modal>

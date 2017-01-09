@@ -116,8 +116,8 @@ nav ul li a {
   background-color: grey;
   border: 1px solid black;
 }
-.tabs .indicator { display: none; }
-.tabs .tab a.active { border-bottom: 2px solid #DA4E28; }
+/*.tabs .indicator { display: none; }*/
+/*.tabs .tab a.active { border-bottom: 2px solid #DA4E28; }*/
 
 .transaction {
   padding:0;
