@@ -104,6 +104,7 @@ class Dashboard extends React.Component {
     change.userData = this.userData;
     this.setState(change);
   }
+  
   changeRoute(route) {
     this.props.router.push(route);
   }

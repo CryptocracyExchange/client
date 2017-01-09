@@ -52,14 +52,14 @@ class Transfers extends React.Component {
           <option value='LTC'>LTC</option>
           <option value='DOGE'>DOGE</option>
         </select>
-        <input 
-          type='text' 
+        <input
+          type='text'
           value={this.state.address}
-          placeholder='Enter your address' 
+          placeholder='Enter your address'
           onChange={this.handleAddressUpdate}>
         </input>
-        <input 
-          type='text' 
+        <input
+          type='text'
           value={this.state.amount}
           placeholder='Enter the amount' 
           onChange={this.handleAmountUpdate}>
