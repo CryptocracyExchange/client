@@ -27,21 +27,15 @@ class History extends React.Component {
       
           <tbody>
             <tr>
-              <td>Alvin</td>
-              <td>Eclair</td>
-              <td>$0.87</td>
-              <td>$0.87</td>
+              <td>Sell</td>
+              <td>2</td>
+              <td>$2</td>
+              <td>$4</td>
             </tr>
             <tr>
-              <td>Alan</td>
-              <td>Jellybean</td>
-              <td>$3.76</td>
-              <td>$0.87</td>
-            </tr>
-            <tr>
-              <td>Jonathan</td>
-              <td>Lollipop</td>
-              <td>$7.00</td>
+              <td>Buy</td>
+              <td>1</td>
+              <td>$25</td>
               <td>$0.87</td>
             </tr>
           </tbody>
@@ -73,23 +67,17 @@ class History extends React.Component {
         </thead>
     
         <tbody>
-          <tr>
-            <td>Fred </td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
+            <tr>
+            <td>Buy</td>
+            <td>2</td>
+            <td>$50</td>
+            <td>$100</td>
           </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-            <td>$0.87</td>
+           <tr>
+            <td>Sell</td>
+            <td>2</td>
+            <td>$25</td>
+            <td>$50</td>
           </tr>
         </tbody>
       </Table>

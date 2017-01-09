@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // const url = process.env.NODE_ENV === 'prod' ? 'deepstream' : 'localhost';
-const url = '192.241.227.176'; // Need to change to production IP/URL when deploying
+// const url = '192.241.227.176'; // Need to change to production IP/URL when deploying
+const url = 'localhost';
 const client = require('deepstream.io-client-js')(`${url}:6020`);
 
 class App extends React.Component {

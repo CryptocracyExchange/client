@@ -19,7 +19,7 @@ class Landing extends React.Component {
     //sign in
     this.props.deep.login({}, (success, data) => {
       if (success) {
-        data = {userID: 'kai'};
+        data = {userID: 'harry'};
         this.props.getUserData(data);
         this.props.router.push('/dashboard');
       } else {
