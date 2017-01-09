@@ -83,10 +83,10 @@ class Dashboard extends React.Component {
     let balances = this.ds.record.getRecord(`balances/${this.props.userData.userID}`);
     balances.whenReady((record) => {
       console.log('setBalance', record.get());
-      const change = _.extend({}, this.state);
+      let change = _.extend({}, this.state);
       change.userBalances = record.get();
       this.setState(change);
-      balances.subscribe((data) => {
+      balances.subscribe('BTC', (data) => {
         console.log('newBal', data);
         // const change = _.extend({}, this.state);
         // change.userBalances = data;

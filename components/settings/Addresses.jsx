@@ -10,7 +10,7 @@ class Addresses extends React.Component{
       DOGEAddress: ''
     };
   
-    this.userWallet = props.getRecord(`wallets/${props.userID}`);
+    this.userWallet = props.deep.record.getRecord(`wallets/${props.userID}`);
   }
 
   componentDidMount() {

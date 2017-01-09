@@ -13,7 +13,7 @@ class Transfers extends React.Component {
     this.handleAmountUpdate = this.handleAmountUpdate.bind(this);
     this.handleCurrencyUpdate = this.handleCurrencyUpdate.bind(this);
     this.handleTransferClick = this.handleTransferClick.bind(this);
-    this.client = deepstream('localhost:6020').login({username: 'walletbrowerclient'});
+    // this.client = deepstream('localhost:6020').login({username: 'walletbrowerclient'});
   }
 
   handleAddressUpdate(e) {
@@ -35,7 +35,7 @@ class Transfers extends React.Component {
   }
 
   handleTransferClick() {
-    this.client.event.emit('wallet-transfer-out', {
+    this.props.deep.event.emit('wallet-transfer-out', {
       userID: this.state.userID,
       currency: this.state.currency,
       amount: this.state.amount,
@@ -54,13 +54,13 @@ class Transfers extends React.Component {
         </select>
         <input 
           type='text' 
-          value='this.state.address' 
+          value={this.state.address}
           placeholder='Enter your address' 
           onChange={this.handleAddressUpdate}>
         </input>
         <input 
           type='text' 
-          value='this.state.amount' 
+          value={this.state.amount} 
           placeholder='Enter the amount' 
           onChange={this.handleAmountUpdate}>
         </input>
