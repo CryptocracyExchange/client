@@ -5,9 +5,6 @@ import { Navbar, NavItem, Tabs, Tab, Icon, Row } from 'react-materialize';
 
 
 
-$(document).ready(function(){
-    $('ul.tabs').tabs();
-  });
 class Nav extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +18,8 @@ class Nav extends React.Component {
     // debugger;
     this.props.toRoute(route);
   }
+
+
 
   render() {
     return (
@@ -37,9 +36,9 @@ class Nav extends React.Component {
             </ul>
          
             <ul className="tabs tabs-transparent">
-              <li className="tab"><a href="#test1">BTC/LTC</a></li>
-              <li className="tab"><a href="#test2">LTC/DOGE</a></li>
-              <li className="tab "><a href="#test3">DOGE/BTC</a></li>
+              <li className="tab"><a onClick={() => this.props.currencySelector(0)}>BTC/LTC</a></li>
+              <li className="tab"><a onClick={() => this.props.currencySelector(1)}>LTC/DOGE</a></li>
+              <li className="tab"><a onClick={() => this.props.currencySelector(2)}>DOGE/BTC</a></li>
             </ul>
           </div>
          </nav>

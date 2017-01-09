@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 
-const PORT = process.env.NODE_ENV === 'prod' ? 80 : 3000;
+const PORT = process.env.NODE_ENV === 'prod' ? 80 : 3001;
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}!`);

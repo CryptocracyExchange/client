@@ -11,49 +11,84 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userBalance: 0
+      userBalances: {},
+      selectedCurrencies: ['BTC', 'LTC']
     }
+    this.ds = this.props.deep;
+    this.userData = this.props.userData;
+    this.userID = this.props.userData.userID;
   }
 
   componentDidMount() {
     console.log('dash', this.props);
-    let userID = this.props.userData.userID
-    const options = {userID: userID, currency: 'BTC'};
-    this.props.deep.event.emit('checkBalance', options);
-    this.props.deep.event.subscribe('returnBalance', this._setUserBalance.bind(this));
-
+    let userID = this.userData.userID
+    this._setUserBalance();
     this._setUserData.bind(this);
-    let closedTransactions = this.props.deep.record.getList('transactionHistory');
-    // closedTransactions.whenReady().getEntries();
-    console.log('closed', closedTransactions)
-    const queryString = JSON.stringify({
+
+    let queryString = JSON.stringify({
       table: 'open',
       query: [
-        [ 'userID', 'match', 'harry' ]
+        [ 'userID', 'eq', 'harry' ]
       ]
-    })
-
-    let openBuyList = this.props.deep.record.getList('search?' + queryString);
-    let openBuyEntries;
-    openBuyList.whenReady((list) => {
-      openBuyEntries = list.getEntries();
-      console.log('open', openBuyEntries)
     });
+    this.ds.event.subscribe('search?' + queryString, (data) => {
+      console.log('d', data);
+    })
+    let openBuyList = this.ds.record.getList('search?' + queryString);
+    setTimeout(() => {
+    openBuyList.whenReady((list) => {
+      console.log('new', list.getEntries());
+    });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    // do something like this to stop listening
+    // if( this..isDestroyed === false ) {
+    //     this.dsRecord.unsubscribe( this._setState );
+    //     this.dsRecord.discard();
+    //   }
+
+    //   delete this.dsRecord; 
+  }
+
+  componentWillUpdate() {
+    // needs to subscribe to changes to balances
+
+  }
+
+  _setCurrency(selector) {
+    console.log('curr', selector);
+    const pairs = [['BTC', 'LTC'],
+      ['LTC', 'DOGE'],
+      ['DOGE', 'BTC']]
+    const change = _.extend({}, this.state);
+    change.selectedCurrencies = pairs[selector];
+    this.setState(change);
+  }
+
+  _init() {
+    //  getRecord for balances, transactions by userID, market price
+    // balances 
+
   }
 
   _setUserData() {
     const change = _.extend({}, this.state);
-    change.userData = this.props.userData
+    change.userData = this.userData;
     this.setState(change);
   }
 
-  _setUserBalance(data) {
-    console.log('setBalance', data.balance);
-    const change = _.extend({}, this.state);
-    change.userBalance = data.balance;
-    this.setState(change);
+  _setUserBalance() {
+    let balances = this.ds.record.getRecord(`balances/${this.props.userData.userID}`);
+    balances.whenReady((record) => {
+      console.log('setBalance', record.get());
+      const change = _.extend({}, this.state);
+      change.userBalances = record.get();
+      this.setState(change);
+    });
+    balances.discard();
   }
-
 
   changeRoute(route) {
     this.props.router.push(route);
@@ -62,15 +97,20 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Nav toRoute={this.changeRoute.bind(this)} />
+        <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
         <ExchangeRates deep={this.props.deep} />
         <Row>
-        <Transaction userData={this.props.userData} userBalance={this.state.userBalance} deep={this.props.deep} />
-        <History deep={this.props.deep} />
-        <Graph deep={this.props.deep} />
+          <Transaction
+            userData={this.props.userData}
+            balances={this.state.userBalances}
+            currencies={this.state.selectedCurrencies}
+            deep={this.props.deep}
+          />
+          <History deep={this.props.deep} />
+          <Graph deep={this.props.deep} />
         </Row>
       </div>
-      )
+    )
   }
 }
 
