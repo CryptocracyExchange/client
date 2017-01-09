@@ -34,11 +34,11 @@ class Nav extends React.Component {
             <ul className="side-nav" id="mobile-demo">
               <li><a onClick={this.clickHandler.bind(this, '/settings')}>Settings</a></li>
             </ul>
-         
+
             <ul className="tabs tabs-transparent">
-              <li className="tab"><a onClick={() => this.props.currencySelector(0)}>BTC/LTC</a></li>
-              <li className="tab"><a onClick={() => this.props.currencySelector(1)}>LTC/DOGE</a></li>
-              <li className="tab"><a onClick={() => this.props.currencySelector(2)}>DOGE/BTC</a></li>
+              <li className="tab"><a onClick={() => this.props.currencySelector(0)}>BTC/LTC | 1.5</a></li>
+              <li className="tab"><a onClick={() => this.props.currencySelector(1)}>LTC/DOGE | 0.6</a></li>
+              <li className="tab"><a onClick={() => this.props.currencySelector(2)}>DOGE/BTC | 7.2</a></li>
             </ul>
           </div>
          </nav>
@@ -50,7 +50,7 @@ class Nav extends React.Component {
 export default Nav;
 
 
-// 
+//
  // <div className="navBar">
  //      <Navbar className='extended' brand='Cryptocracy' right>
  //        <NavItem>
@@ -67,7 +67,7 @@ export default Nav;
       // </div>
 
  // <div className="navBar nav-extended">
-        // <h1>  
+        // <h1>
           // Cryptocracy
         // </h1>
         // <Tabs className=''>

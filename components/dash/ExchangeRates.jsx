@@ -11,7 +11,7 @@ class ExchangeRates extends React.Component {
   render() {
     return (
       <div className="exchangeBar">
-      ExchangeRates
+      <h4>{`${this.props.currencies[0]}/${this.props.currencies[1]}`}</h4>
       </div>
       )
   }

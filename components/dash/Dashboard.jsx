@@ -49,7 +49,7 @@ class Dashboard extends React.Component {
     //     this.dsRecord.discard();
     //   }
 
-    //   delete this.dsRecord; 
+    //   delete this.dsRecord;
   }
 
   componentWillUpdate() {
@@ -69,7 +69,7 @@ class Dashboard extends React.Component {
 
   _init() {
     //  getRecord for balances, transactions by userID, market price
-    // balances 
+    // balances
 
   }
 
@@ -98,7 +98,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
-        <ExchangeRates deep={this.props.deep} />
+        <ExchangeRates deep={this.props.deep} currencies={this.state.selectedCurrencies} />
         <Row>
           <Transaction
             userData={this.props.userData}
