@@ -75,7 +75,7 @@ class Transaction extends React.Component {
          return this.props.balances[this.state.currencySelected] || 'add funds'
         }};
 
-    const buyModal = (
+    const sellModal = (
       <Modal
         header='Confirmation'
         fixedFooter
@@ -90,13 +90,13 @@ class Transaction extends React.Component {
         }
         >
         <p>Do you wish to sell:</p>
-        <p>{this.state.amount} &nbsp; {this.state.currency} for {(this.state.price || this.state.marketValue)} ea.</p>
+        <p>{this.state.amount} &nbsp; {this.state.currencySelected} for {(this.state.price || this.state.marketValue)} ea.</p>
         <br />
         <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
       </Modal>
     );
 
-    const sellModal = (
+    const buyModal = (
       <Modal
         header='Confirmation'
         fixedFooter
@@ -131,9 +131,9 @@ class Transaction extends React.Component {
         </Row>
         <Row>
           &nbsp;&nbsp;&nbsp;
-          {buyModal}
-          &nbsp;&nbsp;&nbsp;
           {sellModal}
+          &nbsp;&nbsp;&nbsp;
+          {buyModal}
         </Row>
       </div>
     );

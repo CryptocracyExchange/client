@@ -1,31 +1,34 @@
 import React from 'react';
-
 import { Router, Route, browserHistory } from 'react-router';
-
+import { Row } from 'react-materialize';
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    console.log('nav props', this.props);
-  }
-
   clickHandler(route) {
-    // debugger;
     this.props.toRoute(route);
   }
 
   render() {
     return (
-      <div className="navBar">
-        <h1>  
-          Cryptocracy
-        </h1>
-        <a className='' onClick={this.clickHandler.bind(this, '/dashboard')}> Home </a>
-      </div>
-      )
+      <Row className='z-depth-0'>
+        <nav className='nav z-depth-2'>
+          <div className='nav-wrapper green-text'>
+            <a className="brand-logo">Cryptocracy</a>
+            <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">
+            menu</i></a>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+             <li><a onClick={this.clickHandler.bind(this, '/dashboard')}>Home</a></li>
+            </ul>
+            <ul className="side-nav" id="mobile-demo">
+              <li><a onClick={this.clickHandler.bind(this, '/dashboard')}>Home</a></li>
+            </ul>
+          </div>
+        </nav>
+      </Row>
+    )
   }
 }
 

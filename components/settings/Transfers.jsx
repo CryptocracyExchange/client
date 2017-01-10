@@ -45,8 +45,8 @@ class Transfers extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>Transfer Out</h3>
+      <div className='transfers'>
+        <h4>Transfer Out</h4>
         <select name='Currency' onChange={this.handleCurrencyUpdate}>
           <option value='BTC'>BTC</option>
           <option value='LTC'>LTC</option>

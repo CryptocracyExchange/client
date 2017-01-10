@@ -14,15 +14,29 @@ class Dashboard extends React.Component {
       userBalances: {},
       selectedCurrencies: ['BTC', 'LTC']
     }
-    this.ds = this.props.deep;
-    this.userData = this.props.userData;
-    this.userID = this.props.userData.userID;
+    this.ds = props.deep;
+    this.userData = props.userData;
+    this.userID = props.userData.userID;
+
+    this.balances = this.ds.record.getRecord(`balances/${this.userID}`);
   }
 
   componentDidMount() {
     console.log('dash', this.props);
-    let userID = this.userData.userID
-    this._setUserBalance();
+    // get user balances
+    this.balances.whenReady((record) => {
+      console.log('setBalance', record.get());
+      let change = _.extend({}, this.state);
+      change.userBalances = record.get();
+      this.setState(change);
+      record.subscribe('BTC', (data) => {
+        console.log('newBal', data);
+        // const change = _.extend({}, this.state);
+        // change.userBalances = data;
+        // this.setState(change);
+      })
+    })
+
     this._setUserData.bind(this);
 
     let queryString = JSON.stringify({
@@ -31,25 +45,11 @@ class Dashboard extends React.Component {
         [ 'userID', 'eq', 'harry' ]
       ]
     });
-    this.ds.event.subscribe('search?' + queryString, (data) => {
-      console.log('d', data);
-    })
-    let openBuyList = this.ds.record.getList('search?' + queryString);
-    setTimeout(() => {
-    openBuyList.whenReady((list) => {
-      console.log('new', list.getEntries());
-    });
-    }, 1000);
   }
 
   componentWillUnmount() {
-    // do something like this to stop listening
-    // if( this..isDestroyed === false ) {
-    //     this.dsRecord.unsubscribe( this._setState );
-    //     this.dsRecord.discard();
-    //   }
+    this.balances.discard();
 
-    //   delete this.dsRecord;
   }
 
   componentWillUpdate() {
@@ -79,22 +79,6 @@ class Dashboard extends React.Component {
     this.setState(change);
   }
 
-  _setUserBalance() {
-    let balances = this.ds.record.getRecord(`balances/${this.props.userData.userID}`);
-    balances.whenReady((record) => {
-      console.log('setBalance', record.get());
-      let change = _.extend({}, this.state);
-      change.userBalances = record.get();
-      this.setState(change);
-      balances.subscribe('BTC', (data) => {
-        console.log('newBal', data);
-        // const change = _.extend({}, this.state);
-        // change.userBalances = data;
-        // this.setState(change);
-      })
-    });
-    // balances.discard();
-  }
 
   changeRoute(route) {
     this.props.router.push(route);

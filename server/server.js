@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const chalk = require('chalk');
 const app = express();
 
 // app.use(morgan('combined'));
@@ -19,5 +19,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.NODE_ENV === 'prod' ? 80 : 3001;
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}!`);
+  console.log(chalk.yellow(`Client on ${PORT}!///////////////`));
 });

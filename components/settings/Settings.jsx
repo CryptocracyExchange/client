@@ -16,9 +16,10 @@ class Settings extends React.Component {
     return (
       <div className="settings">
         <Nav toRoute={this.changeRoute.bind(this)}/>
-      Settings
-        <Addresses deep={this.props.deep} userID={this.props.userData.userID} />
-        <Transfers deep={this.props.deep} userID={this.props.userData.userID} />
+        <div className='settingsBody'>
+          <Addresses deep={this.props.deep} userID={this.props.userData.userID} />
+          <Transfers deep={this.props.deep} userID={this.props.userData.userID} />
+        </div>
       </div>
       )
   }

@@ -4771,7 +4771,7 @@ small {
 
 .tabs.tabs-transparent .indicator {
   /*border-bottom: 2px solid #DA4E28;*/
-  background-color: #DA4E28;
+  background-color: #DA4E28 !important;
 }
 
 .tabs.tabs-fixed-width {
@@ -4824,7 +4824,7 @@ small {
   position: absolute;
   bottom: 0;
   height: 2px;
-  background-color: #DA4E28;
+  background-color: #DA4E28 !important;
   will-change: left, right;
 }
 
@@ -7792,7 +7792,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: 8px;
   width: 8px;
   margin: 24px 4px;
-  background-color: rgba(255, 255, 255, 0.5);
+  /*background-color: rgba(255, 255, 255, 0.5);*/
   transition: background-color .3s;
   border-radius: 50%;
 }

@@ -38,10 +38,13 @@ class Addresses extends React.Component{
   render() {
     return (
       <div>
-        <h3>Generate Wallets</h3>
+        <h4>Generate Wallets</h4>
         <button onClick={() => this.handleGenerateWalletClick('BTC')}>Generate BTC Address</button>
+        &nbsp;&nbsp;
         <button onClick={() => this.handleGenerateWalletClick('LTC')}>Generate LTC Address</button>
+        &nbsp;&nbsp;
         <button onClick={() => this.handleGenerateWalletClick('DOGE')}>Generate DOGE Address</button>
+        <br/><br/>
         <div>BTC Address: {this.state.BTCAddress}</div>
         <div>LTC Address: {this.state.LTCAddress}</div>
         <div>DOGE Address: {this.state.DOGEAddress}</div>
