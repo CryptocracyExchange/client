@@ -21,6 +21,7 @@ class Transaction extends React.Component {
   }
 
   componentDidMount() {
+    console.log('tr', this.props)
     const change = _.extend({}, this.state);
     change.currencySelectors = this.props.currencies;
     this.setState(change);
@@ -53,7 +54,7 @@ class Transaction extends React.Component {
   selectCurrency(e) {
     const change = _.extend({}, this.state);
     change.currencySelected = e.target.value;
-    if (e.target.value !== '1' && this.props.balances[e.target.value]) {
+    if (e.target.value !== '1' && this.props.balances[e.target.value].actual) {
       change.isCurrencySelected = true;
     } else {
       change.isCurrencySelected = false;
@@ -68,11 +69,17 @@ class Transaction extends React.Component {
   }
 
   render() {
-    let balance = () => {
+    let totalBalance = () => {
       if (this.state.currencySelected === null) {
          return 'select currency'
         } else {
-         return this.props.balances[this.state.currencySelected] || 'add funds'
+         return this.props.balances[this.state.currencySelected].actual || 'add funds'
+        }};
+     let availableBalance = () => {
+      if (this.state.currencySelected === null) {
+         return 'select currency'
+        } else {
+         return this.props.balances[this.state.currencySelected].available || 'add funds'
         }};
 
     const sellModal = (
@@ -125,7 +132,8 @@ class Transaction extends React.Component {
             <option value={this.state.currencySelectors[0]}>{this.state.currencySelectors[0]}</option>
             <option value={this.state.currencySelectors[1]}>{this.state.currencySelectors[1]}</option>
           </Input>
-          &nbsp;<span>Balance: { balance() }</span>
+          &nbsp;<span>Total Balance: { totalBalance() }</span><br/>
+          &nbsp;<span>Available Balance: { availableBalance() }</span>
           <Input id='price' onChange={(e) => this.formChange(e)} s={12} label='Price:' defaultValue={this.state.marketValue} />
           <Input id='amount' onChange={(e) => this.formChange(e)} s={12} label='Qty:' defaultValue="1" />
         </Row>
