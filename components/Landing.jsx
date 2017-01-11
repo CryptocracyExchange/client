@@ -11,7 +11,6 @@ let options = {
 class Landing extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   submitHandler(e) {

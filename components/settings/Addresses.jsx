@@ -14,21 +14,19 @@ class Addresses extends React.Component{
   }
 
   componentDidMount() {
-    this.userWallet.whenReady((userWallet) => {
-      userWallet.subscribe('BTC.address', (address) => {
-        this.setState({ BTCAddress: address });
-      });
-      userWallet.subscribe('LTC.address', (address) => {
-        this.setState({ LTCAddress: address });
-      });
-      userWallet.subscribe('DOGE.address', (address) => {
-        this.setState({ DOGEAddress: address });
-      });
+    this.userWallet.subscribe('BTC.address', (address) => {
+      this.setState({ BTCAddress: address });
+    });
+    this.userWallet.subscribe('LTC.address', (address) => {
+      this.setState({ LTCAddress: address });
+    });
+    this.userWallet.subscribe('DOGE.address', (address) => {
+      this.setState({ DOGEAddress: address });
     });
   }
 
   componentWillUnmount() {
-    this.userWallet.unsubscribe();
+    this.userWallet.discard();
   }
 
   handleGenerateWalletClick(type) {

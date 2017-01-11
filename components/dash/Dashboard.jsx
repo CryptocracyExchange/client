@@ -22,20 +22,20 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    console.log('dash', this.props);
     // get user balances
     this.balances.whenReady((record) => {
       console.log('setBalance', record.get());
       let change = _.extend({}, this.state);
       change.userBalances = record.get();
       this.setState(change);
-      record.subscribe('BTC', (data) => {
-        console.log('newBal', data);
-        // const change = _.extend({}, this.state);
-        // change.userBalances = data;
-        // this.setState(change);
-      })
-    })
+    });
+
+    this.balances.subscribe((data) => {
+      console.log('newBal', data);
+      // const change = _.extend({}, this.state);
+      // change.userBalances = data;
+      // this.setState(change);
+    });
 
     this._setUserData.bind(this);
 

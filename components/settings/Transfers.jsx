@@ -60,7 +60,7 @@ class Transfers extends React.Component {
         </input>
         <input 
           type='text' 
-          value={this.state.amount} 
+          value={this.state.amount}
           placeholder='Enter the amount' 
           onChange={this.handleAmountUpdate}>
         </input>
