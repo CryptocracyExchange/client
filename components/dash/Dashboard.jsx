@@ -48,6 +48,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     // get user balances
+    console.log('hello');
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
       change.userBalances = record.get();
@@ -78,6 +79,7 @@ class Dashboard extends React.Component {
     this.balances.discard();
 
   }
+
   _setCurrency(currency, type) {
     console.log('curr', currency, type);
     const change = _.extend({}, this.state);
@@ -99,12 +101,13 @@ class Dashboard extends React.Component {
     change[type + 'Currency'] = currency;
     this.setState(change);
   }
+
   _setUserData() {
     const change = _.extend({}, this.state);
     change.userData = this.userData;
     this.setState(change);
   }
-  
+
   changeRoute(route) {
     this.props.router.push(route);
   }

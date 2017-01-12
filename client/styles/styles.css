@@ -7,7 +7,7 @@
 /*local('DecimaMonoPro'),*/
 body {
   font-family: 'DecimaMonoPro', sans-serif;
-  background-color: #FDFDFD;
+  /*background-color: #DDD;*/
 }
 
 .landing {
@@ -108,24 +108,24 @@ nav ul li a {
 .exchangeBar {
   padding:0;
   width:100%;
-  top:8%;
-  display:none;
+  /*top:8%;*/
+  /*display:none;*/
   left:0;
-  position:fixed;
-  height:10%;
-  background-color: grey;
-  border: 1px solid black;
+  /*position:absolute;*/
+  /*height:10%;*/
+  /*background-color: #DDD;*/
+  border-bottom: 1px solid #bbb;
 }
 /*.tabs .indicator { display: none; }*/
 /*.tabs .tab a.active { border-bottom: 2px solid #DA4E28; }*/
 
 .transaction {
   padding:0;
-  width:25%;
-  top:18%;
-  left:0;
+  /*width:25%;*/
+  /*top:18%;*/
+  /*left:0;*/
   /*position:fixed;*/
-  height:42%;
+  /*height:42%;*/
   min-height: auto;
   /*padding-bottom:60%;*/
   background-color: #FDFDFD !important;
@@ -134,9 +134,9 @@ nav ul li a {
 
 .history {
   padding:0;
-  width:25%;
-  top:60%;
-  left:0;
+  /*width:25%;*/
+  /*top:60%;*/
+  /*left:0;*/
   /*position:fixed;*/
   min-height: auto;
   /*height:42%;*/
@@ -165,5 +165,14 @@ nav ul li a {
 .transfers {
   width:70%;
   position:fixed;
+}
+.currBtn {
+  height:100%;
+}
+
+.currBtn:hover {
+  cursor:pointer;
+  background-color: #EEE;
+  transition: 0.3s;
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab, Row, Input, Button, Modal } from 'react-materialize';
+import { Tabs, Tab, Row, Input, Button, Modal, Col } from 'react-materialize';
 import _ from 'lodash';
 
 /* 
@@ -11,9 +11,6 @@ class Transaction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currencySelectors: ['BTC', 'LTC'],
-      isCurrencySelected: false,
-      currencySelected: null,
       marketValue: 902,
       price: 0,
       amount: 1
@@ -22,17 +19,6 @@ class Transaction extends React.Component {
 
   componentDidMount() {
     console.log('tr', this.props)
-    const change = _.extend({}, this.state);
-    change.currencySelectors = this.props.currencies;
-    this.setState(change);
-  }
-
-  componentWillReceiveProps(nextProps, nextState) {
-    const change = _.extend({}, this.state);
-    change.currencySelectors = nextProps.currencies;
-    change.isCurrencySelected = false;
-    change.currencySelected = null;
-    this.setState(change);
   }
 
   clickHandler(e, type) {
@@ -42,24 +28,13 @@ class Transaction extends React.Component {
     } else {
     const options = {
       userID: this.props.userData.userID,
-      currency: this.state.currencySelected,
+      currency: this.props.primaryCurrency,
       price: this.state.price || this.state.marketValue,
       amount: this.state.amount || 1
     };
     console.log('form', options, 'type', 'transaction' + type);
     this.props.deep.event.emit('transaction' + type, options);
     }
-  }
-
-  selectCurrency(e) {
-    const change = _.extend({}, this.state);
-    change.currencySelected = e.target.value;
-    if (e.target.value !== '1' && this.props.balances[e.target.value].actual) {
-      change.isCurrencySelected = true;
-    } else {
-      change.isCurrencySelected = false;
-    }
-    this.setState(change);
   }
 
   formChange(e) {
@@ -69,25 +44,12 @@ class Transaction extends React.Component {
   }
 
   render() {
-    let totalBalance = () => {
-      if (this.state.currencySelected === null) {
-         return 'select currency'
-        } else {
-         return this.props.balances[this.state.currencySelected].actual || 'add funds'
-        }};
-     let availableBalance = () => {
-      if (this.state.currencySelected === null) {
-         return 'select currency'
-        } else {
-         return this.props.balances[this.state.currencySelected].available || 'add funds'
-        }};
-
     const sellModal = (
       <Modal
         header='Confirmation'
         fixedFooter
         trigger={
-        <Button className={this.state.isCurrencySelected ? 'red' : 'disabled'} waves='light'>
+        <Button className='red' waves='light'>
         Sell
         </Button>
         }
@@ -97,7 +59,7 @@ class Transaction extends React.Component {
         }
         >
         <p>Do you wish to sell:</p>
-        <p>{this.state.amount} &nbsp; {this.state.currencySelected} for {(this.state.price || this.state.marketValue)} ea.</p>
+        <p>{this.state.amount} &nbsp; {this.props.secondaryCurrency} for {(this.state.price || this.state.marketValue)} {this.props.primaryCurrency}ea.</p>
         <br />
         <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
       </Modal>
@@ -108,7 +70,7 @@ class Transaction extends React.Component {
         header='Confirmation'
         fixedFooter
         trigger={
-        <Button className={this.state.isCurrencySelected ? '' : 'disabled'} waves='light'>
+        <Button className='green' waves='light'>
         Buy
         </Button>
         }
@@ -118,7 +80,7 @@ class Transaction extends React.Component {
         }
         >
         <p>Do you wish to buy:</p>
-        <p>{this.state.amount} &nbsp; {this.state.currencySelected} for {(this.state.price || this.state.marketValue)} ea.</p>
+        <p>{this.state.amount} &nbsp; {this.props.secondaryCurrency} for {(this.state.price || this.state.marketValue)} {this.props.primaryCurrency} ea.</p>
         <br />
         <p>Total: {this.state.amount * (this.state.price || this.state.marketValue)}</p>
       </Modal>
@@ -127,21 +89,35 @@ class Transaction extends React.Component {
     const transactionForm = (
       <div className=''>
         <Row>
-          <Input onChange={(e) => this.selectCurrency(e)} s={12} type='select' defaultValue='1'>
-            <option value='1'>Currency</option>
-            <option value={this.state.currencySelectors[0]}>{this.state.currencySelectors[0]}</option>
-            <option value={this.state.currencySelectors[1]}>{this.state.currencySelectors[1]}</option>
-          </Input>
-          &nbsp;<span>Total Balance: { totalBalance() }</span><br/>
-          &nbsp;<span>Available Balance: { availableBalance() }</span>
-          <Input id='price' onChange={(e) => this.formChange(e)} s={12} label='Price:' defaultValue={this.state.marketValue} />
-          <Input id='amount' onChange={(e) => this.formChange(e)} s={12} label='Qty:' defaultValue="1" />
+          <Col s={12}>
+            &nbsp;Balance <br/>
+            <span>{this.props.primaryCurrency}: { this.props.primaryBalance.available || 0 }</span><br/>
+            <span>{this.props.secondaryCurrency}: { this.props.secondaryBalance.available || 0 }</span>
+          </Col>
         </Row>
         <Row>
-          &nbsp;&nbsp;&nbsp;
-          {sellModal}
-          &nbsp;&nbsp;&nbsp;
-          {buyModal}
+          <Input 
+            id='price' 
+            onChange={(e) => this.formChange(e)} 
+            s={10} 
+            label='Price:' 
+            defaultValue={this.state.marketValue} 
+          />
+          <Col s={2}>{this.props.primaryCurrency}</Col>
+        </Row>
+        <Row>
+          <Input 
+            id='amount' 
+            onChange={(e) => this.formChange(e)} 
+            s={10} 
+            label='Amount:' 
+            defaultValue="1" 
+          /> 
+          <Col s={2}>{this.props.secondaryCurrency}</Col>
+        </Row>
+        <Row>
+          <Col s={6} className='center-align'>{sellModal}</Col>
+          <Col s={6} className='center-align'>{buyModal}</Col>
         </Row>
       </div>
     );
