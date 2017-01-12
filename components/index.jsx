@@ -7,7 +7,6 @@ import Settings from './settings/Settings.jsx';
 
 import CreateUser from './auth/CreateUser.jsx';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 const routes = (
