@@ -57,7 +57,9 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
-    "superagent": "^3.1.0"
+    "superagent": "^3.1.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0"
   },
   "homepage": "https://github.com/KN3LL2K/client#readme"
 }

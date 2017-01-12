@@ -1,98 +1,149 @@
 import React from 'react';
 import { Row, Tabs, Tab, Button, Input, Table } from 'react-materialize';
+import _ from 'lodash';
+
+const TableHeader = () => (
+  <thead>
+    <tr>
+      <th data-field="type">Buy/Sell</th>
+      <th data-field="amount">Qty</th>
+      <th data-field="price">Price</th>
+      <th data-field="total">Total</th>
+    </tr>
+  </thead>
+);
+
+const TableRows = (props) => {
+  return (
+    <tbody>
+      {Object.keys(props.orders).map((orderID, key) => {
+        return (
+          <tr key={key}>
+            <td>{props.orders[orderID].type}</td>
+            <td>{props.orders[orderID].amount}</td>
+            <td>{props.orders[orderID].price}</td>
+            <td>{props.orders[orderID].price * props.orders[orderID].amount}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  );
+};
+
+TableRows.propTypes = {
+  orders: React.PropTypes.object.isRequired
+};
+
+const OrderTable = (props) => (
+  <div>
+    <Row>
+      <Table className='responsive striped'>
+        <TableHeader />
+        <TableRows orders={props.orders} />
+      </Table>
+    </Row>
+  </div>
+);
+
+OrderTable.propTypes = {
+  orders: React.PropTypes.object.isRequired
+};
 
 class History extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userID: props.userID,
+      closedOrders: {},
+      openOrders: {}
+    }
+
+    const queryStringClosed = JSON.stringify({
+      table: 'closed',
+      query: [
+        ['userID', 'eq', props.userID]
+      ]
+    });
+
+    const queryStringOpen = JSON.stringify({
+      table: 'open',
+      query: [
+        ['userID', 'eq', props.userID]
+      ]
+    });
+
+    this.userClosedRecordIDs = props.deep.record.getList('search?' + queryStringClosed);
+    this.userOpenRecordIDs = props.deep.record.getList('search?' + queryStringOpen);
   }
 
-
   componentDidMount() {
-    
+    this.userClosedRecordIDs.subscribe((transactionIDs) => {
+      transactionIDs.forEach((transactionID) => {
+        // If state does not currently have the transactionID
+        if (!this.state.closedOrders.hasOwnProperty(transactionID)) {
+          this.props.deep.record.snapshot(`closed/${transactionID}`, (error, transactionData) => {
+            // Build new transaction object
+            const newTransaction = {};
+            newTransaction[transactionID] = {
+              amount: transactionData.amount,
+              currency: transactionData.currency,
+              type:transactionData.type,
+              price: transactionData.price
+            };
+            // Add new transaction to state
+            const change = _.extend(newTransaction, this.state.closedOrders);
+            this.setState({closedOrders: change});
+          });
+        }
+      });
+    }, true);
+
+    this.userOpenRecordIDs.subscribe((transactionIDs) => {
+      transactionIDs.forEach((transactionID) => {
+        // If state does not currently have the transactionID
+        if (!this.state.openOrders.hasOwnProperty(transactionID)) {
+          this.props.deep.record.snapshot(`open/${transactionID}`, (error, transactionData) => {
+            // Build new transaction object
+            const newTransaction = {};
+            newTransaction[transactionID] = {
+              amount: transactionData.amount,
+              currency: transactionData.currency,
+              type:transactionData.type,
+              price: transactionData.price
+            };
+            // Add new transaction to state
+            const change = _.extend(newTransaction, this.state.openOrders);
+            this.setState({openOrders: change});
+          });
+        }
+      });
+    }, true);
+  }
+
+  componentWillUnmount() {
+    this.userClosedRecordIDs.discard();
+    this.userOpenRecordIDs.discard();
   }
 
   render() {
-  const openTable = (
-    <div>
-      <Row>
-        <Table className='responsive striped'>
-          <thead>
-            <tr>
-              <th data-field="type">Buy/Sell</th>
-              <th data-field="amount">Qty</th>
-              <th data-field="price">Price</th>
-              <th data-field="total">Total</th>
-            </tr>
-          </thead>
-      
-          <tbody>
-            <tr>
-              <td>Sell</td>
-              <td>2</td>
-              <td>$2</td>
-              <td>$4</td>
-            </tr>
-            <tr>
-              <td>Buy</td>
-              <td>1</td>
-              <td>$25</td>
-              <td>$0.87</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Row>
-    </div>
-  );
-
-  const tableRow = (
-          <tr>
-            <td>Buy</td>
-            <td>2</td>
-            <td>$50</td>
-            <td>$100</td>
-          </tr>
-    )
-
-  const closedTable = (
-  <div>
-      <Row>
-      <Table className='responsive striped'>
-        <thead>
-          <tr>
-            <th data-field="type">Buy/Sell</th>
-            <th data-field="amount">Qty</th>
-            <th data-field="price">Price</th>
-            <th data-field="total">Total</th>
-          </tr>
-        </thead>
-    
-        <tbody>
-            <tr>
-            <td>Buy</td>
-            <td>2</td>
-            <td>$50</td>
-            <td>$100</td>
-          </tr>
-           <tr>
-            <td>Sell</td>
-            <td>2</td>
-            <td>$25</td>
-            <td>$50</td>
-          </tr>
-        </tbody>
-      </Table>
-    </Row>
-  </div>
-    );
     return (
       <div className="history">
-          <Tabs className=''>
-            <Tab id='open' title="Open" active >{openTable}</Tab>
-            <Tab id='closed' title="Closed" >{closedTable}</Tab>
-          </Tabs>
+        <Tabs className=''>
+          <Tab id='open' title="Open" active >
+            <OrderTable orders={this.state.openOrders} />
+          </Tab>
+          <Tab id='closed' title="Closed" >
+            <OrderTable orders={this.state.closedOrders} />
+          </Tab>
+        </Tabs>
       </div>
       )
   }
 }
+
+History.propTypes = {
+  userID: React.PropTypes.string.isRequired,
+  deep: React.PropTypes.object.isRequired
+};
 
 export default History;

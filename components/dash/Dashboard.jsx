@@ -96,7 +96,7 @@ class Dashboard extends React.Component {
             currencies={this.state.selectedCurrencies}
             deep={this.props.deep}
           />
-          <History deep={this.props.deep} />
+          <History userID={this.props.userData.userID} deep={this.props.deep} />
           <Graph deep={this.props.deep} />
         </Row>
       </div>
