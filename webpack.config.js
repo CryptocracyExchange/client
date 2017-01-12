@@ -3,7 +3,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './components/index.jsx',
+  entry: [
+   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+   './components/index.jsx'
+  ],
   output: {
     path: path.resolve(__dirname, 'client'),
     filename: 'bundle.js'
@@ -30,15 +33,19 @@ module.exports = {
       path.join(__dirname, 'node_modules'),
     ],
   },
-  devtool: '#inline-source-map'
-  // plugins: [
-  //   new webpack.DefinePlugin({  // <-- Key to reducing React's size
-  //     'process.env': {
-  //       'NODE_ENV': JSON.stringify('production')
-  //     }
-  //   }),
-  //   new webpack.optimize.DedupePlugin(),            // Dedupe similar code 
-  //   new webpack.optimize.UglifyJsPlugin(),          // Minify everything
-  //   new webpack.optimize.AggressiveMergingPlugin()  // Merge chunks 
-  // ]
+  devtool: '#inline-source-map',
+  plugins: [
+    // Webpack HMR for faster dev time
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+    // new webpack.DefinePlugin({  // <-- Key to reducing React's size
+    //   'process.env': {
+    //     'NODE_ENV': JSON.stringify('production')
+    //   }
+    // }),
+    // new webpack.optimize.DedupePlugin(),            // Dedupe similar code 
+    // new webpack.optimize.UglifyJsPlugin(),          // Minify everything
+    // new webpack.optimize.AggressiveMergingPlugin()  // Merge chunks 
+  ]
 };
