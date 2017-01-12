@@ -1,22 +1,6 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import { Row } from 'react-materialize';
-import AppBar from 'material-ui/AppBar';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-const muiTheme = getMuiTheme({
-  palette: {
-    textColor: '#FDFDFD',
-  },
-  appBar: {
-    height: 100,
-    fontFamily: 'DecimaMonoPro'
-  },
-});
-
-
 
 class Nav extends React.Component {
   constructor(props) {
