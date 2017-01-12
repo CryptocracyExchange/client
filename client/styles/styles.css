@@ -146,6 +146,15 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   font-size:0.85rem !important;
 }
 
+.transaction input {
+  height:1em !important;
+}
+
+.transaction .input-field label {
+  top:-0.2rem !important;
+  font-size:0.85rem !important;
+}
+
 .history {
   margin:10px;
   width:100%;

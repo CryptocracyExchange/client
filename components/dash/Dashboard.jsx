@@ -112,7 +112,6 @@ class Dashboard extends React.Component {
   }
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
       <div>
         <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
         <ExchangeRates
@@ -136,7 +135,6 @@ class Dashboard extends React.Component {
          </Col>
         </Row>
       </div>
-      </MuiThemeProvider>
     )
   }
 
