@@ -26,6 +26,7 @@ class Addresses extends React.Component{
   }
 
   componentWillUnmount() {
+    console.log('Settings is going to unmount.');
     this.userWallet.discard();
   }
 
