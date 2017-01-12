@@ -4,7 +4,13 @@
   src: url("/fonts/DecimaMonoPro.ttf");
 }
 
-/*local('DecimaMonoPro'),*/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: 'DecimaMonoPro', sans-serif;
   background-color: #EEE;
@@ -118,7 +124,8 @@ nav ul li a {
   border-bottom: 1px solid #bbb;
 }
 /*.tabs .indicator { display: none; }*/
-/*.tabs .tab a.active { border-bottom: 2px solid #DA4E28; }*/
+nav .tabs .tab a.active { border-bottom: 2px solid #DA4E28 !important; }
+nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 
 .transaction {
   padding:0;
