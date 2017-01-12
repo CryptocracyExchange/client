@@ -7,7 +7,7 @@ class Transfers extends React.Component {
       userID: props.userID,
       currency: 'BTC',
       address: '',
-      amount: null,
+      amount: '',
     };
     this.handleAddressUpdate = this.handleAddressUpdate.bind(this);
     this.handleAmountUpdate = this.handleAmountUpdate.bind(this);
