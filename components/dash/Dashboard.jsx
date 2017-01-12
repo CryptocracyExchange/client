@@ -9,6 +9,7 @@ import { Row, Col } from 'react-materialize';
 import { TypeChooser, fitWidth } from 'react-stockcharts';
 import mockData from '../../test/mockdata.js';
 
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);

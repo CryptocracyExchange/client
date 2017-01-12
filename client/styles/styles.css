@@ -7,7 +7,8 @@
 /*local('DecimaMonoPro'),*/
 body {
   font-family: 'DecimaMonoPro', sans-serif;
-  /*background-color: #DDD;*/
+  background-color: #EEE;
+  font-size: 0.85em;
 }
 
 .landing {
@@ -130,6 +131,15 @@ nav ul li a {
   /*padding-bottom:60%;*/
   background-color: #FDFDFD !important;
   /*border: 1px solid black;*/
+}
+
+.transaction input {
+  height:1em !important;
+}
+
+.transaction .input-field label {
+  top:-0.2rem !important;
+  font-size:0.85rem !important;
 }
 
 .history {

@@ -90,7 +90,7 @@ class Transaction extends React.Component {
       <div className=''>
         <Row>
           <Col s={12}>
-            &nbsp;Balance <br/>
+            You Have:
             <span>{this.props.primaryCurrency}: { this.props.primaryBalance.available || 0 }</span><br/>
             <span>{this.props.secondaryCurrency}: { this.props.secondaryBalance.available || 0 }</span>
           </Col>
@@ -124,7 +124,9 @@ class Transaction extends React.Component {
 
   return (
     <div className="transaction z-depth-0">
-    &nbsp;Buy/Sell
+    <Row>
+      <Col s={12}>Buy/Sell</Col>
+    </Row>
       {transactionForm}
     </div>
     )
