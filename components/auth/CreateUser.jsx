@@ -15,13 +15,13 @@ class CreateUser extends React.Component {
   }
   submitHandler(e) {
     e.preventDefault();
-    this.props.router.push('/dashboard');
+    this.props.router.push('/');
   }
-/*
+
   clickHandler(e) {
     e.preventDefault();
     this.props.router.push('/');
-  }*/
+  }
 
 /*<button onClick={(e) => this.clickHandler(e)}> Cancel </button>*/
 
