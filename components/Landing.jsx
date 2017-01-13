@@ -16,6 +16,8 @@ class Landing extends React.Component {
       password: ''
     }
     this.updateInput = this.updateInput.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
   updateInput(key) {
@@ -70,7 +72,7 @@ class Landing extends React.Component {
             <br /><br />
             {console.log(this.state.username)}
             {console.log(this.state.password)}
-            <input type="submit" onClick={(e) => this.clickHandler(e)} value="Log In" />&nbsp;&nbsp;
+            <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;
             <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
           </form>
         </div>
