@@ -70,7 +70,7 @@ class Landing extends React.Component {
             <br /><br />
             {console.log(this.state.username)}
             {console.log(this.state.password)}
-            <input type="submit" value="Log In" />&nbsp;&nbsp;
+            <input type="submit" onClick={(e) => this.clickHandler(e)} value="Log In" />&nbsp;&nbsp;
             <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
           </form>
         </div>
