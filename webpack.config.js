@@ -5,6 +5,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+   'webpack/hot/only-dev-server',
    './components/index.jsx'
   ],
   output: {
@@ -15,11 +16,8 @@ module.exports = {
     loaders: [
       {
         test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loaders: ['react-hot', 'babel-loader?{"presets":["es2015","react"]}'],
+        exclude: /node_modules/
       }
     ]
   },
