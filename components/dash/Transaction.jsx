@@ -124,7 +124,7 @@ class Transaction extends React.Component {
     );
 
   return (
-    <div className="transaction z-depth-0">
+    <div className="transaction z-depth-2">
     <Row>
       <Col s={12}>Buy/Sell</Col>
     </Row>

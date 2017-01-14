@@ -128,16 +128,13 @@ nav .tabs .tab a.active { border-bottom: 2px solid #DA4E28 !important; }
 nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 
 .transaction {
-  padding:0;
-  /*width:25%;*/
-  /*top:18%;*/
-  /*left:0;*/
-  /*position:fixed;*/
-  /*height:42%;*/
-  min-height: auto;
-  /*padding-bottom:60%;*/
+  margin:10px;
+  width:100%;
+  position:relative;
+  height:0;
+  padding-bottom:100%;
   background-color: #FDFDFD !important;
-  /*border: 1px solid black;*/
+  border-radius: 2px;
 }
 
 .transaction input {
@@ -150,28 +147,31 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 }
 
 .history {
-  padding:0;
-  /*width:25%;*/
-  /*top:60%;*/
-  /*left:0;*/
-  /*position:fixed;*/
-  min-height: auto;
-  /*height:42%;*/
+  margin:10px;
+  width:100%;
+  position:relative;
+  height:0;
+  padding-bottom:100%;
   background-color: #FDFDFD !important;
-  /*border: 1px solid black;*/
+  border-radius: 2px;
 }
 
 .graph {
-  padding:0;
-  /*width:75%;*/
-  top:20%;
-  left:25%;
-  /*display:none;*/
-  position:fixed;
-  min-height:100%;
-  width:75%;
-  background-color: grey;
-  border: 1px solid black;
+  padding:10px;
+  margin:10px;
+
+  position:relative;
+  /*min-height:100%;*/
+
+  background-color: #FDFDFD;
+  border-radius: 2px;
+}
+
+.graphWrapper {
+  
+  /*position:relative;*/
+
+
 }
 
 .settingsBody {

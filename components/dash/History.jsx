@@ -127,7 +127,7 @@ class History extends React.Component {
 
   render() {
     return (
-      <div className="history">
+      <div className="history z-depth-2">
         <Tabs className=''>
           <Tab id='open' title="Open" active >
             <OrderTable orders={this.state.openOrders} />

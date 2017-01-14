@@ -54,12 +54,12 @@ class Graph extends React.Component {
       .fill("#4682B4");
 
     return (
-      <ChartCanvas ratio={ratio} width={width} height={400}
+      <ChartCanvas ratio={ratio} width={width} height={200 * 2}
           margin={{ left: 70, right: 70, top: 10, bottom: 30 }} type={type}
           seriesName="MSFT"
           data={data} calculator={[sma20, ema20, ema50, smaVolume50]}
           xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-          xExtents={[new Date(2017, 0, 11), new Date(2017, 0, 12)]}>
+          xExtents={[new Date(2017, 0, 11), new Date()]}>
         <Chart id={1}
             yExtents={[d => [d.high, d.low], sma20.accessor(), ema20.accessor(), ema50.accessor()]}
             padding={{ top: 10, bottom: 20 }}>
@@ -97,10 +97,10 @@ class Graph extends React.Component {
             orient="left"
             displayFormat={d3.format(".4s")} />
 
-          <BarSeries yAccessor={d => d.volume} fill={d => d.close > d.open ? "#6BA583" : "red"} />
+          <BarSeries yAccessor={d => d.volume} fill={d => d.close > d.open ? "#21CE99" : "#DA4E28"} />
           <AreaSeries yAccessor={smaVolume50.accessor()} stroke={smaVolume50.stroke()} fill={smaVolume50.fill()}/>
           <CurrentCoordinate yAccessor={smaVolume50.accessor()} fill={smaVolume50.stroke()} />
-          <CurrentCoordinate yAccessor={d => d.volume} fill="#9B0A47" />
+          <CurrentCoordinate yAccessor={d => d.volume} fill="#333333" />
         </Chart>
         <CrossHairCursor />
       </ChartCanvas>
@@ -137,7 +137,7 @@ class GraphWrapper extends React.Component {
 
   render() {
     if (!this.props.data) return <div> Loading...</div>
-       this.props.data.forEach((d, i) => {
+      this.props.data.forEach((d, i) => {
         d.date = new Date(parseTime(d.date));
         d.open = +d.open;
         d.high = +d.high;
@@ -146,7 +146,7 @@ class GraphWrapper extends React.Component {
         d.volume = +d.volume;
       })
     return (
-      <div className='graph'>
+      <div className='graph z-depth-3'>
          <TypeChooser type="hybrid">
           {type => <Graph data={this.props.data} type={type} />}
          </TypeChooser>
