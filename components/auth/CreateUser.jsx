@@ -48,12 +48,6 @@ class CreateUser extends React.Component {
         username: username,
         password: password,
         email: email
-      },
-      success: (message) => {
-        console.log('success message is:', message);
-      },
-      error: (message) => {
-        console.log('error message is:', message);
       }
     })
   }
