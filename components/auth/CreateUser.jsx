@@ -31,7 +31,7 @@ class CreateUser extends React.Component {
     return function(e) {
       state[key] = e.target.value
       this.setState(
-        state
+        state,
       )
     }.bind(this)
   }
@@ -74,6 +74,7 @@ class CreateUser extends React.Component {
               {console.log(this.state.password)}
               {console.log(this.state.confirm)}
               {console.log(this.state.email)}
+              {console.log(this.state.disabled)}
               <input type="text" onChange={this.updateFormInput('password')} placeholder="password" name="name" />
               <br /><br />
               <input type="text" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
@@ -81,7 +82,7 @@ class CreateUser extends React.Component {
               <input type="text" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
             </label>
             <br /><br />
-            <input type="submit" onClick={this.signUp} value="Submit" />&nbsp;&nbsp;
+            <input type="submit" onClick={this.signUp} value="Submit" disabled={this.state.password.length === 0 || this.state.password !== this.state.confirm} />&nbsp;&nbsp;
           </form>
         </div>
       </div>
