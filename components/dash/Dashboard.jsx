@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
+        <Nav deep={this.props.deep} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
         <ExchangeRates deep={this.props.deep} currencies={this.state.selectedCurrencies} />
         <Row>
           <Transaction

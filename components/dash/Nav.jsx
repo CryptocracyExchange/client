@@ -11,6 +11,15 @@ class Nav extends React.Component {
     this.props.toRoute(route);
   }
 
+  logoutHandler(route) {
+    console.log('hits logout handler');
+    // console.log('window.deepstream is: ', window.deepstream);
+    console.log('this.props.deep is: ', this.props.deep);
+    this.props.deep.close();
+    // this.props.deep('localhost:6020'); // Need to change to production IP/URL when deploying
+    this.props.toRoute(route);
+  }
+
   render() {
     return (
        <Row className='z-depth-0'>
@@ -20,11 +29,11 @@ class Nav extends React.Component {
             <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a onClick={this.clickHandler.bind(this, '/settings')}>Settings</a></li>
-              <li><a onClick={this.clickHandler.bind(this, '/')}>Logout</a></li>
+              <li><a onClick={this.logoutHandler.bind(this, '/')}>Logout</a></li>
             </ul>
             <ul className="side-nav" id="mobile-demo">
               <li><a onClick={this.clickHandler.bind(this, '/settings')}>Settings</a></li>
-              <li><a onClick={this.clickHandler.bind(this, '/settings')}>Logout</a></li>
+              <li><a onClick={this.logoutHandler.bind(this, '/')}>Logout</a></li>
             </ul>
 
             <ul className="tabs tabs-transparent">
