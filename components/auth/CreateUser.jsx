@@ -60,6 +60,8 @@ class CreateUser extends React.Component {
 
 
   render() {
+    let passwordDoesNotMatchOrEmpty = this.state.password.length === 0 || this.state.password !== this.state.confirm
+    let passwordDoesNotMatch = this.state.password !== this.state.confirm
     return (
       <div className='createUser'>
         <div>
@@ -79,10 +81,11 @@ class CreateUser extends React.Component {
               <br /><br />
               <input type="text" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
               <br /><br />
+              {passwordDoesNotMatch && <p>Passwords do not match</p>}
               <input type="text" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
             </label>
             <br /><br />
-            <input type="submit" onClick={this.signUp} value="Submit" disabled={this.state.password.length === 0 || this.state.password !== this.state.confirm} />&nbsp;&nbsp;
+            <input type="submit" onClick={this.signUp} value="Submit" disabled={passwordDoesNotMatchOrEmpty} />&nbsp;&nbsp;
           </form>
         </div>
       </div>
