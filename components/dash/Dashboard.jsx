@@ -132,6 +132,9 @@ class Dashboard extends React.Component {
          <Col s={10}>
           <GraphWrapper data={this.state.chartData}/>
          </Col>
+          <Col s={2}>
+          Troll Box
+         </Col>
         </Row>
       </div>
     )
