@@ -28,12 +28,13 @@ class Transaction extends React.Component {
     } else {
     const options = {
       userID: this.props.userData.userID,
-      currency: this.props.primaryCurrency,
+      currFrom: this.props.primaryCurrency,
+      currTo: this.props.secondaryCurrency,
       price: this.state.price || this.state.marketValue,
       amount: this.state.amount || 1
     };
     console.log('form', options, 'type', 'transaction' + type);
-    this.props.deep.event.emit('transaction' + type, options);
+    this.props.deep.event.emit('transaction', options);
     }
   }
 

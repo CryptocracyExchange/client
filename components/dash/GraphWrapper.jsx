@@ -1,41 +1,25 @@
+'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import mockData from '../../test/mockdata.js'
-import d3 from 'd3';
-import { 
-  ChartCanvas,
-  Chart,
-  series,
-  scale,
-  coordinates,
-  tooltip,
-  axes,
-  indicator,
-  helper,
-  CandlestickSeries, 
-  BarSeries, 
-  LineSeries, 
-  AreaSeries,
-  discontinuousTimeScaleProvider,
-  CrossHairCursor,
-  MouseCoordinateX,
-  MouseCoordinateY,
-  CurrentCoordinate,
-  OHLCTooltip,
-  MovingAverageTooltip,
-  XAxis,
-  YAxis,
-  ema,
-  sma,
-  fitWidth,
-  TypeChooser
-  } from 'react-stockcharts';
+import { mockData } from '../../test/mockdata.js'
+// import d3 from 'd3';
+import { ChartCanvas, Chart, series, scale, coordinates, tooltip, axes, indicator, helper } from "react-stockcharts";
+
+var { CandlestickSeries, BarSeries, LineSeries, AreaSeries } = series;
+var { discontinuousTimeScaleProvider } = scale;
+var { CrossHairCursor, MouseCoordinateX, MouseCoordinateY, CurrentCoordinate } = coordinates;
+var { OHLCTooltip, MovingAverageTooltip } = tooltip;
+var { XAxis, YAxis } = axes;
+var { ema, sma } = indicator;
+
+var { fitWidth, TypeChooser } = helper;
+
+var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
 class Graph extends React.Component {
   constructor(props) {
     super(props);
 
-    // console.log(mockData);
   }
 
   render() {
@@ -69,15 +53,13 @@ class Graph extends React.Component {
       .stroke("#4682B4")
       .fill("#4682B4");
 
-
     return (
-      <div className="graph">
       <ChartCanvas ratio={ratio} width={width} height={400}
           margin={{ left: 70, right: 70, top: 10, bottom: 30 }} type={type}
           seriesName="MSFT"
           data={data} calculator={[sma20, ema20, ema50, smaVolume50]}
           xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-          xExtents={[new Date(2012, 0, 1), new Date(2012, 6, 2)]}>
+          xExtents={[new Date(2017, 0, 11), new Date(2017, 0, 12)]}>
         <Chart id={1}
             yExtents={[d => [d.high, d.low], sma20.accessor(), ema20.accessor(), ema50.accessor()]}
             padding={{ top: 10, bottom: 20 }}>
@@ -122,23 +104,58 @@ class Graph extends React.Component {
         </Chart>
         <CrossHairCursor />
       </ChartCanvas>
-
-
-      </div>
       )
   }
 }
-// Graph.propTypes = {
-//   data: React.PropTypes.array.isRequired,
-//   width: React.PropTypes.number.isRequired,
-//   ratio: React.PropTypes.number.isRequired,
-//   type: React.PropTypes.oneOf(["svg", "hybrid"]).isRequired,
-// };
+Graph.propTypes = {
+  data: React.PropTypes.array.isRequired,
+  width: React.PropTypes.number.isRequired,
+  ratio: React.PropTypes.number.isRequired,
+  type: React.PropTypes.oneOf(["svg", "hybrid"]).isRequired,
+};
 
 Graph.defaultProps = {
   type: "hybrid",
 };
 
 
+Graph = fitWidth(Graph);
 
-export default Graph;
+
+
+class GraphWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+    };
+  }
+  componentDidMount() {
+  }
+
+
+
+  render() {
+    if (!this.props.data) return <div> Loading...</div>
+       this.props.data.forEach((d, i) => {
+        d.date = new Date(parseTime(d.date));
+        d.open = +d.open;
+        d.high = +d.high;
+        d.low = +d.low;
+        d.close = +d.close;
+        d.volume = +d.volume;
+      })
+    return (
+      <div className='graph'>
+         <TypeChooser type="hybrid">
+          {type => <Graph data={this.props.data} type={type} />}
+         </TypeChooser>
+      </div>
+    )
+  }
+}
+
+
+
+// export default Graph;
+export default GraphWrapper;

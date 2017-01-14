@@ -9,7 +9,6 @@ import { Row, Col } from 'react-materialize';
 import { TypeChooser, fitWidth } from 'react-stockcharts';
 import mockData from '../../test/mockdata.js';
 
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -72,7 +71,6 @@ class Dashboard extends React.Component {
     })
 
     // setInterval(() => console.log('st', this.state.chartData), 2000);
-
     //init get historical data for graph
     // subscribe to updates to graph
   }
@@ -132,7 +130,6 @@ class Dashboard extends React.Component {
             />
              <History userID={this.props.userData.userID} deep={this.props.deep} />
           </Col>
-
          <Col s={10}>
           <GraphWrapper data={this.state.chartData}/>
          </Col>
