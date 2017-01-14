@@ -48,7 +48,6 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     // get user balances
-    console.log('hello');
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
       change.userBalances = record.get();
