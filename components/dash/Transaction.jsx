@@ -2,11 +2,6 @@ import React from 'react';
 import { Tabs, Tab, Row, Input, Button, Modal, Col } from 'react-materialize';
 import _ from 'lodash';
 
-/* 
-toDo:
--subscribe to events regarding status of open or closed or canceled(?)
-
-*/
 class Transaction extends React.Component {
   constructor(props) {
     super(props);
@@ -28,12 +23,12 @@ class Transaction extends React.Component {
     } else {
     const options = {
       userID: this.props.userData.userID,
+      type: type,
       currFrom: this.props.primaryCurrency,
       currTo: this.props.secondaryCurrency,
       price: this.state.price || this.state.marketValue,
       amount: this.state.amount || 1
     };
-    console.log('form', options, 'type', 'transaction' + type);
     this.props.deep.event.emit('transaction', options);
     }
   }
@@ -55,7 +50,7 @@ class Transaction extends React.Component {
         </Button>
         }
         actions={
-          [<Button waves='light' onClick={(e) => this.clickHandler(e, 'Sell')} modal='close' flat>Confirm</Button>,
+          [<Button waves='light' onClick={(e) => this.clickHandler(e, 'sell')} modal='close' flat>Confirm</Button>,
           <Button waves='light' modal='close' flat>Cancel</Button>]
         }
         >
@@ -76,7 +71,7 @@ class Transaction extends React.Component {
         </Button>
         }
         actions={
-          [<Button waves='light' onClick={(e) => this.clickHandler(e, 'Buy')} modal='close' flat>Confirm</Button>,
+          [<Button waves='light' onClick={(e) => this.clickHandler(e, 'buy')} modal='close' flat>Confirm</Button>,
           <Button waves='light' modal='close' flat>Cancel</Button>]
         }
         >
@@ -97,24 +92,28 @@ class Transaction extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Input 
-            id='price' 
-            onChange={(e) => this.formChange(e)} 
-            s={10} 
-            label='Price:' 
-            defaultValue={this.state.marketValue} 
-          />
-          <Col s={2}>{this.props.primaryCurrency}</Col>
+          <Col s={1}>
+            <span>Price</span>
+          </Col>
+            <Input 
+              id='price' 
+              onChange={(e) => this.formChange(e)} 
+              s={8}
+              defaultValue={this.state.marketValue} 
+            />
+          <Col s={1}>{this.props.primaryCurrency}</Col>
         </Row>
-        <Row>
+        <Row>  
+          <Col s={1}>
+            <span>Amount:</span>
+          </Col>
           <Input 
             id='amount' 
             onChange={(e) => this.formChange(e)} 
-            s={10} 
-            label='Amount:' 
+            s={8} 
             defaultValue="1" 
           /> 
-          <Col s={2}>{this.props.secondaryCurrency}</Col>
+          <Col s={1}>{this.props.secondaryCurrency}</Col>
         </Row>
         <Row>
           <Col s={6} className='center-align'>{sellModal}</Col>
@@ -126,9 +125,10 @@ class Transaction extends React.Component {
   return (
     <div className="transaction z-depth-2">
     <Row>
-      <Col s={12}>Buy/Sell</Col>
-    </Row>
+      <Col className='transWrapper' s={12}>
       {transactionForm}
+      </Col>
+    </Row>
     </div>
     )
   }

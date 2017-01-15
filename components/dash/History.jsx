@@ -130,10 +130,14 @@ class History extends React.Component {
       <div className="history z-depth-2">
         <Tabs className=''>
           <Tab id='open' title="Open" active >
-            <OrderTable orders={this.state.openOrders} />
+            <div className='tableWrapper'>
+              <OrderTable orders={this.state.openOrders} />
+            </div>
           </Tab>
           <Tab id='closed' title="Closed" >
+          <div className='tableWrapper'>
             <OrderTable orders={this.state.closedOrders} />
+          </div>
           </Tab>
         </Tabs>
       </div>

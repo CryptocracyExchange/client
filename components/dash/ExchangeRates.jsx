@@ -15,16 +15,12 @@ class ExchangeRates extends React.Component {
     return (
       <Row className="exchangeBar">
         <Col s={1}>
-          <div className='currBtn center-align' onClick={() => this.props.currencySelector(this.props.secondaryCurrencies[0], 'secondary')}>
-          {this.props.secondaryCurrencies[0]}
-          </div>
+        Exchange
         </Col>
        <Col s={1}>
-          <div className='currBtn center-align' onClick={() => this.props.currencySelector(this.props.secondaryCurrencies[1], 'secondary')}>
-          {this.props.secondaryCurrencies[1]}
-          </div>
+        Rates
         </Col>
-        <Col s={10}>HELLA SHIT</Col>
+        <Col s={10}>exchangeRates</Col>
       </Row>
     )
   }
@@ -32,7 +28,6 @@ class ExchangeRates extends React.Component {
 
 export default ExchangeRates;
 
-// onClick={() => this.props.currencySelector(this.props.secondaryCurrencies[0], 'secondary')}
 
 
       

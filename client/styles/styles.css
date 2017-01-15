@@ -128,7 +128,7 @@ nav .tabs .tab a.active { border-bottom: 2px solid #DA4E28 !important; }
 nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 
 .transaction {
-  margin:10px;
+  margin:5px;
   width:100%;
   position:relative;
   height:0;
@@ -156,7 +156,7 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 }
 
 .history {
-  margin:10px;
+  margin:5px;
   width:100%;
   position:relative;
   height:0;
@@ -165,13 +165,17 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   border-radius: 2px;
 }
 
+.history .tableWrapper {
+  overflow-y:scroll;
+}
+
 .graph {
   padding:10px;
-  margin:10px;
-
+  margin:5px;
+  width:100%;
+  height:0;
   position:relative;
-  /*min-height:100%;*/
-
+  padding-bottom:46.66%;
   background-color: #FDFDFD;
   border-radius: 2px;
 }
@@ -181,6 +185,28 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   /*position:relative;*/
 
 
+}
+
+.graphSpinner {
+  top:40% !important;
+  left:45%;
+  position: absolute;
+}
+
+.trollbox {
+  margin:5px;
+  height:0;
+  position:relative;
+  width:100%;
+  padding-bottom:200%;
+  background-color: #FDFDFD !important;
+  border-radius: 2px;
+}
+
+.graphcontrols {
+  padding:5px;
+  bottom:0;
+  position:absolute;
 }
 
 .settingsBody {

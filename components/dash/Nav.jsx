@@ -37,10 +37,9 @@ class Nav extends React.Component {
             </ul>
 
             <ul className="tabs tabs-transparent">
-              <li className="tab"><a onClick={() => this.props.currencySelector('BTC', 'primary')}>BTC</a></li>
-              <li className="tab"><a onClick={() => this.props.currencySelector('LTC', 'primary')}>LTC</a></li>
-              <li className="tab"><a onClick={() => this.props.currencySelector('DOGE', 'primary')}>DOGE</a></li>
-
+              <li className=""><a onClick={(e) => this.props.currencySelector(e, 'BTC', 'LTC')}>BTC/LTC</a></li>
+              <li className=""><a onClick={(e) => this.props.currencySelector(e, 'LTC', 'DOGE')}>LTC/DOGE</a></li>
+              <li className=""><a onClick={(e) => this.props.currencySelector(e, 'DOGE', 'BTC')}>DOGE/BTC</a></li>
             </ul>
           </div>
          </nav>

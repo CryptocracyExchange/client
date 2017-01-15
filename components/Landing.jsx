@@ -44,8 +44,8 @@ class Landing extends React.Component {
     }, (success, data) => {
       console.log('success is: ', success, 'data is: ', data);
       if (success) {
-        // data = {userID: 'kai'};
-        data = data;
+        data = {userID: 'harry'};
+        // data = data;
         this.props.getUserData(data);
         this.props.router.push('/dashboard');
       } else {
