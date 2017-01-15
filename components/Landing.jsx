@@ -13,22 +13,26 @@ class Landing extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      correct: true
     }
-    this.updateInput = this.updateInput.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
   }
 
-  updateInput(key) {
-    let state = {}
-    return function(e) {
-      state[key] = e.target.value;
-      this.setState(
-        state
-      )
-    }.bind(this)
-  } 
+  updateUsername(e) {
+    this.setState({
+        username: e.target.value
+      })
+  }
+
+  updatePassword(e) {
+    this.setState({
+        password: e.target.value
+      })
+  }  
 
   submitHandler(e) {
     e.preventDefault();
@@ -45,6 +49,11 @@ class Landing extends React.Component {
         this.props.getUserData(data);
         this.props.router.push('/dashboard');
       } else {
+        this.setState({
+          username: '',
+          password: '',
+          correct: false
+        })
         console.log('incorrect login')
       }
     });
@@ -57,6 +66,8 @@ class Landing extends React.Component {
 
 
   render() {
+    let usernameLength = this.state.username.length;
+    let passwordLength = this.state.password.length;
     return (
       <div className='landing'>
         <div>
@@ -65,11 +76,12 @@ class Landing extends React.Component {
         <div className='loginForm'>
           <form onSubmit={(e) => this.submitHandler(e)}>
             <label>
-              <input type="text" onChange={this.updateInput('username')} placeholder="username" name="name" />
+              <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
               <br /><br />
-              <input type="text" onChange={this.updateInput('password')} placeholder="password" name="name" />
+              <input type="text" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
             </label>
             <br /><br />
+            {!this.state.correct && usernameLength === 0 && passwordLength === 0 && <p>Invalid login</p>}
             {console.log(this.state.username)}
             {console.log(this.state.password)}
             <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;

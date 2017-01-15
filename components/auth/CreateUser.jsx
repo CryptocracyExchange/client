@@ -76,7 +76,6 @@ class CreateUser extends React.Component {
               {console.log(this.state.password)}
               {console.log(this.state.confirm)}
               {console.log(this.state.email)}
-              {console.log(this.state.disabled)}
               <input type="text" onChange={this.updateFormInput('password')} placeholder="password" name="name" />
               <br /><br />
               <input type="text" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
