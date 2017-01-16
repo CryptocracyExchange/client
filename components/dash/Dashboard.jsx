@@ -31,7 +31,9 @@ class Dashboard extends React.Component {
       primaryCurrency: 'BTC',
       secondaryCurrency: 'LTC',
       chartData: null,
-      periodDur: [15, 'minutes']
+      periodDur: [15, 'minutes'],
+      perLow: 0.00475,
+      perHigh: 0.00475
     }
     this.ds = props.deep;
     this.userData = props.userData;
@@ -134,8 +136,15 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
-        <Row>
-          <Col s={2}>
+        <ExchangeRates 
+          primaryCurrency={this.state.primaryCurrency}
+          secondaryCurrency={this.state.secondaryCurrency}
+          perLow={this.state.perLow}
+          perHigh={this.state.perHigh}
+        />
+          }
+        <div className='row content'>
+          <div className='left-column'>
             <Transaction
               userData={this.props.userData}
               primaryCurrency={this.state.primaryCurrency}
@@ -145,17 +154,19 @@ class Dashboard extends React.Component {
               deep={this.props.deep}
             />
              <History userID={this.props.userData.userID} deep={this.props.deep} />
-          </Col>
-          <Col s={8}>
-            <div  className='graph'>
+          </div>
+          <div className='center-column'>
+            <div className='graphWrapper'>
               <GraphWrapper data={this.state.chartData} />
-              <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
             </div>
-          </Col>
-          <Col s={2}>
+              <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
+          </div>
+          <div className='right-column'>
             <TrollBox />
-          </Col>
-        </Row>
+          </div>
+        </div>
+        <div className='footer'>
+        </div>
       </div>
     )
   }

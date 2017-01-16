@@ -45,9 +45,9 @@ class Transaction extends React.Component {
         header='Confirmation'
         fixedFooter
         trigger={
-        <Button className='red' waves='light'>
+        <div className='sellBtn' waves='light'>
         Sell
-        </Button>
+        </div>
         }
         actions={
           [<Button waves='light' onClick={(e) => this.clickHandler(e, 'sell')} modal='close' flat>Confirm</Button>,
@@ -66,9 +66,9 @@ class Transaction extends React.Component {
         header='Confirmation'
         fixedFooter
         trigger={
-        <Button className='green' waves='light'>
+        <div className='buyBtn' waves='light'>
         Buy
-        </Button>
+        </div>
         }
         actions={
           [<Button waves='light' onClick={(e) => this.clickHandler(e, 'buy')} modal='close' flat>Confirm</Button>,
@@ -84,48 +84,59 @@ class Transaction extends React.Component {
 
     const transactionForm = (
       <div className=''>
-        <Row>
-          <Col s={12}>
-            You Have:
-            <span>{this.props.primaryCurrency}: { this.props.primaryBalance.available || 0 }</span><br/>
-            <span>{this.props.secondaryCurrency}: { this.props.secondaryBalance.available || 0 }</span>
-          </Col>
-        </Row>
-        <Row>
-          <Col s={1}>
-            <span>Price</span>
-          </Col>
+        <div className='transWrapper'>
+          <Row className='balanceWrapper'> 
+            <span>Balance:</span>
+            { this.props.primaryBalance.available || 0 } &nbsp; {this.props.primaryCurrency}<br/>
+            { this.props.secondaryBalance.available || 0 } &nbsp; {this.props.secondaryCurrency}
+          </Row> 
+          <Row>
+            <Col s={2}>
+              <span>PRICE</span>
+            </Col>
+              <Input 
+                id='price' 
+                onChange={(e) => this.formChange(e)} 
+                s={4}
+                defaultValue={this.state.marketValue} 
+              />
+            <Col s={1}>{this.props.primaryCurrency}</Col>
+          </Row>
+          <Row>  
+            <Col s={2}>
+              <span>AMOUNT</span>
+            </Col>
             <Input 
-              id='price' 
+              id='amount' 
               onChange={(e) => this.formChange(e)} 
-              s={8}
-              defaultValue={this.state.marketValue} 
-            />
-          <Col s={1}>{this.props.primaryCurrency}</Col>
-        </Row>
-        <Row>  
-          <Col s={1}>
-            <span>Amount:</span>
-          </Col>
-          <Input 
-            id='amount' 
-            onChange={(e) => this.formChange(e)} 
-            s={8} 
-            defaultValue="1" 
-          /> 
-          <Col s={1}>{this.props.secondaryCurrency}</Col>
-        </Row>
-        <Row>
-          <Col s={6} className='center-align'>{sellModal}</Col>
-          <Col s={6} className='center-align'>{buyModal}</Col>
-        </Row>
+              s={4} 
+              defaultValue="1" 
+            /> 
+            <Col s={1}>{this.props.secondaryCurrency}</Col>
+          </Row>
+          <Row className='total'>
+            <Col s={2}>
+              <span>TOTAL</span>
+            </Col>
+            <Col s={5}>
+              {this.state.amount * this.state.price || 0}
+            </Col>
+          </Row>
+        </div>
+          <div className='btnWrapper'>
+            {sellModal}
+            {buyModal}
+          </div>
       </div>
     );
 
   return (
     <div className="transaction">
+    <div className='header'>
+      Trade
+    </div>
     <Row>
-      <Col className='transWrapper' s={12}>
+      <Col className='wrapper' s={12}>
       {transactionForm}
       </Col>
     </Row>

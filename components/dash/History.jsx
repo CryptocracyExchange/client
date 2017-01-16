@@ -128,6 +128,9 @@ class History extends React.Component {
   render() {
     return (
       <div className="history">
+        <div className='header'>
+            Orders
+        </div>
         <Tabs className=''>
           <Tab id='open' title="Open" active >
             <div className='tableWrapper'>

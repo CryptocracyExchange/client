@@ -52,7 +52,7 @@ class Graph extends React.Component {
       .stroke("#4682B4")
       .fill("#4682B4");
 
-    var chartHeight = window.innerHeight * 0.40;
+    var chartHeight = window.innerHeight * 0.5;
     var resize = function() {
       charHeight = window.innerHeight * 0.42;
     }
@@ -154,7 +154,7 @@ class GraphWrapper extends React.Component {
         d.volume = +d.volume;
       })
     return (
-      <div className=''>
+      <div className='graph'>
         <TypeChooser type="hybrid">
           {type => <Graph data={this.props.data} type={type} />}
         </TypeChooser>

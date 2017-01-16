@@ -11,8 +11,10 @@ class TrollBox extends React.Component {
 
   render() {
     return (
-      <div className='trollbox z-depth-2'>
-      Troll Box
+      <div className='trollbox'>
+        <div className='header'>
+          Troll Box
+        </div>
       </div>
     )
   }
