@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import { Row } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 
 class Nav extends React.Component {
   constructor(props) {
@@ -22,29 +22,21 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <Row className='z-depth-0'>
-         <nav className="nav-extended z-depth-2">
-          <div className="nav-wrapper green-text">
-            <a className="brand-logo">Cryptocracy</a>
-            <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li><a onClick={this.clickHandler.bind(this, '/settings')}>Settings</a></li>
-              <li><a onClick={this.clickHandler.bind(this, '/')}>Logout</a></li>
-            </ul>
-            <ul className="side-nav" id="mobile-demo">
-              <li><a onClick={this.clickHandler.bind(this, '/settings')}>Settings</a></li>
-              <li><a onClick={this.clickHandler.bind(this, '/')}>Logout</a></li>
-            </ul>
-
-            <ul className="tabs tabs-transparent">
-              <li className="tab"><a onClick={() => this.props.currencySelector('BTC', 'primary')}>BTC</a></li>
-              <li className="tab"><a onClick={() => this.props.currencySelector('LTC', 'primary')}>LTC</a></li>
-              <li className="tab"><a onClick={() => this.props.currencySelector('DOGE', 'primary')}>DOGE</a></li>
-
-            </ul>
-          </div>
-         </nav>
-       </Row>
+          <Row className="navBar">
+            <Col s={2}>
+              <span>Cryptocracy</span>
+            </Col>
+            <Col s={3}>
+              <a onClick={(e) => this.props.currencySelector(e, 'BTC', 'LTC')}>BTC<span className='fwdSlash'>/</span>LTC</a>&nbsp;
+              <a onClick={(e) => this.props.currencySelector(e, 'LTC', 'DOGE')}>LTC<span className='fwdSlash'>/</span>DOGE</a>&nbsp;
+              <a onClick={(e) => this.props.currencySelector(e, 'DOGE', 'BTC')}>DOGE<span className='fwdSlash'>/</span>BTC</a>
+            </Col>
+            <Col s={5}>
+            </Col>
+            <Col s={2}>
+              <a onClick={this.clickHandler.bind(this, '/settings')}>SETTINGS</a>
+            </Col>
+          </Row>
       )
   }
 }

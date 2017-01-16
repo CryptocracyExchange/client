@@ -3,10 +3,11 @@ import Nav from './Nav.jsx';
 import ExchangeRates from './ExchangeRates.jsx';
 import Transaction from './Transaction.jsx';
 import GraphWrapper from './GraphWrapper.jsx';
+import GraphControls from './GraphControls.jsx';
 import History from './History.jsx';
+import TrollBox from './TrollBox.jsx';
 import _ from 'lodash';
 import { Row, Col } from 'react-materialize';
-import { TypeChooser, fitWidth } from 'react-stockcharts';
 import mockData from '../../test/mockdata.js';
 
 class Dashboard extends React.Component {
@@ -29,15 +30,16 @@ class Dashboard extends React.Component {
       },
       primaryCurrency: 'BTC',
       secondaryCurrency: 'LTC',
-      secondaryCurrencies: ['LTC', 'DOGE'],
-      chartData: null
+      chartData: null,
+      periodDur: [15, 'minutes'],
+      perLow: 0.00475,
+      perHigh: 0.00475
     }
     this.ds = props.deep;
     this.userData = props.userData;
     this.userID = props.userData.userID;
 
     this.balances = this.ds.record.getRecord(`balances/${this.userID}`);
-    this.ds.event.emit('getData');
     this.ds.event.subscribe('histData', (data) => {
       console.log('hist', data);
       const change = _.extend({}, this.state);
@@ -47,20 +49,22 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    // get chart data
+    this._getChartData()
     // get user balances
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
       change.userBalances = record.get();
       this.setState(change);
     });
-
+    // subscribe to balance changes
     this.balances.subscribe((data) => {
       console.log('newBal', data);
       const change = _.extend({}, this.state);
       change.userBalances = data;
       this.setState(change);
     });
-
+    // set user data
     this._setUserData.bind(this);
 
     //notification for closed orders
@@ -68,35 +72,40 @@ class Dashboard extends React.Component {
       console.log('toast!', data)
       Materialize.toast('Success! An order was filled!', 4000);
     })
-
-    // setInterval(() => console.log('st', this.state.chartData), 2000);
-    //init get historical data for graph
-    // subscribe to updates to graph
   }
+
   componentWillUnmount() {
     this.balances.discard();
-
   }
 
-  _setCurrency(currency, type) {
-    console.log('curr', currency, type);
-    const change = _.extend({}, this.state);
-    if (type === 'primary') {
-      let selector;
-      let pairs = [['LTC', 'DOGE'],
-                  ['BTC', 'DOGE'],
-                  ['LTC', 'BTC']]
-      if (currency === 'BTC') {
-        selector = 0;
-      } else if (currency === 'LTC') {
-        selector = 1;
-      } else {
-        selector = 2;
+  componentWillUpdate(nextProps, nextState) {
+    console.log('nextState', nextState)
+    console.log('compUpdate', Date.now())
+    if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
+      if (this.state.chartData) {
+        this.setState({chartData: null})
       }
-      change.secondaryCurrencies = pairs[selector];
-      change.secondaryCurrency = pairs[selector][0];
+      setTimeout(() => {
+        this._getChartData();
+      }, 200);
     }
-    change[type + 'Currency'] = currency;
+  }
+
+  _getChartData() {
+    let options = {
+      primaryCurrency: this.state.primaryCurrency,
+      secondaryCurrency: this.state.secondaryCurrency,
+      periodDur: this.state.periodDur
+    };
+    console.log('getChartData', Date.now(), this.state.periodDur)
+    this.ds.event.emit('getData', options);
+  }
+
+  _setCurrency(e, primary, secondary) {
+    e.preventDefault;
+    const change = _.extend({}, this.state);
+    change.primaryCurrency = primary;
+    change.secondaryCurrency = secondary;
     this.setState(change);
   }
 
@@ -106,6 +115,20 @@ class Dashboard extends React.Component {
     this.setState(change);
   }
 
+  _selectPeriod(e) {
+    let periods = [
+      [15, 'minutes'],
+      [30, 'minutes'],
+      [1, 'hours'],
+      [2, 'hours']
+    ]
+    console.log('period', e.target.value);
+    const change = _.extend({}, this.state);
+    change.periodDur = periods[e.target.value];
+    this.setState(change);
+  }
+
+
   changeRoute(route) {
     this.props.router.push(route);
   }
@@ -113,12 +136,15 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
-        <ExchangeRates
-          currencySelector={this._setCurrency.bind(this)}
-          secondaryCurrencies={this.state.secondaryCurrencies}
-          />
-        <Row>
-          <Col s={2}>
+        <ExchangeRates 
+          primaryCurrency={this.state.primaryCurrency}
+          secondaryCurrency={this.state.secondaryCurrency}
+          perLow={this.state.perLow}
+          perHigh={this.state.perHigh}
+        />
+          }
+        <div className='row content'>
+          <div className='left-column'>
             <Transaction
               userData={this.props.userData}
               primaryCurrency={this.state.primaryCurrency}
@@ -128,11 +154,19 @@ class Dashboard extends React.Component {
               deep={this.props.deep}
             />
              <History userID={this.props.userData.userID} deep={this.props.deep} />
-          </Col>
-         <Col s={10}>
-          <GraphWrapper data={this.state.chartData}/>
-         </Col>
-        </Row>
+          </div>
+          <div className='center-column'>
+            <div className='graphWrapper'>
+              <GraphWrapper data={this.state.chartData} />
+            </div>
+              <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
+          </div>
+          <div className='right-column'>
+            <TrollBox />
+          </div>
+        </div>
+        <div className='footer'>
+        </div>
       </div>
     )
   }
