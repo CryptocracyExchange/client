@@ -8,7 +8,6 @@ import History from './History.jsx';
 import TrollBox from './TrollBox.jsx';
 import _ from 'lodash';
 import { Row, Col } from 'react-materialize';
-import { TypeChooser, fitWidth } from 'react-stockcharts';
 import mockData from '../../test/mockdata.js';
 
 class Dashboard extends React.Component {
@@ -148,7 +147,7 @@ class Dashboard extends React.Component {
              <History userID={this.props.userData.userID} deep={this.props.deep} />
           </Col>
           <Col s={8}>
-            <div  className='graph z-depth-2'>
+            <div  className='graph'>
               <GraphWrapper data={this.state.chartData} />
               <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
             </div>

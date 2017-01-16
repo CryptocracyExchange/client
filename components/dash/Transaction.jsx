@@ -123,7 +123,7 @@ class Transaction extends React.Component {
     );
 
   return (
-    <div className="transaction z-depth-2">
+    <div className="transaction">
     <Row>
       <Col className='transWrapper' s={12}>
       {transactionForm}

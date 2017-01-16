@@ -127,7 +127,7 @@ class History extends React.Component {
 
   render() {
     return (
-      <div className="history z-depth-2">
+      <div className="history">
         <Tabs className=''>
           <Tab id='open' title="Open" active >
             <div className='tableWrapper'>

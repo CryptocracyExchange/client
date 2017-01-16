@@ -22,8 +22,8 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <Row className='z-depth-0'>
-         <nav className="nav-extended z-depth-2">
+      <Row className=''>
+         <nav className="nav-extended">
           <div className="nav-wrapper green-text">
             <a className="brand-logo">Cryptocracy</a>
             <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
@@ -35,7 +35,6 @@ class Nav extends React.Component {
               <li><a onClick={this.clickHandler.bind(this, '/settings')}>Settings</a></li>
               <li><a onClick={this.clickHandler.bind(this, '/')}>Logout</a></li>
             </ul>
-
             <ul className="tabs tabs-transparent">
               <li className=""><a onClick={(e) => this.props.currencySelector(e, 'BTC', 'LTC')}>BTC/LTC</a></li>
               <li className=""><a onClick={(e) => this.props.currencySelector(e, 'LTC', 'DOGE')}>LTC/DOGE</a></li>
