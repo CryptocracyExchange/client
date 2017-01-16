@@ -31,18 +31,18 @@ const config = {
   devtool: '#inline-source-map'
 };
 
-if (process.env.NODE_ENV === 'prod') {
-  config.plugins = [
-    new webpack.DefinePlugin({  // <-- Key to reducing React's size
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.DedupePlugin(),            // Dedupe similar code 
-    new webpack.optimize.UglifyJsPlugin(),          // Minify everything
-    new webpack.optimize.AggressiveMergingPlugin()  // Merge chunks
-  ]
-}
+// if (process.env.NODE_ENV === 'prod') {
+//   config.plugins = [
+//     new webpack.DefinePlugin({  // <-- Key to reducing React's size
+//       'process.env': {
+//         'NODE_ENV': JSON.stringify('production')
+//       }
+//     }),
+//     new webpack.optimize.DedupePlugin(),            // Dedupe similar code 
+//     new webpack.optimize.UglifyJsPlugin(),          // Minify everything
+//     new webpack.optimize.AggressiveMergingPlugin()  // Merge chunks
+//   ]
+// }
 
 if (process.env.NODE_ENV !== 'prod') {
   config.entry.unshift(
