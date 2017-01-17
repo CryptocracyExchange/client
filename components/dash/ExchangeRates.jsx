@@ -4,12 +4,8 @@ import { Row, Col, Navbar, NavItem } from 'react-materialize';
 class ExchangeRates extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = this.props.exchangeRates;
   }
-
-
 
   render() {
     return (
@@ -23,7 +19,7 @@ class ExchangeRates extends React.Component {
           3.40% <img src='/img/greenArrow.svg'></img>
         </Col>
         <Col className='exchRate' s={1}>0.00475</Col>
-        <Col s={3}>   
+        <Col s={3}>
           LOW {this.props.perLow}
           &nbsp;&nbsp;
           HIGH {this.props.perHigh}
@@ -35,7 +31,3 @@ class ExchangeRates extends React.Component {
 }
 
 export default ExchangeRates;
-
-
-
-      

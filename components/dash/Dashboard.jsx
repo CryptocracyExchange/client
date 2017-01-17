@@ -46,6 +46,20 @@ class Dashboard extends React.Component {
       change.chartData = data;
       this.setState(change);
     })
+    this.exchangeRates = {
+      // BTCLTC: this.ds.record.getRecord('rates/BTCLTC'),
+      // LTCBTC: this.ds.record.getRecord('rates/LTCBTC'),
+      // LTCDOGE: this.ds.record.getRecord('rates/LTCDOGE'),
+      // DOGELTC: this.ds.record.getRecord('rates/DOGELTC'),
+      // BTCDOGE: this.ds.record.getRecord('rates/BTCDOGE'),
+      // DOGEBTC: this.ds.record.getRecord('rates/DOGEBTC')
+      BTCLTC: 54,
+      LTCBTC: 23,
+      LTCDOGE: 53,
+      DOGELTC: 62,
+      BTCDOGE: 23,
+      DOGEBTC: 52
+    };
   }
 
   componentDidMount() {
