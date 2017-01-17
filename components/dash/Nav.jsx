@@ -13,10 +13,8 @@ class Nav extends React.Component {
 
   logoutHandler(route) {
     console.log('hits logout handler');
-    // console.log('window.deepstream is: ', window.deepstream);
-    console.log('this.props.deep is: ', this.props.deep);
-    this.props.deep.close();
-    // this.props.deep('localhost:6020'); // Need to change to production IP/URL when deploying
+    this.props.deepstream.close();
+    // this.props.deep.close(); //this is the first way things worked. not sure why it stopped working
     this.props.toRoute(route);
   }
 

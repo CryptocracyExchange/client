@@ -148,8 +148,8 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
-        <ExchangeRates
+        <Nav deepstream={this.ds} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
+        <ExchangeRates 
           primaryCurrency={this.state.primaryCurrency}
           secondaryCurrency={this.state.secondaryCurrency}
           perLow={this.state.perLow}
