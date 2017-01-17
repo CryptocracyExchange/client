@@ -33,7 +33,8 @@ class Dashboard extends React.Component {
       chartData: null,
       periodDur: [15, 'minutes'],
       perLow: 0.00475,
-      perHigh: 0.00475
+      perHigh: 0.00475,
+      exchangeRate: null
     }
     this.ds = props.deep;
     this.userData = props.userData;
@@ -46,20 +47,6 @@ class Dashboard extends React.Component {
       change.chartData = data;
       this.setState(change);
     })
-    this.exchangeRates = {
-      // BTCLTC: this.ds.record.getRecord('rates/BTCLTC'),
-      // LTCBTC: this.ds.record.getRecord('rates/LTCBTC'),
-      // LTCDOGE: this.ds.record.getRecord('rates/LTCDOGE'),
-      // DOGELTC: this.ds.record.getRecord('rates/DOGELTC'),
-      // BTCDOGE: this.ds.record.getRecord('rates/BTCDOGE'),
-      // DOGEBTC: this.ds.record.getRecord('rates/DOGEBTC')
-      BTCLTC: 54,
-      LTCBTC: 23,
-      LTCDOGE: 53,
-      DOGELTC: 62,
-      BTCDOGE: 23,
-      DOGEBTC: 52
-    };
   }
 
   componentDidMount() {
@@ -86,6 +73,9 @@ class Dashboard extends React.Component {
       console.log('toast!', data)
       Materialize.toast('Success! An order was filled!', 4000);
     })
+
+    // set exchange rate
+    this._setExchangeRate(this.state.primaryCurrency, this.state.secondaryCurrency);
   }
 
   componentWillUnmount() {
@@ -103,6 +93,15 @@ class Dashboard extends React.Component {
         this._getChartData();
       }, 200);
     }
+  }
+
+  _setExchangeRate(primary, secondary) {
+    this.ds.record.getRecord(`rates/${primary}${secondary}`).whenReady((xchangeRate) => {
+      let rate = xchangeRate.get('rate');
+      const change = _.extend({}, this.state);
+      change.exchangeRate = rate;
+      this.setState(change);
+    });
   }
 
   _getChartData() {
@@ -150,11 +149,12 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Nav currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
-        <ExchangeRates 
+        <ExchangeRates
           primaryCurrency={this.state.primaryCurrency}
           secondaryCurrency={this.state.secondaryCurrency}
           perLow={this.state.perLow}
           perHigh={this.state.perHigh}
+          exchangeRate={this.state.exchangeRate}
         />
           }
         <div className='row content'>
