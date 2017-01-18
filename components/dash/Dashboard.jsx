@@ -176,7 +176,10 @@ class Dashboard extends React.Component {
               <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
           </div>
           <div className='right-column'>
-            <TrollBox />
+            <TrollBox
+              userData={this.props.userData}
+              deep={this.props.deep}
+            />
           </div>
         </div>
         <div className='footer'>
