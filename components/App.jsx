@@ -18,7 +18,7 @@ class App extends React.Component {
     this.setState({data: data})
   }
 
-  checkAuth() {
+  checkAuth(settings) {
     const connectionState = client.getConnectionState();
     if (connectionState !== 'OPEN') { // Test to see if this is the correct constant.
       const userJWT = window.localStorage.cryptocracy;
@@ -30,7 +30,11 @@ class App extends React.Component {
           console.log(this.props);
           if (success) {
             this.getUserData(data);
-            this.props.router.push('/dashboard');
+            if (!settings) {
+              this.props.router.push('/dashboard');
+            } else {
+              this.props.router.push('/settings');
+            }
           } else {
             this.props.router.push('/');
           }

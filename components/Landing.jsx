@@ -8,13 +8,23 @@ let options = {
   currency: 'BTC'
 }
 
+//create function renderLanding
+  //if the showLanding property is false
+    //return null
+  //otherwise return the stuff I want to render (Need to figure out some way to handle the this value)
+
+
+//create showLanding property in state defaulted to true
+
+
 class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      correct: true
+      correct: true,
+      visibility: ''
     }
     this.submitHandler = this.submitHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -23,6 +33,16 @@ class Landing extends React.Component {
   }
 
   componentWillMount() {
+    const userJWT = window.localStorage.cryptocracy;
+      if (userJWT) {
+        this.setState({
+          visibility: 'hidden'
+        })
+      } else {
+        this.setState({
+          visibility: 'visible'
+        })
+      }
     this.props.checkAuth();
   }
   
@@ -72,8 +92,11 @@ class Landing extends React.Component {
   render() {
     let usernameLength = this.state.username.length;
     let passwordLength = this.state.password.length;
+    let visibility = {
+      visibility: this.state.visibility
+    }
     return (
-      <div className='landing'>
+      <div style={visibility} className='landing'>
         <div>
         <img src='/img/whiteCrypt.svg' className='landingBanner'></img>
         </div>
