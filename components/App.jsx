@@ -14,6 +14,10 @@ class App extends React.Component {
     }
   }
   
+  getUserData(data) {
+    this.setState({data: data})
+  }
+
   checkAuth() {
     const connectionState = client.getConnectionState();
     if (connectionState !== 'OPEN') { // Test to see if this is the correct constant.
@@ -23,21 +27,16 @@ class App extends React.Component {
           role: 'user',
           jwt: userJWT
         }, (success, data) => {
+          console.log(this.props);
           if (success) {
-            data = data;
-            this.props.getUserData(data);
+            this.getUserData(data);
             this.props.router.push('/dashboard');
           } else {
-            this.props.router.push('/landing');
+            this.props.router.push('/');
           }
         });
       }
     }
-  }
-
-  getUserData(data) {
-    //setstate
-    this.setState({data: data})
   }
 
   render() {
