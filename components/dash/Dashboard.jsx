@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
       primaryCurrency: 'BTC',
       secondaryCurrency: 'LTC',
       chartData: null,
-      periodDur: '15m',
+      periodDur: '2m',
       perLow: 0.00475,
       perHigh: 0.00475,
       exchangeRate: null
@@ -77,12 +77,14 @@ class Dashboard extends React.Component {
       this.setState(change);
     });
     // set user data
-    this._setUserData.bind(this);
+    // this._setUserData.bind(this);
 
     //notification for closed orders
     this.ds.event.subscribe('closedSale', (data) => {
       console.log('toast!', data)
-      Materialize.toast('Success! An order was filled!', 4000);
+      if (data.userID === this.userID) {
+        Materialize.toast('Success! An order was filled!', 4000);
+      }
     })
 
     // set exchange rate
@@ -101,7 +103,8 @@ class Dashboard extends React.Component {
         this.setState({chartData: null})
       }
       setTimeout(() => {
-        this._getChartData();
+        // refactor to pass nextState instead of referencing state
+        this._getChartData(nextState.);
       }, 200);
     }
   }
@@ -114,8 +117,9 @@ class Dashboard extends React.Component {
       this.setState(change);
     });
   }
-
-  _getChartData() {
+  
+// refactor to pass nextState instead of referencing state
+  _getChartData(periodDur) {
     if (this.chartData) {
       this.chartData.discard();
     }
@@ -142,11 +146,12 @@ class Dashboard extends React.Component {
     this.setState(change);
   }
 
-  _setUserData() {
-    const change = _.extend({}, this.state);
-    change.userData = this.userData;
-    this.setState(change);
-  }
+// double check need for this
+  // _setUserData() {
+  //   const change = _.extend({}, this.state);
+  //   change.userData = this.userData;
+  //   this.setState(change);
+  // }
 
   _selectPeriod(e) {
     let periods = [
