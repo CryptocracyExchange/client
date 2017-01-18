@@ -8,6 +8,10 @@ class Settings extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.checkAuth();
+  }
+
   changeRoute(route) {
     this.props.router.push(route)
   }

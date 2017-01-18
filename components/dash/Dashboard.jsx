@@ -49,6 +49,10 @@ class Dashboard extends React.Component {
     })
   }
 
+  componentWillMount() {
+    this.props.checkAuth();
+  }
+
   componentDidMount() {
     // get chart data
     this._getChartData()
@@ -148,7 +152,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Nav deepstream={this.ds} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
+        <Nav deep={this.props.deep} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
         <ExchangeRates 
           primaryCurrency={this.state.primaryCurrency}
           secondaryCurrency={this.state.secondaryCurrency}

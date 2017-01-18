@@ -13,6 +13,27 @@ class App extends React.Component {
       data: {}
     }
   }
+  
+  checkAuth() {
+    const connectionState = client.getConnectionState();
+    if (connectionState !== 'OPEN') { // Test to see if this is the correct constant.
+      const userJWT = window.localStorage.cryptocracy;
+      if (userJWT) {
+        client.login({
+          role: 'user',
+          jwt: userJWT
+        }, (success, data) => {
+          if (success) {
+            data = data;
+            this.props.getUserData(data);
+            this.props.router.push('/dashboard');
+          } else {
+            this.props.router.push('/landing');
+          }
+        });
+      }
+    }
+  }
 
   getUserData(data) {
     //setstate
@@ -22,6 +43,7 @@ class App extends React.Component {
   render() {
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
+        checkAuth: this.checkAuth.bind(this),
         deep: client,
         getUserData: this.getUserData.bind(this),
         userData: this.state.data

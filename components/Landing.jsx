@@ -22,6 +22,10 @@ class Landing extends React.Component {
     this.updatePassword = this.updatePassword.bind(this);
   }
 
+  componentWillMount() {
+    this.props.checkAuth();
+  }
+  
   updateUsername(e) {
     this.setState({
         username: e.target.value

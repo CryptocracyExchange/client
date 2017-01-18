@@ -15,6 +15,10 @@ class CreateUser extends React.Component {
     this.updateErrorState = this.updateErrorState.bind(this);
     this.signUp = this.signUp.bind(this);
   }
+  
+  componentWillMount() {
+    this.props.checkAuth();
+  }
 
   submitHandler(e, success) {
     console.log('gets into submitHandler')

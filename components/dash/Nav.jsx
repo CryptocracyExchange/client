@@ -12,9 +12,7 @@ class Nav extends React.Component {
   }
 
   logoutHandler(route) {
-    console.log('hits logout handler');
-    this.props.deepstream.close();
-    // this.props.deep.close(); //this is the first way things worked. not sure why it stopped working
+    this.props.deep.close();
     this.props.toRoute(route);
   }
 
