@@ -141,7 +141,7 @@ class GraphWrapper extends React.Component {
 
   render() {
     if (!this.props.data) return <div className='graphSpinner'> 
-      <div className='center-align'>
+      <div className=''>
         <Preloader flashing/>
       </div>
     </div>

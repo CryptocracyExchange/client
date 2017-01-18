@@ -32,6 +32,7 @@ class Nav extends React.Component {
             </Col>
             <Col s={2}>
               <a onClick={this.clickHandler.bind(this, '/settings')}>SETTINGS</a>
+              &nbsp;&nbsp;
               <a onClick={this.logoutHandler.bind(this, '/')}>LOGOUT</a>
             </Col>
           </Row>

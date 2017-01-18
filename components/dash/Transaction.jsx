@@ -45,7 +45,7 @@ class Transaction extends React.Component {
         header='Confirmation'
         fixedFooter
         trigger={
-        <div className='sellBtn' waves='light'>
+        <div className='sellBtn'>
         Sell
         </div>
         }
