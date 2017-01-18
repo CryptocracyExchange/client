@@ -34,7 +34,7 @@ class Landing extends React.Component {
 
   componentWillMount() {
     const userJWT = window.localStorage.cryptocracy;
-      if (userJWT) {
+      /*if (userJWT) {
         this.setState({
           visibility: 'hidden'
         })
@@ -42,8 +42,10 @@ class Landing extends React.Component {
         this.setState({
           visibility: 'visible'
         })
-      }
-    this.props.checkAuth();
+      }*/
+    if (userJWT) {
+      this.props.checkAuth();
+    }
   }
   
   updateUsername(e) {

@@ -40,6 +40,7 @@ class App extends React.Component {
               this.props.router.push('/settings');
             }
           } else {
+            window.localStorage.removeItem('cryptocracy');
             this.props.router.push('/');
           }
         });
