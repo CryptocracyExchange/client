@@ -10,7 +10,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      data: {}
+      data: {},
+      shouldRender: true
     }
   }
   
@@ -29,6 +30,9 @@ class App extends React.Component {
         }, (success, data) => {
           console.log(this.props);
           if (success) {
+            this.setState({
+              shouldRender: false
+            })
             this.getUserData(data);
             if (!settings) {
               this.props.router.push('/dashboard');
@@ -49,7 +53,8 @@ class App extends React.Component {
         checkAuth: this.checkAuth.bind(this),
         deep: client,
         getUserData: this.getUserData.bind(this),
-        userData: this.state.data
+        userData: this.state.data,
+        shouldRender: this.state.shouldRender
       })
     );
 

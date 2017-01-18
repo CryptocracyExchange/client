@@ -92,29 +92,31 @@ class Landing extends React.Component {
   render() {
     let usernameLength = this.state.username.length;
     let passwordLength = this.state.password.length;
-    let visibility = {
-      visibility: this.state.visibility
-    }
-    return (
-      <div style={visibility} className='landing'>
-        <div>
-        <img src='/img/whiteCrypt.svg' className='landingBanner'></img>
-        </div>
-        <div className='loginForm'>
-          <form onSubmit={(e) => this.submitHandler(e)}>
-            <label>
-              <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
+    console.log('this.props.shouldRender is: ', this.props.shouldRender);
+    if (this.props.shouldRender) {
+      return (
+        <div className='landing'>
+          <div>
+          <img src='/img/whiteCrypt.svg' className='landingBanner'></img>
+          </div>
+          <div className='loginForm'>
+            <form onSubmit={(e) => this.submitHandler(e)}>
+              <label>
+                <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
+                <br /><br />
+                <input type="text" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
+              </label>
               <br /><br />
-              <input type="text" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
-            </label>
-            <br /><br />
-            {!this.state.correct && usernameLength === 0 && passwordLength === 0 && <p>Invalid login</p>}
-            <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;
-            <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
-          </form>
+              {!this.state.correct && usernameLength === 0 && passwordLength === 0 && <p>Invalid login</p>}
+              <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;
+              <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
+            </form>
+          </div>
         </div>
-      </div>
       )
+    } else {
+      return <div></div>
+    }
   }
 }
 
