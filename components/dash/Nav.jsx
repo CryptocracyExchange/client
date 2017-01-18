@@ -12,6 +12,7 @@ class Nav extends React.Component {
   }
 
   logoutHandler(route) {
+    window.localStorage.removeItem('cryptocracy');
     this.props.deep.close();
     this.props.toRoute(route);
   }
