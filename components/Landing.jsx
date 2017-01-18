@@ -44,8 +44,9 @@ class Landing extends React.Component {
     }, (success, data) => {
       console.log('success is: ', success, 'data is: ', data);
       if (success) {
-        data = {userID: 'harry'};
-        // data = data;
+        // data = {userID: 'harry'};
+        data = data;
+        window.localStorage.cryptocracy = data.token;
         this.props.getUserData(data);
         this.props.router.push('/dashboard');
       } else {
@@ -54,7 +55,6 @@ class Landing extends React.Component {
           password: '',
           correct: false
         })
-        console.log('incorrect login')
       }
     });
   }
@@ -82,8 +82,6 @@ class Landing extends React.Component {
             </label>
             <br /><br />
             {!this.state.correct && usernameLength === 0 && passwordLength === 0 && <p>Invalid login</p>}
-            {console.log(this.state.username)}
-            {console.log(this.state.password)}
             <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;
             <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
           </form>
