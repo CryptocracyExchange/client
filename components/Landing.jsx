@@ -2,7 +2,6 @@ import React from 'react';
 import request from 'superagent';
 import { Router, Route, browserHistory } from 'react-router';
 
-
 class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -12,29 +11,21 @@ class Landing extends React.Component {
       correct: true
     }
     this.submitHandler = this.submitHandler.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
+    this.signUpclickHandler = this.signUpclickHandler.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
   }
 
-  componentWillMount() {
-    console.log('this.props is: ', this.props);
-    const userJWT = window.localStorage.cryptocracy;
-    if (userJWT) {
-      this.props.checkAuth();
-    }
-  }
-  
   updateUsername(e) {
     this.setState({
-        username: e.target.value
-      })
+      username: e.target.value
+    });
   }
 
   updatePassword(e) {
     this.setState({
-        password: e.target.value
-      })
+      password: e.target.value
+    });
   }  
 
   submitHandler(e) {
@@ -45,13 +36,9 @@ class Landing extends React.Component {
       username: this.state.username,
       password: this.state.password
     }, (success, data) => {
-      console.log('success is: ', success, 'data is: ', data);
       if (success) {
-        // data = {userID: 'harry'};
-        data = data;
-        window.localStorage.cryptocracy = data.token;
-        this.props.getUserData(data);
-        this.props.makeDsConnectionTrue();
+        window.localStorage.setItem('cryptocracy', data.token);
+        window.localStorage.setItem('cryptocracyuserID', data.userID);
         this.props.router.push('/dashboard');
       } else {
         this.setState({
@@ -59,20 +46,17 @@ class Landing extends React.Component {
           password: '',
           correct: false
         })
+        console.log(this.state);
       }
     });
   }
 
-  clickHandler(e) {
+  signUpclickHandler(e) {
     e.preventDefault();
     this.props.router.push('/signup');
   }
 
-
   render() {
-    let usernameLength = this.state.username.length;
-    let passwordLength = this.state.password.length;
-    if (!this.props.dsConnected) {
       return (
         <div className='landing'>
           <div>
@@ -86,15 +70,13 @@ class Landing extends React.Component {
                 <input type="text" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
               </label>
               <br /><br />
-              {!this.state.correct && usernameLength === 0 && passwordLength === 0 && <p>Invalid login</p>}
+              {!this.state.correct && this.state.username.length === 0 && this.state.password.length === 0 && <p>Invalid login</p>}
               <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;
-              <button onClick={(e) => this.clickHandler(e)}> Sign Up </button>
+              <button onClick={(e) => this.signUpclickHandler(e)}> Sign Up </button>
             </form>
           </div>
         </div>
-      ) } else {
-      return <div>Put a spinner in here</div>
-    }
+      )
   }
 }
 

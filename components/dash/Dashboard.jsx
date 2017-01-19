@@ -52,12 +52,8 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    console.log('this.props is: ', this.props);
-    console.log('this.props.deep._connection._state is: ', this.props.deep._connection._state);
-    if (this.props.deep.getConnectionState() !== 'OPEN') {
-      console.log('hits connection state is not open');
-      this.props.checkAuth();
-    }
+    console.log('props', this.props);
+
   }
 
   componentDidMount() {
@@ -76,9 +72,6 @@ class Dashboard extends React.Component {
       change.userBalances = data;
       this.setState(change);
     });
-    // set user data
-    // this._setUserData.bind(this);
-
     //notification for closed orders
     this.ds.event.subscribe('closedSale', (data) => {
       console.log('toast!', data)
@@ -146,13 +139,6 @@ class Dashboard extends React.Component {
     this.setState(change);
   }
 
-// double check need for this
-  // _setUserData() {
-  //   const change = _.extend({}, this.state);
-  //   change.userData = this.userData;
-  //   this.setState(change);
-  // }
-
   _selectPeriod(e) {
     let periods = [
       ['15m'],
@@ -170,8 +156,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    if (this.props.dsConnected) {
-      return (
+    return (
         <div>
           <Nav 
             deep={this.props.deep}
@@ -215,11 +200,9 @@ class Dashboard extends React.Component {
           </div>
         </div>
       )
-    } else {
-      return <div>Put a spinner in here</div>
-    }
   }
 
 }
 
 export default Dashboard;
+
