@@ -91,36 +91,40 @@ class CreateUser extends React.Component {
   render() {
     let passwordDoesNotMatchOrEmpty = this.state.password.length === 0 || this.state.password !== this.state.confirm
     let passwordDoesNotMatch = this.state.password !== this.state.confirm
-    return (
-      <div className='createUser'>
-        <div>
-        <img src='/img/grnCrypt.svg' className='createUserBanner'></img>
+    if (!this.props.dsConnected) {
+      return (
+        <div className='createUser'>
+          <div>
+          <img src='/img/grnCrypt.svg' className='createUserBanner'></img>
+          </div>
+          <div className='loginForm'>
+            <form onSubmit={(e) => this.submitHandler(e)}>
+              <label>
+                <input type="text" onChange={this.updateFormInput('username')} placeholder="username" name="name" />
+                {this.state.error === 'username is already taken' && <p>username is already taken</p>}
+                <br /><br />
+                {console.log(this.state.username)}
+                {console.log(this.state.password)}
+                {console.log(this.state.confirm)}
+                {console.log(this.state.email)}
+                {console.log('this.state.error is: ', this.state.error)}
+                <input type="text" onChange={this.updateFormInput('password')} placeholder="password" name="name" />
+                <br /><br />
+                <input type="text" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
+                <br /><br />
+                {passwordDoesNotMatch && <p>Passwords do not match</p>}
+                <input type="text" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
+                {this.state.error === 'email is already taken' && <p>email is already taken</p>}
+              </label>
+              <br /><br />
+              <input type="submit" onClick={this.signUp} value="Submit" disabled={passwordDoesNotMatchOrEmpty} />&nbsp;&nbsp;
+            </form>
+          </div>
         </div>
-        <div className='loginForm'>
-          <form onSubmit={(e) => this.submitHandler(e)}>
-            <label>
-              <input type="text" onChange={this.updateFormInput('username')} placeholder="username" name="name" />
-              {this.state.error === 'username is already taken' && <p>username is already taken</p>}
-              <br /><br />
-              {console.log(this.state.username)}
-              {console.log(this.state.password)}
-              {console.log(this.state.confirm)}
-              {console.log(this.state.email)}
-              {console.log('this.state.error is: ', this.state.error)}
-              <input type="text" onChange={this.updateFormInput('password')} placeholder="password" name="name" />
-              <br /><br />
-              <input type="text" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
-              <br /><br />
-              {passwordDoesNotMatch && <p>Passwords do not match</p>}
-              <input type="text" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
-              {this.state.error === 'email is already taken' && <p>email is already taken</p>}
-            </label>
-            <br /><br />
-            <input type="submit" onClick={this.signUp} value="Submit" disabled={passwordDoesNotMatchOrEmpty} />&nbsp;&nbsp;
-          </form>
-        </div>
-      </div>
-    )
+      )
+    } else {
+      return <div>Put a spinner in here</div>
+    }
   }
 }
 
