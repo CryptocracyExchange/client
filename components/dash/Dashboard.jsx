@@ -47,11 +47,13 @@ class Dashboard extends React.Component {
       change.chartData = data;
       this.setState(change);
     })
-    console.log('this.props.deep is: ', this.props.deep);
   }
 
   componentWillMount() {
-    if (!this.props.deep._connection._state === 'OPEN') {
+    console.log('this.props is: ', this.props);
+    console.log('this.props.deep._connection._state is: ', this.props.deep._connection._state);
+    if (this.props.deep._connection._state !== 'OPEN') {
+      console.log('hits connection state is not open');
       this.props.checkAuth();
     }
   }
@@ -153,46 +155,50 @@ class Dashboard extends React.Component {
     this.props.router.push(route);
   }
   render() {
-    return (
-      <div>
-        <Nav deep={this.props.deep} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
-        <ExchangeRates 
-          primaryCurrency={this.state.primaryCurrency}
-          secondaryCurrency={this.state.secondaryCurrency}
-          perLow={this.state.perLow}
-          perHigh={this.state.perHigh}
-          exchangeRate={this.state.exchangeRate}
-        />
-          }
-        <div className='row content'>
-          <div className='left-column'>
-            <Transaction
-              userData={this.props.userData}
-              primaryCurrency={this.state.primaryCurrency}
-              secondaryCurrency={this.state.secondaryCurrency}
-              primaryBalance={this.state.userBalances[this.state.primaryCurrency]}
-              secondaryBalance={this.state.userBalances[this.state.secondaryCurrency]}
-              deep={this.props.deep}
-            />
-             <History userID={this.props.userData.userID} deep={this.props.deep} />
-          </div>
-          <div className='center-column'>
-            <div className='graphWrapper'>
-              <GraphWrapper data={this.state.chartData} />
+    if (this.props.dsConnected) {
+      return (
+        <div>
+          <Nav deep={this.props.deep} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
+          <ExchangeRates 
+            primaryCurrency={this.state.primaryCurrency}
+            secondaryCurrency={this.state.secondaryCurrency}
+            perLow={this.state.perLow}
+            perHigh={this.state.perHigh}
+            exchangeRate={this.state.exchangeRate}
+          />
+            }
+          <div className='row content'>
+            <div className='left-column'>
+              <Transaction
+                userData={this.props.userData}
+                primaryCurrency={this.state.primaryCurrency}
+                secondaryCurrency={this.state.secondaryCurrency}
+                primaryBalance={this.state.userBalances[this.state.primaryCurrency]}
+                secondaryBalance={this.state.userBalances[this.state.secondaryCurrency]}
+                deep={this.props.deep}
+              />
+               <History userID={this.props.userData.userID} deep={this.props.deep} />
             </div>
-              <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
+            <div className='center-column'>
+              <div className='graphWrapper'>
+                <GraphWrapper data={this.state.chartData} />
+              </div>
+                <GraphControls selectPeriod={this._selectPeriod.bind(this)} />
+            </div>
+            <div className='right-column'>
+              <TrollBox
+                userData={this.props.userData}
+                deep={this.props.deep}
+              />
+            </div>
           </div>
-          <div className='right-column'>
-            <TrollBox
-              userData={this.props.userData}
-              deep={this.props.deep}
-            />
+          <div className='footer'>
           </div>
         </div>
-        <div className='footer'>
-        </div>
-      </div>
-    )
+      )
+    } else {
+      return <div>Put a spinner in here</div>
+    }
   }
 
 }

@@ -32,16 +32,8 @@ class Landing extends React.Component {
   }
 
   componentWillMount() {
+    console.log('this.props is: ', this.props);
     const userJWT = window.localStorage.cryptocracy;
-      /*if (userJWT) {
-        this.setState({
-          visibility: 'hidden'
-        })
-      } else {
-        this.setState({
-          visibility: 'visible'
-        })
-      }*/
     if (userJWT) {
       this.props.checkAuth();
     }

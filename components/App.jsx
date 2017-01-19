@@ -20,7 +20,9 @@ class App extends React.Component {
   }
 
   checkAuth(settings) {
+    console.log('hits checkAuth function');
     const connectionState = client.getConnectionState();
+    console.log('connectionState is: ', connectionState);
     if (connectionState !== 'OPEN') { // Test to see if this is the correct constant.
       this.setState({
         dsConnected: true
@@ -31,10 +33,12 @@ class App extends React.Component {
           role: 'user',
           jwt: userJWT
         }, (success, data) => {
+          console.log('success is: ', success, 'data is: ', data);
           if (success) {
             this.getUserData(data);
             if (!settings) {
-              this.props.router.push('/dashboard');
+              console.log('hits not settings');
+              // this.props.router.push('/dashboard');
             } else {
               this.props.router.push('/settings');
             }
