@@ -65,6 +65,7 @@ class Landing extends React.Component {
         data = data;
         window.localStorage.cryptocracy = data.token;
         this.props.getUserData(data);
+        this.props.makeDsConnectionTrue();
         this.props.router.push('/dashboard');
       } else {
         this.setState({

@@ -19,6 +19,12 @@ class App extends React.Component {
     this.setState({data: data})
   }
 
+  makeDsConnectionTrue() {
+    this.setState({
+      dsConnected: true
+    })
+  }
+
   checkAuth(settings) {
     console.log('hits checkAuth function');
     const connectionState = client.getConnectionState();
@@ -58,6 +64,7 @@ class App extends React.Component {
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
         checkAuth: this.checkAuth.bind(this),
+        makeDsConnectionTrue: this.makeDsConnectionTrue.bind(this),
         deep: client,
         getUserData: this.getUserData.bind(this),
         userData: this.state.data,
