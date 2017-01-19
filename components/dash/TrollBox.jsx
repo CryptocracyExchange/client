@@ -54,7 +54,7 @@ class TrollBox extends React.Component {
 
   handleChatSubmit(e) {
     if (this.state.userMessage.length > 0) {
-      this.props.deep.event.emit('trollbox-create-message', {userID: this.state.userID, content: this.state.userMessage});
+      this.props.deep.event.emit('trollbox-create-message', {userID:  this.props.userData.userID, content: this.state.userMessage});
       this.setState({userMessage: ''});
     }
   }
@@ -65,20 +65,17 @@ class TrollBox extends React.Component {
         <div className='header'>
           Troll Box
         </div>
-        <br />
-        <br />
         <div className='messages-container'>
           <MessageList chatMessages={this.state.chatMessages} />
         </div>
-        <br />
-        <br />
+
         <div className='message-input'>
           <input 
             id="message-input"
             autoComplete="off"
             onChange={this.handleChatInput}
           />
-          <button onClick={this.handleChatSubmit}>Send</button>
+          <div className='trollBtn' onClick={this.handleChatSubmit}>Send</div>
         </div>
       </div>
     )

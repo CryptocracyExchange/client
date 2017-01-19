@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     // get chart data
-    this._getChartData()
+    this._getChartData('2m') // replace with default
     // get user balances
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
@@ -104,7 +104,7 @@ class Dashboard extends React.Component {
       }
       setTimeout(() => {
         // refactor to pass nextState instead of referencing state
-        this._getChartData(nextState.);
+        this._getChartData(nextState.periodDur);
       }, 200);
     }
   }
@@ -123,7 +123,7 @@ class Dashboard extends React.Component {
     if (this.chartData) {
       this.chartData.discard();
     }
-    const pair = this.primaryCurrency.toLowerCase() + this.secondaryCurrency.toLowerCase() + '';
+    const pair = this.state.primaryCurrency + this.state.secondaryCurrency + '';
  
     this.chartData = this.ds.record.getRecord(`chartData/${pair}${this.state.periodDur}`).whenReady((data) => {
       let change = _.extend({}, this.state);
