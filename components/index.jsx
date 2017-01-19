@@ -66,6 +66,8 @@ const checkAuth = (nextState, replace, done) => {
   } else if (nextState.location.pathname === '/signup') {
     if (userJWT) {
       loginJWTExternal(replace, loginSuccessExternal);
+    } else {
+      done();
     }
   } else if (nextState.location.pathname === '/dashboard') {
     if (connectionState !== 'OPEN'){
@@ -88,6 +90,7 @@ const checkAuth = (nextState, replace, done) => {
         replace({
           pathname: '/'
         });
+        done();
       }
     } else {
       done();
