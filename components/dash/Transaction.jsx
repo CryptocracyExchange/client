@@ -45,13 +45,13 @@ class Transaction extends React.Component {
         header='Confirmation'
         fixedFooter
         trigger={
-        <div className='sellBtn' waves='light'>
+        <div className='sellBtn'>
         Sell
         </div>
         }
         actions={
-          [<Button waves='light' onClick={(e) => this.clickHandler(e, 'sell')} modal='close' flat>Confirm</Button>,
-          <Button waves='light' modal='close' flat>Cancel</Button>]
+          [<Button onClick={(e) => this.clickHandler(e, 'sell')} modal='close' flat>Confirm</Button>,
+          <Button modal='close' flat>Cancel</Button>]
         }
         >
         <p>Do you wish to sell:</p>
@@ -66,13 +66,13 @@ class Transaction extends React.Component {
         header='Confirmation'
         fixedFooter
         trigger={
-        <div className='buyBtn' waves='light'>
+        <div className='buyBtn'>
         Buy
         </div>
         }
         actions={
-          [<Button waves='light' onClick={(e) => this.clickHandler(e, 'buy')} modal='close' flat>Confirm</Button>,
-          <Button waves='light' modal='close' flat>Cancel</Button>]
+          [<Button onClick={(e) => this.clickHandler(e, 'buy')} modal='close' flat>Confirm</Button>,
+          <Button modal='close' flat>Cancel</Button>]
         }
         >
         <p>Do you wish to buy:</p>

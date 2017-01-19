@@ -3,20 +3,6 @@ import request from 'superagent';
 import { Router, Route, browserHistory } from 'react-router';
 
 
-let options = {
-  userID: '00',
-  currency: 'BTC'
-}
-
-//create function renderLanding
-  //if the showLanding property is false
-    //return null
-  //otherwise return the stuff I want to render (Need to figure out some way to handle the this value)
-
-
-//create showLanding property in state defaulted to true
-
-
 class Landing extends React.Component {
   constructor(props) {
     super(props);

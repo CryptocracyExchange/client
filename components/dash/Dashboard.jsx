@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
       primaryCurrency: 'BTC',
       secondaryCurrency: 'LTC',
       chartData: null,
-      periodDur: [15, 'minutes'],
+      periodDur: '2m',
       perLow: 0.00475,
       perHigh: 0.00475,
       exchangeRate: null
@@ -39,6 +39,8 @@ class Dashboard extends React.Component {
     this.ds = props.deep;
     this.userData = props.userData;
     this.userID = props.userData.userID;
+
+    this.chartData;
 
     this.balances = this.ds.record.getRecord(`balances/${this.userID}`);
     this.ds.event.subscribe('histData', (data) => {
@@ -60,7 +62,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     // get chart data
-    this._getChartData()
+    this._getChartData('2m') // replace with default
     // get user balances
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
@@ -75,12 +77,14 @@ class Dashboard extends React.Component {
       this.setState(change);
     });
     // set user data
-    this._setUserData.bind(this);
+    // this._setUserData.bind(this);
 
     //notification for closed orders
     this.ds.event.subscribe('closedSale', (data) => {
       console.log('toast!', data)
-      Materialize.toast('Success! An order was filled!', 4000);
+      if (data.userID === this.userID) {
+        Materialize.toast('Success! An order was filled!', 4000);
+      }
     })
 
     // set exchange rate
@@ -99,7 +103,8 @@ class Dashboard extends React.Component {
         this.setState({chartData: null})
       }
       setTimeout(() => {
-        this._getChartData();
+        // refactor to pass nextState instead of referencing state
+        this._getChartData(nextState.periodDur);
       }, 200);
     }
   }
@@ -112,15 +117,25 @@ class Dashboard extends React.Component {
       this.setState(change);
     });
   }
+  
+// refactor to pass nextState instead of referencing state
+  _getChartData(periodDur) {
+    if (this.chartData) {
+      this.chartData.discard();
+    }
+    const pair = this.state.primaryCurrency + this.state.secondaryCurrency + '';
+ 
+    this.chartData = this.ds.record.getRecord(`chartData/${pair}${this.state.periodDur}`).whenReady((data) => {
+      let change = _.extend({}, this.state);
+      change.chartData = data.data;
+      this.setState(change);
+    })
 
-  _getChartData() {
-    let options = {
-      primaryCurrency: this.state.primaryCurrency,
-      secondaryCurrency: this.state.secondaryCurrency,
-      periodDur: this.state.periodDur
-    };
-    console.log('getChartData', Date.now(), this.state.periodDur)
-    this.ds.event.emit('getData', options);
+    // chartData.subscribe((newData) => {
+    //   let change = _.extend({}, this.state);
+    //   change.chartData = newData;
+    //   this.setState(change);
+    // })
   }
 
   _setCurrency(e, primary, secondary) {
@@ -131,34 +146,37 @@ class Dashboard extends React.Component {
     this.setState(change);
   }
 
-  _setUserData() {
-    const change = _.extend({}, this.state);
-    change.userData = this.userData;
-    this.setState(change);
-  }
+// double check need for this
+  // _setUserData() {
+  //   const change = _.extend({}, this.state);
+  //   change.userData = this.userData;
+  //   this.setState(change);
+  // }
 
   _selectPeriod(e) {
     let periods = [
-      [15, 'minutes'],
-      [30, 'minutes'],
-      [1, 'hours'],
-      [2, 'hours']
+      ['15m'],
+      ['30m'],
+      ['1h'],
+      ['2h']
     ]
-    console.log('period', e.target.value);
     const change = _.extend({}, this.state);
     change.periodDur = periods[e.target.value];
     this.setState(change);
   }
 
-
   changeRoute(route) {
     this.props.router.push(route);
   }
+
   render() {
     if (this.props.dsConnected) {
       return (
         <div>
-          <Nav deep={this.props.deep} currencySelector={this._setCurrency.bind(this)} toRoute={this.changeRoute.bind(this)} />
+          <Nav 
+            deep={this.props.deep}
+            currencySelector={this._setCurrency.bind(this)}
+            toRoute={this.changeRoute.bind(this)} />
           <ExchangeRates 
             primaryCurrency={this.state.primaryCurrency}
             secondaryCurrency={this.state.secondaryCurrency}
@@ -190,6 +208,7 @@ class Dashboard extends React.Component {
                 userData={this.props.userData}
                 deep={this.props.deep}
               />
+
             </div>
           </div>
           <div className='footer'>

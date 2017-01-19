@@ -132,19 +132,16 @@ Graph = fitWidth(Graph);
 class GraphWrapper extends React.Component {
   constructor(props) {
     super(props);
-  
-    this.state = {
-    };
   }
   componentDidMount() {
   }
 
   render() {
-    if (!this.props.data) return <div className='graphSpinner'> 
-      <div className='center-align'>
+    if (!this.props.data) return (
+      <div className='graphSpinner'> 
         <Preloader flashing/>
       </div>
-    </div>
+    );
       this.props.data.forEach((d, i) => {
         d.date = new Date(parseTime(d.date));
         d.open = +d.open;
