@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
   componentWillMount() {
     console.log('this.props is: ', this.props);
     console.log('this.props.deep._connection._state is: ', this.props.deep._connection._state);
-    if (this.props.deep._connection._state !== 'OPEN') {
+    if (this.props.deep.getConnectionState() !== 'OPEN') {
       console.log('hits connection state is not open');
       this.props.checkAuth();
     }

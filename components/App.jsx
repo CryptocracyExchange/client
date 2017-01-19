@@ -15,8 +15,8 @@ class App extends React.Component {
     }
   }
   
-  getUserData(data) {
-    this.setState({data: data})
+  getUserData(data, callback) {
+    this.setState({data: data}, callback)
   }
 
   makeDsConnectionTrue() {
@@ -41,13 +41,16 @@ class App extends React.Component {
         }, (success, data) => {
           console.log('success is: ', success, 'data is: ', data);
           if (success) {
-            this.getUserData(data);
-            if (!settings) {
-              console.log('hits not settings');
-              // this.props.router.push('/dashboard');
-            } else {
-              this.props.router.push('/settings');
+            const callback = () => {
+              if (!settings) {
+                console.log('hits not settings');
+                this.props.router.push('/dashboard');
+              } else {
+                this.props.router.push('/settings');
+              }
             }
+            this.getUserData(data, callback);
+            
           } else {
             window.localStorage.removeItem('cryptocracy');
             this.setState({
