@@ -23,8 +23,7 @@ class Landing extends React.Component {
     this.state = {
       username: '',
       password: '',
-      correct: true,
-      visibility: ''
+      correct: true
     }
     this.submitHandler = this.submitHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -94,8 +93,7 @@ class Landing extends React.Component {
   render() {
     let usernameLength = this.state.username.length;
     let passwordLength = this.state.password.length;
-    console.log('this.props.shouldRender is: ', this.props.shouldRender);
-    if (this.props.shouldRender) {
+    if (!this.props.dsConnected) {
       return (
         <div className='landing'>
           <div>
@@ -115,9 +113,8 @@ class Landing extends React.Component {
             </form>
           </div>
         </div>
-      )
-    } else {
-      return <div></div>
+      ) } else {
+      return <div>Put a spinner in here</div>
     }
   }
 }

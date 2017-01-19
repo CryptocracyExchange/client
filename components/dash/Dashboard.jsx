@@ -47,10 +47,13 @@ class Dashboard extends React.Component {
       change.chartData = data;
       this.setState(change);
     })
+    console.log('this.props.deep is: ', this.props.deep);
   }
 
   componentWillMount() {
-    this.props.checkAuth();
+    if (!this.props.deep._connection._state === 'OPEN') {
+      this.props.checkAuth();
+    }
   }
 
   componentDidMount() {

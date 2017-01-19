@@ -18,16 +18,9 @@ class CreateUser extends React.Component {
   
   componentWillMount() {
     const userJWT = window.localStorage.cryptocracy;
-      if (userJWT) {
-        this.setState({
-          visibility: 'hidden'
-        })
-      } else {
-        this.setState({
-          visibility: 'visible'
-        })
-      }
-    this.props.checkAuth();
+    if (userJWT) {
+      this.props.checkAuth();
+    }
   }
 
   submitHandler(e, success) {
@@ -98,11 +91,8 @@ class CreateUser extends React.Component {
   render() {
     let passwordDoesNotMatchOrEmpty = this.state.password.length === 0 || this.state.password !== this.state.confirm
     let passwordDoesNotMatch = this.state.password !== this.state.confirm
-    let visibility = {
-      visibility: this.state.visibility
-    }
     return (
-      <div style={visibility} className='createUser'>
+      <div className='createUser'>
         <div>
         <img src='/img/grnCrypt.svg' className='createUserBanner'></img>
         </div>

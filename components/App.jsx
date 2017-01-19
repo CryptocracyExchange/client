@@ -11,7 +11,7 @@ class App extends React.Component {
 
     this.state = {
       data: {},
-      shouldRender: true
+      dsConnected: false
     }
   }
   
@@ -22,17 +22,16 @@ class App extends React.Component {
   checkAuth(settings) {
     const connectionState = client.getConnectionState();
     if (connectionState !== 'OPEN') { // Test to see if this is the correct constant.
+      this.setState({
+        dsConnected: true
+      })
       const userJWT = window.localStorage.cryptocracy;
       if (userJWT) {
         client.login({
           role: 'user',
           jwt: userJWT
         }, (success, data) => {
-          console.log(this.props);
           if (success) {
-            this.setState({
-              shouldRender: false
-            })
             this.getUserData(data);
             if (!settings) {
               this.props.router.push('/dashboard');
@@ -41,7 +40,10 @@ class App extends React.Component {
             }
           } else {
             window.localStorage.removeItem('cryptocracy');
-            this.props.router.push('/');
+            this.setState({
+              dsConnected: false
+            })
+            // this.props.router.push('/');
           }
         });
       }
@@ -55,7 +57,7 @@ class App extends React.Component {
         deep: client,
         getUserData: this.getUserData.bind(this),
         userData: this.state.data,
-        shouldRender: this.state.shouldRender
+        dsConnected: this.state.dsConnected
       })
     );
 
