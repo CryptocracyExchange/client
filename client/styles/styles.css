@@ -78,7 +78,7 @@ body {
   height:75%;
   position: fixed;
   display:flex !important;
-
+  background-color:#A3E9D4;
 }
 
 .header {
@@ -232,6 +232,7 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 .transaction .input-field label {
   top: 0 !important;
   font-size:0.85rem !important;
+  margin-bottom:0px !important;
 }
 
 .history {
@@ -244,11 +245,24 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   overflow: hidden;
 }
 
+.historyTable {
+  display:flex;
+  justify-content: space-between;
+  height: 2rem !important;
+
+} 
+
+.historyTable a {
+  font-size:0.85rem !important;
+  padding:3px !important;
+  line-height:2;
+}
+
 .historyEntries {
   display: flex;
   flex-direction: column-reverse;
-  overflow-y: auto;
-  position: absolute;
+  /*overflow-y: auto;*/
+  /*position: absolute;*/
 }
 
 .graph {
@@ -260,8 +274,8 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   /*background-color: #EEEEEE;*/
 }
 
-.graph label{
-  dis
+.graph label {
+  display:none;
 }
 
 content > .col-sm-8 {
@@ -314,13 +328,17 @@ span.fwdSlash {
   flex-direction: column-reverse;
   background-color: #FDFDFD;
   border-bottom: 1px solid #D0D0D0;
+
 }
 
 .messages-container ul {
   display: flex;
   flex-direction: column-reverse;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x:hidden;
+  text-overflow: wrap;
+  /*white-space: nowrap;*/
 }
 
 .messages-container li {
@@ -332,7 +350,7 @@ span.fwdSlash {
   background-color: #FDFDFD;
   position: relative;
   width:94%;
-  height:2.15rem;
+  height:2.5rem;
   font-size:0.85rem;
   /*padding:6px 12px 6px 12px;*/
   outline:none;
@@ -376,8 +394,11 @@ span.fwdSlash {
 .footer {
   bottom:0;
   width:100%;
-  height:auto;
-  background-color:#EEEEEE;
+  height:20%;
+  z-index:-1;
+  flex-grow:1;
+  position:fixed;
+  background-color:#C0C0C0;
 }
 
 .currBtn:hover {
@@ -448,8 +469,12 @@ span.fwdSlash {
   transition: 0.3s;
 }
 
+.bodyWrapper {
+  display:flex;
+}
+
 .left-column {
-  padding: 0 3px 0 3px !important;
+  padding: 0 1.5px 3px 3px !important;
   /*left:0;*/
   order:-1;
   display:flex;
@@ -462,14 +487,14 @@ span.fwdSlash {
 }
 
 .center-column {
-  /*padding: 0 3px 3px 3px !important;*/
+  padding: 0 1.5px 3px 1.5px !important;
   flex-grow:1;
   flex-wrap:wrap;
   /*flex-grow: 3;*/
 }
 
 .right-column {
-  padding: 0 3px 3px 3px !important;
+  padding: 0 3px 3px 1.5px !important;
   order:1;
   flex-grow:0;
 }

@@ -158,7 +158,7 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-        <div>
+        <div className='bodyWrapper'>
           <Nav 
             deep={this.props.deep}
             currencySelector={this._setCurrency.bind(this)}

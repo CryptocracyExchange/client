@@ -37,7 +37,7 @@ TableRows.propTypes = {
 const OrderTable = (props) => (
   <div>
     <Row>
-      <Table className='responsive striped'>
+      <Table className='striped'>
         <TableHeader />
         <TableRows orders={props.orders} />
       </Table>
@@ -131,7 +131,7 @@ class History extends React.Component {
         <div className='header'>
             Orders
         </div>
-        <Tabs className=''>
+        <Tabs className='historyTable'>
           <Tab id='open' title="Open" active >
             <div className='tableWrapper'>
               <OrderTable orders={this.state.openOrders} />
