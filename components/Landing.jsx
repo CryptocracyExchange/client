@@ -67,17 +67,18 @@ class Landing extends React.Component {
             <form onSubmit={(e) => this.submitHandler(e)}>
               <label>
                 <div className='login-container'>
-                  <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
+                  <input id='login-input' type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
                 </div>
                 <br /><br />
                 <div className='login-container'>
-                  <input type="password" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
+                  <input id='login-input' type="password" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
                 </div>
               </label>
               <br /><br />
               {!this.state.correct && this.state.username.length === 0 && this.state.password.length === 0 && <p>Invalid login</p>}
-              <input type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />&nbsp;&nbsp;
-              <button onClick={(e) => this.signUpclickHandler(e)}> Sign Up </button>
+              <input id='inputBtn' type="submit" onClick={(e) => this.submitHandler(e)} value="Log In" />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input id='inputBtn' type="submit" onClick={(e) => this.signUpclickHandler(e)} value='Sign Up' />
             </form>
           </div>
         </div>

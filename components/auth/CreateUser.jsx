@@ -81,15 +81,15 @@ class CreateUser extends React.Component {
         <div className='loginForm'>
           <form onSubmit={(e) => this.submitHandler(e)}>
             <label>
-              <input type="text" onChange={this.updateFormInput('username')} placeholder="username" name="name" />
+              <input id='signup-input' type="text" onChange={this.updateFormInput('username')} placeholder="username" name="name" />
               {this.state.error === 'username is already taken' && <p>username is already taken</p>}
               <br /><br />
-              <input type="password" onChange={this.updateFormInput('password')} placeholder="password" name="name" />
+              <input id='signup-input' type="password" onChange={this.updateFormInput('password')} placeholder="password" name="name" />
               <br /><br />
-              <input type="password" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
+              <input id='signup-input' type="password" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
               <br /><br />
               {passwordDoesNotMatch && <p>Passwords do not match</p>}
-              <input type="email" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
+              <input id='signup-input' type="email" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
               {this.state.error === 'email is already taken' && <p>email is already taken</p>}
             </label>
             <br /><br />
