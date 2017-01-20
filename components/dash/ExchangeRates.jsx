@@ -29,7 +29,7 @@ class ExchangeRates extends React.Component {
         { percent }% <img src='/img/redArrow.svg'></img>
       </Col>
     );
-        
+
     return (
       <Row className="exchangeBar">
         <Col s={1}>

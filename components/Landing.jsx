@@ -32,7 +32,7 @@ class Landing extends React.Component {
     this.setState({
         password: e.target.value
       })
-  }  
+  }
 
   submitHandler(e) {
     e.preventDefault();
