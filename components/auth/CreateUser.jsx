@@ -93,7 +93,7 @@ class CreateUser extends React.Component {
               {this.state.error === 'email is already taken' && <p>email is already taken</p>}
             </label>
             <br /><br />
-            <input type="submit" onClick={this.signUp} value="Submit" disabled={passwordDoesNotMatchOrEmpty} />&nbsp;&nbsp;
+            <input id='inputBtn' type="submit" onClick={this.signUp} value="Submit" disabled={passwordDoesNotMatchOrEmpty} />&nbsp;&nbsp;
           </form>
         </div>
       </div>
