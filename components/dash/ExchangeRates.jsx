@@ -7,17 +7,14 @@ class ExchangeRates extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('current exchangeRate', this.props.exchangeRate);
-    console.log('next exchangeRate', nextProps.exchangeRate);
-    if (nextProps.exchangeRate && this.props.exchangeRate) {
-      let calculate = ( (nextProps.exchangeRate - this.props.exchangeRate) / this.props.exchangeRate ) * 100
-      console.log('calculate', calculate);
-      this.setState({percent: calculate ? calculate.toFixed(3) : 0});
-      if(this.props.exchangeRate > nextProps.exchangeRate) {
-        console.log('isSmaller');
+    if (nextProps.perOpen && nextProps.perClose) {
+      let oldPercent = Math.floor(((this.props.perOpen - this.props.perClose)/this.props.perOpen * 100));
+      let newPercent = Math.floor(((nextProps.perOpen - nextProps.perClose)/nextProps.perOpen * 100));
+      if(oldPercent > newPercent) {
+        // console.log('isSmaller');
         this.setState({isBigger: false});
       } else {
-        console.log('isBigger')
+        // console.log('isBigger')
         this.setState({isBigger: true});
       }
     }
@@ -45,7 +42,9 @@ class ExchangeRates extends React.Component {
         {this.props.secondaryCurrency} </span>
         </Col>
         {isBigger ? positive : negative}
-        <Col className='exchRate' s={1}></Col>
+        <Col className='exchRate' s={1}>
+          { this.props.exchangeRate.toFixed(2) }
+        </Col>
         <Col s={3}>
           <span className='exchange-chart-data-title'>
             LOW
