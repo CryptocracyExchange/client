@@ -19,6 +19,7 @@ class CreateUser extends React.Component {
   submitHandler(e, success) {
     if (success) {
       this.props.router.push('/');
+      this.props.deep.event.emit('initBalance', {userID: this.state.username});
     }
   };
 
