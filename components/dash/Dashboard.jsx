@@ -91,18 +91,13 @@ class Dashboard extends React.Component {
     this.balances.discard();
   }
 
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log('nextState', nextState)
-  //   if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
-  //     // if (this.state.chartData) {
-  //     //   this.setState({chartData: null})
-  //     // }
-  //     setTimeout(() => {
-  //       // refactor to pass nextState instead of referencing state
-  //       this._getChartData(nextState.periodDur);
-  //     }, 200);
-  //   }
-  // }
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
+      setTimeout(() => {
+        this._getChartData(nextState.periodDur);
+      }, 200);
+    }
+  }
 
   // _setExchangeRate(primary, secondary) {
   //   this.ds.record.getRecord(`rates/${primary}${secondary}`).whenReady((xchangeRate) => {
@@ -122,10 +117,8 @@ class Dashboard extends React.Component {
     const pair = this.state.primaryCurrency + this.state.secondaryCurrency + '';
 
     this._chartData = this.ds.record.getRecord(`chartData/${pair}${per}`).whenReady((data) => {
-      console.log('chart1', data.get())
       let chartdata = data.get()
       let change = _.extend({}, this.state);
-      console.log('update', chartdata);
       change.chartData = chartdata.data;
       change.perHigh = chartdata.data[chartdata.data.length - 1].high;
       change.perLow = chartdata.data[chartdata.data.length - 1].low;
@@ -133,13 +126,6 @@ class Dashboard extends React.Component {
       change.perClose = chartdata.data[chartdata.data.length - 1].close;
       this.setState(change);
     })
-
-    // this.chartData.subscribe('data', (newData) => {
-    //   console.log('chartUp', newData)
-    //   let change = _.extend({}, this.state);
-    //   change.chartData = newData;
-    //   this.setState(change);
-    // })
   }
 
   _setCurrency(e, primary, secondary) {
