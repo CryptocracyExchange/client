@@ -40,7 +40,7 @@ class Dashboard extends React.Component {
     this.userData = props.userData;
     this.userID = props.userData.userID;
 
-    this.chartData;
+    this._chartData;
 
     this.balances = this.ds.record.getRecord(`balances/${this.userID}`);
     this.ds.event.subscribe('histData', (data) => {
@@ -49,11 +49,6 @@ class Dashboard extends React.Component {
       change.chartData = data;
       this.setState(change);
     })
-  }
-
-  componentWillMount() {
-    console.log('props', this.props);
-
   }
 
   componentDidMount() {
@@ -81,7 +76,7 @@ class Dashboard extends React.Component {
     })
 
     // set exchange rate
-    this._setExchangeRate(this.state.primaryCurrency, this.state.secondaryCurrency);
+    // this._setExchangeRate(this.state.primaryCurrency, this.state.secondaryCurrency);
   }
 
   componentWillUnmount() {
@@ -90,11 +85,10 @@ class Dashboard extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     console.log('nextState', nextState)
-    console.log('compUpdate', Date.now())
     if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
-      if (this.state.chartData) {
-        this.setState({chartData: null})
-      }
+      // if (this.state.chartData) {
+      //   this.setState({chartData: null})
+      // }
       setTimeout(() => {
         // refactor to pass nextState instead of referencing state
         this._getChartData(nextState.periodDur);
@@ -102,29 +96,33 @@ class Dashboard extends React.Component {
     }
   }
 
-  _setExchangeRate(primary, secondary) {
-    this.ds.record.getRecord(`rates/${primary}${secondary}`).whenReady((xchangeRate) => {
-      let rate = xchangeRate.get('rate');
-      const change = _.extend({}, this.state);
-      change.exchangeRate = rate;
-      this.setState(change);
-    });
-  }
+  // _setExchangeRate(primary, secondary) {
+  //   this.ds.record.getRecord(`rates/${primary}${secondary}`).whenReady((xchangeRate) => {
+  //     let rate = xchangeRate.get('rate');
+  //     const change = _.extend({}, this.state);
+  //     change.exchangeRate = rate;
+  //     this.setState(change);
+  //   });
+  // }
   
 // refactor to pass nextState instead of referencing state
-  _getChartData(periodDur) {
-    if (this.chartData) {
-      this.chartData.discard();
-    }
+  _getChartData(per) {
+    // if (this._chartData) {
+    //   this._chartData.discard();
+    // }
     const pair = this.state.primaryCurrency + this.state.secondaryCurrency + '';
- 
-    this.chartData = this.ds.record.getRecord(`chartData/${pair}${periodDur}`).whenReady((data) => {
+
+    this._chartData = this.ds.record.getRecord(`chartData/${pair}${per}`).whenReady((data) => {
+      console.log('chart1', data.get())
+      let chartdata = data.get()
       let change = _.extend({}, this.state);
-      change.chartData = data.data;
+      console.log('update', chartdata);
+      change.chartData = chartdata.data;
       this.setState(change);
     })
 
-    // chartData.subscribe((newData) => {
+    // this.chartData.subscribe('data', (newData) => {
+    //   console.log('chartUp', newData)
     //   let change = _.extend({}, this.state);
     //   change.chartData = newData;
     //   this.setState(change);
@@ -162,13 +160,13 @@ class Dashboard extends React.Component {
           <Nav 
             deep={this.props.deep}
             currencySelector={this._setCurrency.bind(this)}
-            toRoute={this.changeRoute.bind(this)} />
+            toRoute={this.changeRoute.bind(this)} 
+          />
           <ExchangeRates 
             primaryCurrency={this.state.primaryCurrency}
             secondaryCurrency={this.state.secondaryCurrency}
             perLow={this.state.perLow}
             perHigh={this.state.perHigh}
-            exchangeRate={this.state.exchangeRate}
           />
             }
           <div className='row content'>

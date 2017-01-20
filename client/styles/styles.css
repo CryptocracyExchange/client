@@ -74,6 +74,7 @@ body {
 .content {
   top:90px;
   width:100%;
+  height:75%;
   position: fixed;
   display:flex !important;
 
@@ -183,7 +184,7 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 }
 
 .transaction {
-  margin: 0px 3px 3px 3px !important;
+  /*margin: 0px 3px 3px 3px !important;*/
   /*padding:0;*/
   width:240px;
   position:relative;
@@ -226,17 +227,15 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 
 
 .history {
-  margin: 3px 3px 3px 3px !important;
+  margin: 3px 0 0 0 !important;
   width:240px;
   position:relative;
   height:100%;
   background-color: #FDFDFD !important;
   border-radius: 1px;
+  overflow: hidden;
 }
 
-.history .tableWrapper {
-  overflow-y:scroll;
-}
 
 .graph {
   height:85%;
@@ -251,18 +250,15 @@ content > .col-sm-8 {
 }
 
 .graphWrapper {
-  overflow:hidden;
   display: flex;
-  min-width:300px;
+  width:100%;
   height:100%;
-  flex-grow:0;
-  /*width:100%;*/
-  left:251px;
-  position:absolute;
+  flex-grow:1;
+  flex-wrap: wrap;
+  position:relative;
   background-color: #FDFDFD;
   border-radius: 1px;
   order:0;
-
 }
 
 span.fwdSlash {
@@ -277,11 +273,11 @@ span.fwdSlash {
 }
 
 .trollbox {
-  margin: 0px 3px 3px 3px !important;
-  right:0;
+  /*margin: 0px 3px 3px 3px !important;*/
+  /*right:0;*/
   height:100%;
   display:flex;
-  position:absolute;
+  /*position:absolute;*/
   flex-flow: column wrap;
   align-content: space-between;
   width:240px;
@@ -394,7 +390,7 @@ span.fwdSlash {
 }
 
 .trollBtn {
-  width:100%;
+  width:240px;
   height:45px;
   display:flex;
   justify-content: center;
@@ -412,24 +408,29 @@ span.fwdSlash {
 }
 
 .left-column {
-  padding: 0 3px 3px 3px !important;
+  padding: 0 3px 0 3px !important;
   /*left:0;*/
   order:-1;
+  display:flex;
+  flex-direction: column;
   /*margin: 0 3px 3px 3px !important;*/
   /*flex-direction: column;*/
   /*position:fixed;*/
-  flex-grow:1;
+  flex-grow:0;
+
 }
 
 .center-column {
-  padding: 0 3px 3px 3px !important;
+  /*padding: 0 3px 3px 3px !important;*/
+  flex-grow:1;
+  flex-wrap:wrap;
   /*flex-grow: 3;*/
 }
 
 .right-column {
   padding: 0 3px 3px 3px !important;
   order:1;
-  /*flex-grow:1;*/
+  flex-grow:0;
 }
 
 .balanceWrapper {

@@ -7,13 +7,13 @@ class ExchangeRates extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let calculate = ( (nextProps - this.state.exchangeRate) / this.state.exchangeRate ) * 100
-    this.setState({percent: calculate.toFixed(2)});
-    if(this.props.exchangeRate > nextProps) {
-      this.setState({isBigger: false});
-    } else {
-      this.setState({isBigger: true});
-    }
+    // let calculate = ( (nextProps - this.state.exchangeRate) / this.state.exchangeRate ) * 100
+    // this.setState({percent: calculate.toFixed(2)});
+    // if(this.props.exchangeRate > nextProps) {
+    //   this.setState({isBigger: false});
+    // } else {
+    //   this.setState({isBigger: true});
+    // }
   }
 
   render() {
@@ -38,11 +38,11 @@ class ExchangeRates extends React.Component {
         {this.props.secondaryCurrency} </span>
         </Col>
         {isBigger ? positive : negative}
-        <Col className='exchRate' s={1}>{this.props.exchangeRate}</Col>
+        <Col className='exchRate' s={1}></Col>
         <Col s={3}>
-          LOW {this.props.perLow}
+          LOW 
           &nbsp;&nbsp;
-          HIGH {this.props.perHigh}
+          HIGH
         </Col>
         <Col s={6}></Col>
       </Row>

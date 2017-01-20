@@ -61,11 +61,11 @@ class Graph extends React.Component {
 
     return (
       <ChartCanvas ratio={ratio} width={width} height={chartHeight}
-          margin={{ left: 80, right: 80, top: 20, bottom: 20 }} type={type}
+          margin={{ left: 20, right: 20, top: 20, bottom: 20 }} type={type}
           seriesName="MSFT"
           data={data} calculator={[sma20, ema20, ema50, smaVolume50]}
           xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-          xExtents={[new Date(2017, 0, 11), new Date()]}>
+          xExtents={[new Date(2017, 0, 16), new Date()]}>
         <Chart id={1}
             yExtents={[d => [d.high, d.low], sma20.accessor(), ema20.accessor(), ema50.accessor()]}
             padding={{ top: 10, bottom: 10 }}>
@@ -134,33 +134,41 @@ class GraphWrapper extends React.Component {
     super(props);
   }
   componentDidMount() {
+    console.log('cData', this.props.data)
+  }
+
+  componentWillUpdate(nextProps) {
+    console.log('next cData', nextProps)
   }
 
   render() {
-    if (!this.props.data) return (
+    if (!this.props.data) {
+     return (
       <div className='graphSpinner'> 
         <Preloader flashing/>
       </div>
-    );
+      ) 
+    } else {
       this.props.data.forEach((d, i) => {
         d.date = new Date(parseTime(d.date));
+        console.log('chartDate00000', d)
         d.open = +d.open;
         d.high = +d.high;
         d.low = +d.low;
         d.close = +d.close;
         d.volume = +d.volume;
       })
-    return (
-      <div className='graph'>
-        <TypeChooser type="hybrid">
-          {type => <Graph data={this.props.data} type={type} />}
-        </TypeChooser>
-      </div>
-    )
+      return (
+        <div className='graph'>
+          <TypeChooser type="hybrid">
+            {type => <Graph data={this.props.data} type={type} />}
+          </TypeChooser>
+        </div>
+      )
+    }
   }
 }
 
 
 
-// export default Graph;
 export default GraphWrapper;
