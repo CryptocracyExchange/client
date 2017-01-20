@@ -56,6 +56,8 @@ class Dashboard extends React.Component {
   componentDidMount() {
     // get chart data
     this._getChartData('5m') // replace with default
+    this._getExchangeRate('BTC', 'LTC');
+
     // get user balances
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
@@ -76,15 +78,6 @@ class Dashboard extends React.Component {
         Materialize.toast('Success! An order was filled!', 4000);
       }
     })
-
-    // set exchange rate
-    this.ds.event.subscribe('rates/BTCLTC', (rate) => {
-      console.log('rate', rate);
-      const change = _.extend({}, this.state);
-      change.exchangeRate = rate.rate;
-      this.setState(change);
-    });
-    // this._setExchangeRate(this.state.primaryCurrency, this.state.secondaryCurrency);
   }
 
   componentWillUnmount() {
@@ -93,21 +86,26 @@ class Dashboard extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
+      // if (this.state.chartData) {
+      //   this.setState({chartData: null})
+      // }
+      this._getExchangeRate(nextState.primaryCurrency, nextState.secondaryCurrency);
       setTimeout(() => {
+        // refactor to pass nextState instead of referencing state
         this._getChartData(nextState.periodDur);
       }, 200);
     }
   }
 
-  // _setExchangeRate(primary, secondary) {
-  //   this.ds.record.getRecord(`rates/${primary}${secondary}`).whenReady((xchangeRate) => {
-  //     let rate = xchangeRate.get('rate');
-  //     console.log('rate', rate);
-  //     const change = _.extend({}, this.state);
-  //     change.exchangeRate = rate;
-  //     this.setState(change);
-  //   });
-  // }
+  _getExchangeRate(primary, secondary) {
+    const newPair = `rates/${primary}${secondary}`;
+    this.ds.event.subscribe(newPair, (rate) => {
+      console.log('rate', rate);
+      const change = _.extend({}, this.state);
+      change.exchangeRate = rate;
+      this.setState(change);
+    });
+  }
 
 // refactor to pass nextState instead of referencing state
   _getChartData(per) {
@@ -130,15 +128,6 @@ class Dashboard extends React.Component {
 
   _setCurrency(e, primary, secondary) {
     e.preventDefault;
-    const oldPair = `rates/${this.state.primaryCurrency}${this.state.secondaryCurrency}`;
-    this.ds.event.unsubscribe(oldPair);
-    const newPair = `rates/${primary}${secondary}`;
-    this.ds.event.subscribe(newPair, (rate) => {
-      console.log('rate', rate);
-      const change = _.extend({}, this.state);
-      change.exchangeRate = rate.rate;
-      this.setState(change);
-    });
     const change = _.extend({}, this.state);
     change.primaryCurrency = primary;
     change.secondaryCurrency = secondary;
