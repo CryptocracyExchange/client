@@ -60,7 +60,7 @@ class Graph extends React.Component {
     // window.onresize = resize;
 
     return (
-      <ChartCanvas ratio={ratio} width={width} height={chartHeight}
+      <ChartCanvas ratio={ratio} width={width} height={400}
           margin={{ left: 48, right: 48, top: 60, bottom: 20 }} type={type}
           seriesName="MSFT"
           data={data} calculator={[sma20, ema20, ema50, smaVolume50]}
