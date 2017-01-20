@@ -57,7 +57,7 @@ class TrollBox extends React.Component {
         <form onSubmit={this.handleChatSubmit}>
           
           <input 
-              className="message-input"
+              id="message-input"
               autoComplete="off"
               onChange={this.handleChatInput}
               value={this.state.userMessage}
