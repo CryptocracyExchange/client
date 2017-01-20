@@ -133,13 +133,6 @@ class GraphWrapper extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    console.log('cData', this.props.data)
-  }
-
-  componentWillUpdate(nextProps) {
-    console.log('next cData', nextProps)
-  }
 
   render() {
     if (!this.props.data) {
@@ -151,7 +144,6 @@ class GraphWrapper extends React.Component {
     } else {
       this.props.data.forEach((d, i) => {
         d.date = new Date(d.date);
-        console.log('chartDate00000', d)
         d.open = +d.open;
         d.high = +d.high;
         d.low = +d.low;

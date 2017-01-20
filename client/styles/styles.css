@@ -180,6 +180,11 @@ body {
 nav .tabs .tab a.active { border-bottom: 2px solid #DA4E28 !important; }
 nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 
+
+.tabs .tab a:hover {
+  color:#DA4E28;
+}
+
 .transWrapper {
   display: flex;
   justify-content: space-between;
@@ -249,6 +254,7 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   display:flex;
   justify-content: space-between;
   height: 2rem !important;
+  border-bottom:0.5px solid #D0D0D0;
 
 } 
 
@@ -259,7 +265,7 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
 }
 
 .historyEntries {
-  display: flex;
+  /*display: flex;*/
   flex-direction: column-reverse;
   /*overflow-y: auto;*/
   /*position: absolute;*/
