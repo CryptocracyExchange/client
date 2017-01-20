@@ -225,7 +225,6 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   font-size:0.85rem !important;
 }
 
-
 .history {
   margin: 3px 0 0 0 !important;
   width:240px;
@@ -236,6 +235,12 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   overflow: hidden;
 }
 
+.historyEntries {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  position: absolute;
+}
 
 .graph {
   height:100%;

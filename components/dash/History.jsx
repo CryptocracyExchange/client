@@ -15,7 +15,7 @@ const TableHeader = () => (
 
 const TableRows = (props) => {
   return (
-    <tbody>
+    <tbody className='historyEntries'>
       {Object.keys(props.orders).map((orderID, key) => {
         return (
           <tr key={key}>
