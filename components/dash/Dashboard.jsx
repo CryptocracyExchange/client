@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
       primaryCurrency: 'BTC',
       secondaryCurrency: 'LTC',
       chartData: null,
-      periodDur: '2m',
+      periodDur: '5m',
       perLow: 0.00475,
       perHigh: 0.00475,
       exchangeRate: null
@@ -58,7 +58,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     // get chart data
-    this._getChartData('2m') // replace with default
+    this._getChartData('5m') // replace with default
     // get user balances
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
     }
     const pair = this.state.primaryCurrency + this.state.secondaryCurrency + '';
  
-    this.chartData = this.ds.record.getRecord(`chartData/${pair}${this.state.periodDur}`).whenReady((data) => {
+    this.chartData = this.ds.record.getRecord(`chartData/${pair}${periodDur}`).whenReady((data) => {
       let change = _.extend({}, this.state);
       change.chartData = data.data;
       this.setState(change);
@@ -141,6 +141,7 @@ class Dashboard extends React.Component {
 
   _selectPeriod(e) {
     let periods = [
+      ['5m'],
       ['15m'],
       ['30m'],
       ['1h'],
