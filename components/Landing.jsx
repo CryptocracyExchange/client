@@ -48,7 +48,6 @@ class Landing extends React.Component {
           password: '',
           correct: false
         })
-        console.log(this.state);
       }
     });
   }
@@ -69,7 +68,7 @@ class Landing extends React.Component {
               <label>
                 <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
                 <br /><br />
-                <input type="text" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
+                <input type="password" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
               </label>
               <br /><br />
               {!this.state.correct && this.state.username.length === 0 && this.state.password.length === 0 && <p>Invalid login</p>}
