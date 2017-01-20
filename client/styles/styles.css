@@ -411,13 +411,32 @@ span.fwdSlash {
 .settings {
   height: 100%;
   width: 100%;
-  background: #D0D0D0;
-  position: absolute;  
+  /*background: #D0D0D0;
+  position: absolute; */ 
+}
+
+.allSettings {
+  padding-left: 12px;
+}
+
+.indentPlaceholder {
+  text-indent: 12px;
+}
+
+.moveBTCButton {
+  margin-left: 6px;
+}
+
+.moveSubmitTransferButton {
+  /*margin-left: 6px;*/
+  margin-bottom: 6px;
 }
 
 .settingsHeader {
   color: #888;
   font-size: 1.5rem;
+  background: #EEE;
+  /*text-align: center;*/
 }
 
 .settingsBody {
@@ -426,10 +445,14 @@ span.fwdSlash {
   position:fixed;
 }
 
+.addressesAndTransfers {
+  background: #FDFDFD;
+}
+/*
 .transfers {
   width:70%;
   position:fixed;
-}
+}*/
 .currBtn {
   height:100%;
 }

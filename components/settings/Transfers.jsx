@@ -45,26 +45,27 @@ class Transfers extends React.Component {
 
   render() {
     return (
-      <div className='transfers'>
-        <h4 className="settingsHeader">Transfer Out</h4>
+      <div className='addressesAndTransfers transfers'>
+        <h4 className="settingsHeader"><span className="allSettings">Transfer Out</span></h4>
         <select name='Currency' onChange={this.handleCurrencyUpdate}>
           <option id="inputBtn" value='BTC'>BTC</option>
           <option id="inputBtn" value='LTC'>LTC</option>
           <option id="inputBtn" value='DOGE'>DOGE</option>
         </select>
-        <input
+        <input className="indentPlaceholder"
           type='text'
           value={this.state.address}
           placeholder='Enter your address'
           onChange={this.handleAddressUpdate}>
         </input>
-        <input
+        <input className="indentPlaceholder"
           type='text'
           value={this.state.amount}
           placeholder='Enter the amount' 
           onChange={this.handleAmountUpdate}>
         </input>
-        <button onClick={this.handleTransferClick}>Submit Transfer</button>
+        &nbsp;&nbsp;
+        <button className="moveSubmitTransferButton" onClick={this.handleTransferClick}>Submit Transfer</button>
       </div>
     )
   }

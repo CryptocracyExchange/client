@@ -36,17 +36,18 @@ class Addresses extends React.Component{
 
   render() {
     return (
-      <div>
-        <h4 className="settingsHeader">Generate Wallets</h4>
+      <div className="addressesAndTransfers">
+        <h4 className="settingsHeader"><span className="allSettings">Generate Wallets</span></h4>
+        &nbsp;&nbsp;
         <button onClick={() => this.handleGenerateWalletClick('BTC')}>Generate BTC Address</button>
         &nbsp;&nbsp;
         <button onClick={() => this.handleGenerateWalletClick('LTC')}>Generate LTC Address</button>
         &nbsp;&nbsp;
         <button onClick={() => this.handleGenerateWalletClick('DOGE')}>Generate DOGE Address</button>
         <br/><br/>
-        <div>BTC Address: {this.state.BTCAddress}</div>
-        <div>LTC Address: {this.state.LTCAddress}</div>
-        <div>DOGE Address: {this.state.DOGEAddress}</div>
+        <div className="allSettings">BTC Address: {this.state.BTCAddress}</div>
+        <div className="allSettings">LTC Address: {this.state.LTCAddress}</div>
+        <div className="allSettings">DOGE Address: {this.state.DOGEAddress}</div>
       </div>
     )
   }
