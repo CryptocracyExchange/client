@@ -17,7 +17,9 @@ class CreateUser extends React.Component {
   }
 
   submitHandler(e, success) {
+    e.preventDefault();
     if (success) {
+      // console.log('the login is successful yet the user is not redirected to login')
       this.props.router.push('/');
       this.props.deep.event.emit('initBalance', {userID: this.state.username});
     }
