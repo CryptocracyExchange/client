@@ -18,13 +18,15 @@ class Landing extends React.Component {
 
   updateUsername(e) {
     this.setState({
-      username: e.target.value
+      username: e.target.value,
+      correct: true
     });
   }
 
   updatePassword(e) {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
+      correct: true
     });
   }  
 
