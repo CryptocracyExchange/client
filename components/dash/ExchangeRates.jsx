@@ -9,15 +9,17 @@ class ExchangeRates extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('current exchangeRate', this.props.exchangeRate);
     console.log('next exchangeRate', nextProps.exchangeRate);
-    let calculate = ( (nextProps.exchangeRate - this.props.exchangeRate) / this.props.exchangeRate ) * 100
-    console.log('calculate', calculate);
-    this.setState({percent: calculate ? calculate.toFixed(3) : 0});
-    if(this.props.exchangeRate > nextProps.exchangeRate) {
-      console.log('isSmaller');
-      this.setState({isBigger: false});
-    } else {
-      console.log('isBigger')
-      this.setState({isBigger: true});
+    if (nextProps.exchangeRate && this.props.exchangeRate) {
+      let calculate = ( (nextProps.exchangeRate - this.props.exchangeRate) / this.props.exchangeRate ) * 100
+      console.log('calculate', calculate);
+      this.setState({percent: calculate ? calculate.toFixed(3) : 0});
+      if(this.props.exchangeRate > nextProps.exchangeRate) {
+        console.log('isSmaller');
+        this.setState({isBigger: false});
+      } else {
+        console.log('isBigger')
+        this.setState({isBigger: true});
+      }
     }
   }
 
