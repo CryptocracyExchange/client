@@ -43,7 +43,7 @@ class ExchangeRates extends React.Component {
         </Col>
         {isBigger ? positive : negative}
         <Col className='exchRate' s={1}>
-          { this.props.exchangeRate.toFixed(2) }
+          { this.props.exchangeRate ? this.props.exchangeRate.toFixed(2) : null }
         </Col>
         <Col s={3}>
           <span className='exchange-chart-data-title'>
