@@ -24,6 +24,7 @@ html {
 body {
   font-family: 'DecimaMonoPro', sans-serif;
   background-color: #A3E9D4;
+  /*background: #D0D0D0;*/
   font-size: 0.85em;
   letter-spacing: -0.05em;
   overflow: hidden;
@@ -350,6 +351,13 @@ span.fwdSlash {
   justify-content: center;
   align-items: center;
   background-color: #EEEEEE;
+}
+
+.settings {
+  height: 100%;
+  width: 100%;
+  background: #D0D0D0;
+  position: absolute;  
 }
 
 .settingsBody {
