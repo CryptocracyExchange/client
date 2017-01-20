@@ -259,6 +259,10 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   /*background-color: #EEEEEE;*/
 }
 
+.graph label{
+  dis
+}
+
 content > .col-sm-8 {
   padding-left:0 !important;
   padding-right:0 !important;
@@ -292,17 +296,23 @@ span.fwdSlash {
   /*right:0;*/
   height:100%;
   display:flex;
+  justify-content: space-between;
   /*position:absolute;*/
   flex-flow: column wrap;
-  align-content: space-between;
+  /*align-content: space-between;*/
   width:240px;
-  background-color: #FDFDFD !important;
+  background-color: #EEEEEE !important;
   border-radius: 1px;
 }
 
 .messages-container {
   width: 100%;
-  height: 80%;
+  /*height: 100%;*/
+  flex-grow:1;
+  display: flex;
+  flex-direction: column-reverse;
+  background-color: #FDFDFD;
+  border-bottom: 1px solid #D0D0D0;
 }
 
 .messages-container ul {
@@ -316,12 +326,17 @@ span.fwdSlash {
   padding-left: 5px;
 }
 
-.message-input {
-  border-top: .5px solid black;
-  bottom:0;
-  position: absolute;
-  width: 100%;
-  height:auto;
+#message-input {
+  border: .5px solid #888888;
+  background-color: #FDFDFD;
+  position: relative;
+  width:94%;
+  height:2.15rem;
+  font-size:0.85rem;
+  /*padding:6px 12px 6px 12px;*/
+  outline:none;
+  margin: 12px 6px 12px 6px !important;
+  border-radius: 2px;
 }
 
 .graphcontrols {
@@ -476,4 +491,8 @@ span.fwdSlash {
 
 input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
   margin: 0 0 16px 0 !important;
+}
+
+[type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+  padding-left:24px !important;
 }

@@ -55,12 +55,13 @@ class TrollBox extends React.Component {
         </div>
         <div className='message-input'>
         <form onSubmit={this.handleChatSubmit}>
+          
           <input 
-            id="message-input"
-            autoComplete="off"
-            onChange={this.handleChatInput}
-            value={this.state.userMessage}
-          />
+              id="message-input"
+              autoComplete="off"
+              onChange={this.handleChatInput}
+              value={this.state.userMessage}
+            />
           <div className='trollBtn' onClick={this.handleChatSubmit}>Send</div>
         </form>
         </div>
@@ -75,3 +76,6 @@ TrollBox.propTypes = {
 }
 
 export default TrollBox;
+
+
+
