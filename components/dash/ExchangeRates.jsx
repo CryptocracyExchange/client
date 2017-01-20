@@ -33,16 +33,28 @@ class ExchangeRates extends React.Component {
     return (
       <Row className="exchangeBar">
         <Col s={1}>
-        <span>  {this.props.primaryCurrency}/
+        <span className='exchange-pair-title'>  {this.props.primaryCurrency}/
         <br/>
         {this.props.secondaryCurrency} </span>
         </Col>
         {isBigger ? positive : negative}
         <Col className='exchRate' s={1}></Col>
         <Col s={3}>
-          LOW 
-          &nbsp;&nbsp;
-          HIGH
+          <span className='exchange-chart-data-title'>
+            LOW
+          </span>
+          <span className='exchange-chart-data-info'>
+            {this.props.perLow.toFixed(5)}
+          </span>
+          <span className='exchange-chart-data-title'>
+            HIGH
+          </span>
+          <span className='exchange-chart-data-info'>
+            {this.props.perHigh.toFixed(5)}
+          </span>
+          <span className='exchange-chart-data-title'>
+            {this.props.periodDur}
+          </span>
         </Col>
         <Col s={6}></Col>
       </Row>

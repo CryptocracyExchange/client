@@ -118,6 +118,8 @@ class Dashboard extends React.Component {
       let change = _.extend({}, this.state);
       console.log('update', chartdata);
       change.chartData = chartdata.data;
+      change.perHigh = chartdata.data[chartdata.data.length - 1].high;
+      change.perLow = chartdata.data[chartdata.data.length - 1].low;
       this.setState(change);
     })
 
@@ -167,6 +169,7 @@ class Dashboard extends React.Component {
             secondaryCurrency={this.state.secondaryCurrency}
             perLow={this.state.perLow}
             perHigh={this.state.perHigh}
+            periodDur={this.state.periodDur}
           />
             }
           <div className='row content'>

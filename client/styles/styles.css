@@ -134,7 +134,7 @@ body {
   align-items: center;
 }
 
-.exchangeBar span {
+.exchange-pair-title {
   display:flex;
   flex-direction: column;
   top: 3px;
@@ -144,6 +144,14 @@ body {
   color: #DA4E28;
   font-size:2.25em;
   line-height: 0.8em;
+}
+
+.exchange-chart-data-title {
+  padding-left: 15px;
+}
+
+.exchange-chart-data-info {
+  padding-left: 5px;
 }
 
 .exchRate {
