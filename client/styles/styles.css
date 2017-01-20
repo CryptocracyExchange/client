@@ -316,7 +316,7 @@ span.fwdSlash {
   height:100%;
   display:flex;
   justify-content: space-between;
-  flex-flow: column wrap;
+  flex-flow: column;
   width:240px;
   background-color: #EEEEEE !important;
   border-radius: 1px;
@@ -330,7 +330,7 @@ span.fwdSlash {
   flex-direction: column-reverse;
   background-color: #FDFDFD;
   border-bottom: 1px solid #D0D0D0;
-
+  overflow: scroll;
 }
 
 .messages-container ul {
