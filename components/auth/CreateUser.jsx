@@ -87,7 +87,7 @@ class CreateUser extends React.Component {
               <input type="password" onChange={this.updateFormInput('confirm')} placeholder="confirm password" name="name" />
               <br /><br />
               {passwordDoesNotMatch && <p>Passwords do not match</p>}
-              <input type="text" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
+              <input type="email" onChange={this.updateFormInput('email')} placeholder="email" name="name" />
               {this.state.error === 'email is already taken' && <p>email is already taken</p>}
             </label>
             <br /><br />
