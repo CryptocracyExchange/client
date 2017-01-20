@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 const config = {
   entry: [
@@ -27,24 +28,38 @@ const config = {
     root: [
       path.join(__dirname, 'node_modules'),
     ],
-  },
-  devtool: '#inline-source-map'
+  }
 };
 
-// if (process.env.NODE_ENV === 'prod') {
-//   config.plugins = [
-//     new webpack.DefinePlugin({  // <-- Key to reducing React's size
-//       'process.env': {
-//         'NODE_ENV': JSON.stringify('production')
-//       }
-//     }),
-//     new webpack.optimize.DedupePlugin(),            // Dedupe similar code 
-//     new webpack.optimize.UglifyJsPlugin(),          // Minify everything
-//     new webpack.optimize.AggressiveMergingPlugin()  // Merge chunks
-//   ]
-// }
+if (process.env.NODE_ENV === 'production') {
+  config.plugins = [
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      },
+    }),
+    new webpack.optimize.DedupePlugin(),            // Dedupe similar code 
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false
+      },
+      compress: {
+        screw_ie8: true,
+        warnings: false
+      }
+    }),          // Minify everything
+    new webpack.optimize.AggressiveMergingPlugin()  // Merge chunks
+  ]
+}
 
-if (process.env.NODE_ENV !== 'prod') {
+if (process.env.NODE_ENV !== 'production') {
   config.entry.unshift(
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     'webpack/hot/only-dev-server'

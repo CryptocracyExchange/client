@@ -6,7 +6,7 @@ const chalk = require('chalk');
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'prod') {
+if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
   const webpackDevMiddleware = require("webpack-dev-middleware");
   const webpackHotMiddleware = require("webpack-hot-middleware");
@@ -35,11 +35,20 @@ app.use(bodyParser.json());
 
 app.use(express.static('client'));
 
+app.get('/bundle.js', function(req, res) {
+  if (process.env.NODE_ENV === 'production') {
+    res.set('Content-Encoding', 'gzip');
+    res.sendFile(path.resolve(__dirname, '../client/bundle.js.gz'));
+  } else {
+    res.sendFile(path.resolve(__dirname, '../client/bundle.js'));
+  }
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-const PORT = process.env.NODE_ENV === 'prod' ? 80 : 3001;
+const PORT = process.env.NODE_ENV === 'production' ? 80 : 3001;
 
 app.listen(PORT, () => {
   console.log(chalk.yellow(`Client on ${PORT}!///////////////`));
