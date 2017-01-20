@@ -15,7 +15,9 @@ class Settings extends React.Component {
   render() {
     return (
       <div className="settings">
-        <Nav toRoute={this.changeRoute.bind(this)}/>
+        <Nav deep={this.props.deep} toRoute={this.changeRoute.bind(this)}/>
+        <br></br>
+        <br></br>
         <div className='settingsBody'>
           <Addresses deep={this.props.deep} userID={this.props.userData.userID} />
           <Transfers deep={this.props.deep} userID={this.props.userData.userID} />
