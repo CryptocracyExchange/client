@@ -34,6 +34,8 @@ class Dashboard extends React.Component {
       periodDur: '5m',
       perLow: 0.00475,
       perHigh: 0.00475,
+      perOpen: null,
+      perClose: null,
       exchangeRate: null
     }
     this.ds = props.deep;
@@ -127,6 +129,8 @@ class Dashboard extends React.Component {
       change.chartData = chartdata.data;
       change.perHigh = chartdata.data[chartdata.data.length - 1].high;
       change.perLow = chartdata.data[chartdata.data.length - 1].low;
+      change.perOpen = chartdata.data[chartdata.data.length - 1].open;
+      change.perClose = chartdata.data[chartdata.data.length - 1].close;
       this.setState(change);
     })
 
@@ -187,6 +191,8 @@ class Dashboard extends React.Component {
             perHigh={this.state.perHigh}
             periodDur={this.state.periodDur}
             exchangeRate={this.state.exchangeRate}
+            perOpen={this.state.perOpen}
+            perClose={this.state.perClose}
           />
             }
           <div className='row content'>
