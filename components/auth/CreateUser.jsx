@@ -17,11 +17,10 @@ class CreateUser extends React.Component {
   }
 
   submitHandler(e, success) {
-    e.preventDefault();
     if (success) {
       this.props.router.push('/');
     }
-  }
+  };
 
   updateFormInput(key) {
     var state = {};
@@ -32,13 +31,13 @@ class CreateUser extends React.Component {
         state,
       )
     }.bind(this)
-  }
+  };
 
   updateErrorState(){
     this.setState({
       error: false
     })
-  }
+  };
 
   signUp(e) {
     const username = this.state.username
@@ -66,7 +65,7 @@ class CreateUser extends React.Component {
         this.submitHandler(e, false)
       }
     })
-  }
+  };
 
   render() {
     let passwordDoesNotMatchOrEmpty = this.state.password.length === 0 || this.state.password !== this.state.confirm
@@ -96,7 +95,7 @@ class CreateUser extends React.Component {
         </div>
       </div>
     )
-  }
-}
+  };
+};
 
 export default CreateUser;
