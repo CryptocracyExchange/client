@@ -1,24 +1,5 @@
 import React from 'react';
-
-const MessageList = (props) => {
-  return (
-    <ul>
-      {props.chatMessages.map((chat, key) => {
-        console.log(chat);
-        return (
-          <li key={key}>
-            <span className='message-userid'>{chat.userID}: </span>
-            <span className='message-content'>{chat.content}</span>
-          </li>
-        )
-      })}
-    </ul>
-  );
-};
-
-MessageList.propTypes = {
-  chatMessages: React.PropTypes.array.isRequired
-}
+import MessageList from './MessageList.jsx'
 
 class TrollBox extends React.Component {
   constructor(props) {
@@ -34,17 +15,15 @@ class TrollBox extends React.Component {
   }
   
   componentDidMount() {
-    this.props.deep.record
-      .getList('trollbox-messages')
-      .subscribe((messageList) => {
-        const messages = [];
-        messageList.forEach((messageID) => {
-          this.props.deep.record.snapshot(messageID, (err, messageData) => {
-            messages.push({userID: messageData.userID, content: messageData.content});
-          })
-        })
-        this.setState({chatMessages: messages});
-      }, false);
+    this.props.deep.event.subscribe('trollbox-create-message', (messageData) => {
+      const messages = this.state.chatMessages.slice();
+      messages.unshift({userID: messageData.userID, content: messageData.content, time: messageData.time});
+      this.setState({chatMessages: messages});
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.deep.event.unsubscribe('trollbox-create-message');
   }
   
 
@@ -53,8 +32,14 @@ class TrollBox extends React.Component {
   }
 
   handleChatSubmit(e) {
+    e.preventDefault();
     if (this.state.userMessage.length > 0) {
-      this.props.deep.event.emit('trollbox-create-message', {userID:  this.props.userData.userID, content: this.state.userMessage});
+      const time = Date.now();
+      this.props.deep.event.emit('trollbox-create-message', {
+        userID:  this.props.userData.userID, 
+        content: this.state.userMessage,
+        time: time
+      });
       this.setState({userMessage: ''});
     }
   }
@@ -68,14 +53,16 @@ class TrollBox extends React.Component {
         <div className='messages-container'>
           <MessageList chatMessages={this.state.chatMessages} />
         </div>
-
         <div className='message-input'>
+        <form onSubmit={this.handleChatSubmit}>
           <input 
             id="message-input"
             autoComplete="off"
             onChange={this.handleChatInput}
+            value={this.state.userMessage}
           />
           <div className='trollBtn' onClick={this.handleChatSubmit}>Send</div>
+        </form>
         </div>
       </div>
     )

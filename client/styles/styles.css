@@ -26,6 +26,7 @@ body {
   background-color: #A3E9D4;
   font-size: 0.85em;
   letter-spacing: -0.05em;
+  overflow: hidden;
 }
 
 .landing {
@@ -289,11 +290,23 @@ span.fwdSlash {
 }
 
 .messages-container {
-  
   width: 100%;
-  height:auto;
+  height: 80%;
 }
+
+.messages-container ul {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 100%;
+  overflow: auto;
+}
+
+.messages-container li {
+  padding-left: 5px;
+}
+
 .message-input {
+  border-top: .5px solid black;
   bottom:0;
   position: absolute;
   width: 100%;

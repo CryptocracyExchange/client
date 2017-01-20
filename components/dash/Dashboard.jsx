@@ -5,7 +5,7 @@ import Transaction from './Transaction.jsx';
 import GraphWrapper from './GraphWrapper.jsx';
 import GraphControls from './GraphControls.jsx';
 import History from './History.jsx';
-import TrollBox from './TrollBox.jsx';
+import TrollBox from './TrollBox/index.jsx';
 import _ from 'lodash';
 import { Row, Col } from 'react-materialize';
 import mockData from '../../test/mockdata.js';
