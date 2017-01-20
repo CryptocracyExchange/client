@@ -7,13 +7,18 @@ class ExchangeRates extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // let calculate = ( (nextProps - this.state.exchangeRate) / this.state.exchangeRate ) * 100
-    // this.setState({percent: calculate.toFixed(2)});
-    // if(this.props.exchangeRate > nextProps) {
-    //   this.setState({isBigger: false});
-    // } else {
-    //   this.setState({isBigger: true});
-    // }
+    console.log('current exchangeRate', this.props.exchangeRate);
+    console.log('next exchangeRate', nextProps.exchangeRate);
+    let calculate = ( (nextProps.exchangeRate - this.props.exchangeRate) / this.props.exchangeRate ) * 100
+    console.log('calculate', calculate);
+    this.setState({percent: calculate ? calculate.toFixed(3) : 0});
+    if(this.props.exchangeRate > nextProps.exchangeRate) {
+      console.log('isSmaller');
+      this.setState({isBigger: false});
+    } else {
+      console.log('isBigger')
+      this.setState({isBigger: true});
+    }
   }
 
   render() {
@@ -29,7 +34,7 @@ class ExchangeRates extends React.Component {
         { percent }% <img src='/img/redArrow.svg'></img>
       </Col>
     );
-        
+
     return (
       <Row className="exchangeBar">
         <Col s={1}>

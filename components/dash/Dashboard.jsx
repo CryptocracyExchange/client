@@ -34,8 +34,6 @@ class Dashboard extends React.Component {
       periodDur: '5m',
       perLow: 0.00475,
       perHigh: 0.00475,
-      perOpen: 0,
-      perClose: 0,
       exchangeRate: null
     }
     this.ds = props.deep;
@@ -78,6 +76,12 @@ class Dashboard extends React.Component {
     })
 
     // set exchange rate
+    this.ds.event.subscribe('rates/BTCLTC', (rate) => {
+      console.log('rate', rate);
+      const change = _.extend({}, this.state);
+      change.exchangeRate = rate.rate;
+      this.setState(change);
+    });
     // this._setExchangeRate(this.state.primaryCurrency, this.state.secondaryCurrency);
   }
 
@@ -85,28 +89,29 @@ class Dashboard extends React.Component {
     this.balances.discard();
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log('nextState', nextState)
-    if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
-      // if (this.state.chartData) {
-      //   this.setState({chartData: null})
-      // }
-      setTimeout(() => {
-        // refactor to pass nextState instead of referencing state
-        this._getChartData(nextState.periodDur);
-      }, 200);
-    }
-  }
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log('nextState', nextState)
+  //   if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
+  //     // if (this.state.chartData) {
+  //     //   this.setState({chartData: null})
+  //     // }
+  //     setTimeout(() => {
+  //       // refactor to pass nextState instead of referencing state
+  //       this._getChartData(nextState.periodDur);
+  //     }, 200);
+  //   }
+  // }
 
   // _setExchangeRate(primary, secondary) {
   //   this.ds.record.getRecord(`rates/${primary}${secondary}`).whenReady((xchangeRate) => {
   //     let rate = xchangeRate.get('rate');
+  //     console.log('rate', rate);
   //     const change = _.extend({}, this.state);
   //     change.exchangeRate = rate;
   //     this.setState(change);
   //   });
   // }
-  
+
 // refactor to pass nextState instead of referencing state
   _getChartData(per) {
     // if (this._chartData) {
@@ -122,8 +127,6 @@ class Dashboard extends React.Component {
       change.chartData = chartdata.data;
       change.perHigh = chartdata.data[chartdata.data.length - 1].high;
       change.perLow = chartdata.data[chartdata.data.length - 1].low;
-      change.perOpen = chartdata.data[chartdata.data.length - 1].open;
-      change.perClose = chartdata.data[chartdata.data.length - 1].close;
       this.setState(change);
     })
 
@@ -137,6 +140,15 @@ class Dashboard extends React.Component {
 
   _setCurrency(e, primary, secondary) {
     e.preventDefault;
+    const oldPair = `rates/${this.state.primaryCurrency}${this.state.secondaryCurrency}`;
+    this.ds.event.unsubscribe(oldPair);
+    const newPair = `rates/${primary}${secondary}`;
+    this.ds.event.subscribe(newPair, (rate) => {
+      console.log('rate', rate);
+      const change = _.extend({}, this.state);
+      change.exchangeRate = rate.rate;
+      this.setState(change);
+    });
     const change = _.extend({}, this.state);
     change.primaryCurrency = primary;
     change.secondaryCurrency = secondary;
@@ -162,20 +174,19 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-        <div className='bodyWrapper'>
-          <Nav 
+        <div>
+          <Nav
             deep={this.props.deep}
             currencySelector={this._setCurrency.bind(this)}
-            toRoute={this.changeRoute.bind(this)} 
+            toRoute={this.changeRoute.bind(this)}
           />
-          <ExchangeRates 
+          <ExchangeRates
             primaryCurrency={this.state.primaryCurrency}
             secondaryCurrency={this.state.secondaryCurrency}
             perLow={this.state.perLow}
             perHigh={this.state.perHigh}
             periodDur={this.state.periodDur}
-            perOpen={this.state.perOpen}
-            perClose={this.state.perClose}
+            exchangeRate={this.state.exchangeRate}
           />
             }
           <div className='row content'>
@@ -213,4 +224,3 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
-
