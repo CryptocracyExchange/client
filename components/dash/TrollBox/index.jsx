@@ -53,11 +53,11 @@ class TrollBox extends React.Component {
         <div className='messages-container'>
           <MessageList chatMessages={this.state.chatMessages} />
         </div>
-        <div className='message-input'>
+        <div className="message-input">
         <form onSubmit={this.handleChatSubmit}>
           
           <input 
-              id="message-input"
+              className="message-input"
               autoComplete="off"
               onChange={this.handleChatInput}
               value={this.state.userMessage}

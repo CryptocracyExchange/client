@@ -66,9 +66,13 @@ class Landing extends React.Component {
           <div className='loginForm'>
             <form onSubmit={(e) => this.submitHandler(e)}>
               <label>
-                <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
+                <div className='login-container'>
+                  <input type="text" value={this.state.username} onChange={(e) => this.updateUsername(e)} placeholder="username" name="name" />
+                </div>
                 <br /><br />
-                <input type="password" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
+                <div className='login-container'>
+                  <input type="password" value={this.state.password} onChange={(e) => this.updatePassword(e)} placeholder="password" name="name" />
+                </div>
               </label>
               <br /><br />
               {!this.state.correct && this.state.username.length === 0 && this.state.password.length === 0 && <p>Invalid login</p>}
