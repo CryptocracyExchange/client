@@ -388,6 +388,11 @@ span.fwdSlash {
   position: absolute;  
 }
 
+.settingsHeader {
+  color: #888;
+  font-size: 1.5rem;
+}
+
 .settingsBody {
   left:10%;
   width:80%;

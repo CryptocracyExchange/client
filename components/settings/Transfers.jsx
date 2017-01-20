@@ -46,11 +46,11 @@ class Transfers extends React.Component {
   render() {
     return (
       <div className='transfers'>
-        <h4>Transfer Out</h4>
+        <h4 className="settingsHeader">Transfer Out</h4>
         <select name='Currency' onChange={this.handleCurrencyUpdate}>
-          <option value='BTC'>BTC</option>
-          <option value='LTC'>LTC</option>
-          <option value='DOGE'>DOGE</option>
+          <option id="inputBtn" value='BTC'>BTC</option>
+          <option id="inputBtn" value='LTC'>LTC</option>
+          <option id="inputBtn" value='DOGE'>DOGE</option>
         </select>
         <input
           type='text'
