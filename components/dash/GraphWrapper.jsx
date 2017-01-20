@@ -52,7 +52,7 @@ class Graph extends React.Component {
       .stroke("#4682B4")
       .fill("#4682B4");
 
-    var chartHeight = window.innerHeight * 0.5;
+    var chartHeight = window.innerHeight * 0.4;
     var resize = function() {
       charHeight = window.innerHeight * 0.42;
     }
@@ -60,8 +60,8 @@ class Graph extends React.Component {
     // window.onresize = resize;
 
     return (
-      <ChartCanvas ratio={ratio} width={width} height={chartHeight}
-          margin={{ left: 20, right: 20, top: 20, bottom: 20 }} type={type}
+      <ChartCanvas ratio={ratio} width={width} height={400}
+          margin={{ left: 48, right: 48, top: 20, bottom: 20 }} type={type}
           seriesName="MSFT"
           data={data} calculator={[sma20, ema20, ema50, smaVolume50]}
           xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
@@ -150,7 +150,7 @@ class GraphWrapper extends React.Component {
       ) 
     } else {
       this.props.data.forEach((d, i) => {
-        d.date = new Date(parseTime(d.date));
+        d.date = new Date(d.date);
         console.log('chartDate00000', d)
         d.open = +d.open;
         d.high = +d.high;
