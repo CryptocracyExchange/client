@@ -22,7 +22,7 @@ class ExchangeRates extends React.Component {
 
   render() {
     let isBigger = this.state ? this.state.isBigger : null;
-    let percent = Math.floor(((this.props.perOpen - this.props.perClose)/this.props.perOpen * 100));
+    let percent = this.props.perOpen === null && this.props.perClosed === null ? '-' : Math.floor(((this.props.perOpen - this.props.perClose)/this.props.perOpen * 100));
     let positive = (
       <Col className='percentChange' s={1}>
         { percent }% <img src='/img/greenArrow.svg'></img>
