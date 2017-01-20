@@ -169,6 +169,14 @@ body {
   margin:auto;
 }
 
+.percentUp {
+  color: #28DADA;
+}
+
+.percentDown {
+  color: #DA4128;
+}
+
 .total {
   width:100%;
   position: relative;
