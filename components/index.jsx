@@ -7,7 +7,7 @@ import Settings from './settings/Settings.jsx';
 import CreateUser from './auth/CreateUser.jsx';
 import { Router, Route, IndexRoute, browserHistory, withRouter } from 'react-router';
 
-const url = '35.167.204.20'; // Need to change to production IP/URL when deploying
+const url = '35.167.82.137'; // Need to change to production IP/URL when deploying
 // const url = 'localhost';
 const client = window.deepstream(`${url}:6020`);
 let data;
