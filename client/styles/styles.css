@@ -182,7 +182,7 @@ body {
 }
 
 .percentUp {
-  color: #28DADA;
+  color: #28DA8A;
 }
 
 .percentDown {
@@ -276,7 +276,7 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   height: 2rem !important;
   border-bottom:0.5px solid #D0D0D0;
 
-} 
+}
 
 .historyTable a {
   font-size:0.85rem !important;
@@ -412,7 +412,7 @@ span.fwdSlash {
   height: 100%;
   width: 100%;
   /*background: #D0D0D0;
-  position: absolute; */ 
+  position: absolute; */
 }
 
 .allSettings {
@@ -488,7 +488,7 @@ span.fwdSlash {
   background-color: #21CE99;
   color:#FDFDFD;
   transition: 0.3s;
-  bottom:0;  
+  bottom:0;
 }
 
 .buyBtn:hover {
