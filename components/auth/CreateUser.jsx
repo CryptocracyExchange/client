@@ -43,14 +43,12 @@ class CreateUser extends React.Component {
   };
 
   signUp(e) {
-    const username = this.state.username
-    const password = this.state.password
-    const email = this.state.email
-    console.log('process.env.NODE_ENV is: ', process.env.NODE_ENV);
+    const username = this.state.username;
+    const password = this.state.password;
+    const email = this.state.email;
     let url = '';
     if (process.env.NODE_ENV) {
-      console.log('hits process.env.NODE_ENV is truthy!')
-      url = 'http://accounts:8999/signup';
+      url = 'http://cryptocracy.co:8999/signup';
     } else {
       url = 'http://localhost:8999/signup';
     }
