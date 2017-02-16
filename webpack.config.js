@@ -30,9 +30,7 @@ const config = {
     ],
   }
 };
-console.log('In the webpack config this is actually printed');
 if (process.env.NODE_ENV === 'production') {
-  console.log('and this is printed b/c its production?')
   config.plugins = [
     new CompressionPlugin({
       asset: "[path].gz[query]",
@@ -61,7 +59,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  console.log('and this is printed because its not production?')
   config.entry.unshift(
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     'webpack/hot/only-dev-server'
