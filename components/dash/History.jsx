@@ -21,8 +21,8 @@ const TableRows = (props) => {
           <tr key={key}>
             <td>{props.orders[orderID].type}</td>
             <td>{props.orders[orderID].amount}</td>
-            <td>{props.orders[orderID].price}</td>
-            <td>{props.orders[orderID].price * props.orders[orderID].amount}</td>
+            <td>{props.orders[orderID].price.toFixed(3)}</td>
+            <td>{(props.orders[orderID].price * props.orders[orderID].amount).toFixed(3)}</td>
           </tr>
         );
       })}

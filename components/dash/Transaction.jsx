@@ -83,8 +83,8 @@ class Transaction extends React.Component {
         <div className='transWrapper'>
           <Row className='balanceWrapper'> 
             <span>Balance:</span>
-            { this.props.primaryBalance.available || 0 } &nbsp; {this.props.primaryCurrency}<br/>
-            { this.props.secondaryBalance.available || 0 } &nbsp; {this.props.secondaryCurrency}
+            { this.props.primaryBalance.available.toFixed(5) || 0 } &nbsp; {this.props.primaryCurrency}<br/>
+            { this.props.secondaryBalance.available.toFixed(5) || 0 } &nbsp; {this.props.secondaryCurrency}
           </Row> 
           <Row>
             <Col s={2}>
