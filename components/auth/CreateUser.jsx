@@ -53,11 +53,7 @@ class CreateUser extends React.Component {
     const password = this.state.password;
     const email = this.state.email;
     let url = '';
-    if (process.env.NODE_ENV) {
-      url = 'http://cryptocracy.co:8999/signup';
-    } else {
-      url = 'http://localhost:8999/signup';
-    }
+    url = 'http://cryptocracy.co:8999/signup';
     $.ajax({
       url: url,
       method: 'POST',
