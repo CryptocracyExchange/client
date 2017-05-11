@@ -22,6 +22,12 @@ class CreateUser extends React.Component {
       // console.log('the login is successful yet the user is not redirected to login')
       this.props.router.push('/');
       this.props.deep.event.emit('initBalance', {userID: this.state.username});
+      setTimeout( () => {
+      this.props.deep.event.emit('updateBalance', {userID: this.state.username, currency: 'BTC', isExternal: true, update: 100000})
+      this.props.deep.event.emit('updateBalance', {userID: this.state.username, currency: 'LTC', isExternal: true, update: 100000})
+      this.props.deep.event.emit('updateBalance', {userID: this.state.username, currency: 'DOGE', isExternal: true, update: 100000})
+    }, 2000)
+      
     }
   };
 

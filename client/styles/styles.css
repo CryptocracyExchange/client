@@ -88,6 +88,7 @@ body {
   height:75%;
   position: fixed;
   display:flex !important;
+  flex-wrap:nowrap !important;
   background-color:#A3E9D4;
 }
 
@@ -551,6 +552,7 @@ span.fwdSlash {
   padding: 0 1.5px 3px 1.5px !important;
   flex-grow:1;
   flex-wrap:wrap;
+  overflow:hidden;
 }
 
 .right-column {
