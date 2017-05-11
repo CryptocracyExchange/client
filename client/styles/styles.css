@@ -11,10 +11,25 @@ html {
   box-sizing: inherit;
 }
 
+.modal-content {
+  padding:20px !important;
+  text-align:center !important;
+}
+
+.modal-content p {
+  margin:0;
+}
+
 .col {
   /*margin: 0 !important;*/
   /*padding: 0 !important;*/
 }
+
+.react-stockchart {
+  margin:auto;
+}
+
+
 
 .row {
   /*margin: 0 !important;*/
@@ -533,6 +548,26 @@ span.fwdSlash {
 .trollBtn:hover {
   cursor: pointer;
   background-color: #EB9F92;
+  transition: 0.3s;
+}
+
+.aboutBtn {
+  width:10%;
+  height:25%;
+  left:45%;
+  top:58.5%;
+  display:flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  /*background-color: #DA4E28;*/
+  color:#888888;
+  transition: 0.3s;
+  bottom:0;
+}
+.aboutBtn:hover {
+  cursor: pointer;
+  background-color: rgba(253, 253, 253, 0.36);
   transition: 0.3s;
 }
 

@@ -7,7 +7,7 @@ import GraphControls from './GraphControls.jsx';
 import History from './History.jsx';
 import TrollBox from './TrollBox/index.jsx';
 import _ from 'lodash';
-import { Row, Col } from 'react-materialize';
+import { Row, Col, Modal, Button } from 'react-materialize';
 import mockData from '../../test/mockdata.js';
 
 class Dashboard extends React.Component {
@@ -188,6 +188,35 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className='footer'>
+            <Modal
+            fixedFooter
+              trigger={
+                <div className='aboutBtn'>
+                  About
+                </div>
+              }
+              actions={[<Button modal='close' flat>Close</Button>]}
+              >
+
+              <h3>About Cryptocracy</h3>
+              Cryptocracy is an exploration in performance, stability and scalability.
+              <ul style={{textAlign:'center'}}>
+                <li>React</li>
+                <li>deepstream.io</li>
+                <li>rethinkDB</li>
+                <li>redis</li>
+                <li>Node/Express</li>
+              </ul>
+              As you can see, this is a demo. Real trades are being generated (by bot managed dummy users). The option to transfer funds from an external wallet are disabled for obvious reasons.  <br/>
+              <span>Cryptocracy was made by:</span>
+              <ul style={{textAlign:'center'}}>
+                <li>Kai Hsia -- <a href='https://github.com/kaihsia' target='_blank'>Github</a></li>
+                <li>Matt Goldwater -- <a href='https://github.com/MJGwater' target='_blank'>Github</a></li>
+                <li>Harry Bellenie -- <a href='https://github.com/KN3LL2K' target='_blank'>Github</a></li>
+                <li>Mikel Duffy -- <a href='https://github.com/mikelduffy' target='_blank'>Github</a></li>
+              </ul>
+              <span>Thank you!</span>
+              </Modal>
           </div>
         </div>
       )
