@@ -38,15 +38,16 @@ class Dashboard extends React.Component {
       perClose: null,
       exchangeRate: null
     }
+    // console.log(window.localStorage.getItem('cryptocracyuserID'))
     this.ds = props.deep;
-    this.userData = props.userData;
-    this.userID = props.userData.userID;
+    this.userData = this.props.userData;
+    this.userID = window.localStorage.getItem('cryptocracyuserID');
 
     this._chartData;
-
-    this.balances = this.ds.record.getRecord(`balances/${this.userID}`);
+    this._exchangeRate;
+    this.balances = this.ds.record.getRecord(`balances/${this.userID}`)
+    
     this.ds.event.subscribe('histData', (data) => {
-      console.log('hist', data);
       const change = _.extend({}, this.state);
       change.chartData = data;
       this.setState(change);
@@ -57,7 +58,6 @@ class Dashboard extends React.Component {
     // get chart data
     this._getChartData('5m') // replace with default
     this._getExchangeRate('BTC', 'LTC');
-
     // get user balances
     this.balances.whenReady((record) => {
       const change = _.extend({}, this.state);
@@ -66,14 +66,12 @@ class Dashboard extends React.Component {
     });
     // subscribe to balance changes
     this.balances.subscribe((data) => {
-      console.log('newBal', data);
       const change = _.extend({}, this.state);
       change.userBalances = data;
       this.setState(change);
     });
     //notification for closed orders
     this.ds.event.subscribe('closedSale', (data) => {
-      console.log('toast!', data)
       if (data.userID === this.userID) {
         Materialize.toast('Success! An order was filled!', 4000);
       }
@@ -86,12 +84,8 @@ class Dashboard extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (this.state.primaryCurrency !== nextState.primaryCurrency || this.state.secondaryCurrency !== nextState.secondaryCurrency || this.state.periodDur !== nextState.periodDur) {
-      // if (this.state.chartData) {
-      //   this.setState({chartData: null})
-      // }
       this._getExchangeRate(nextState.primaryCurrency, nextState.secondaryCurrency);
       setTimeout(() => {
-        // refactor to pass nextState instead of referencing state
         this._getChartData(nextState.periodDur);
       }, 200);
     }
@@ -99,21 +93,18 @@ class Dashboard extends React.Component {
 
   _getExchangeRate(primary, secondary) {
     const newPair = `rates/${primary}${secondary}`;
-    this.ds.event.subscribe(newPair, (rate) => {
-      console.log('rate', rate);
+    this._exchangeRate = this.ds.record.snapshot(newPair, (err, data) => {
+      if (err) {
+        console.log(err)
+      }
       const change = _.extend({}, this.state);
-      change.exchangeRate = rate;
+      change.exchangeRate = data.rate;
       this.setState(change);
     });
   }
 
-// refactor to pass nextState instead of referencing state
   _getChartData(per) {
-    // if (this._chartData) {
-    //   this._chartData.discard();
-    // }
     const pair = this.state.primaryCurrency + this.state.secondaryCurrency + '';
-
     this._chartData = this.ds.record.getRecord(`chartData/${pair}${per}`).whenReady((data) => {
       let chartdata = data.get()
       let change = _.extend({}, this.state);
@@ -180,7 +171,7 @@ class Dashboard extends React.Component {
                 secondaryBalance={this.state.userBalances[this.state.secondaryCurrency]}
                 deep={this.props.deep}
               />
-               <History userID={this.props.userData.userID} deep={this.props.deep} />
+               <History userID={this.userID} deep={this.props.deep} />
             </div>
             <div className='center-column'>
               <div className='graphWrapper'>

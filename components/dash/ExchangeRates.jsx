@@ -6,25 +6,8 @@ class ExchangeRates extends React.Component {
     super(props);
   }
 
-  componentWillReceiveProps(nextProps) {
-  //   if (nextProps.perOpen && nextProps.perClose) {
-  //     let oldPercent = Math.floor(((this.props.perOpen - this.props.perClose)/this.props.perOpen * 100));
-  //     let newPercent = Math.floor(((nextProps.perOpen - nextProps.perClose)/nextProps.perOpen * 100));
-  //     if(oldPercent > newPercent) {
-  //       // console.log('isSmaller');
-  //       this.setState({isBigger: false});
-  //     } else {
-  //       // console.log('isBigger')
-  //       this.setState({isBigger: true});
-  //     }
-  //   }
-  }
-
   render() {
-    console.log('exchangeRate', this.props.exchangeRate);
-
-    // let isBigger = this.state ? this.state.isBigger : null;
-    let exchRate = this.props.exchangeRate ? this.props.exchangeRate.toFixed(2) : 0;
+    let exchRate = this.props.exchangeRate ? this.props.exchangeRate.toFixed(5) : 0;
     let percent = this.props.perOpen === null && this.props.perClosed === null ? '-' : Math.floor(((this.props.perOpen - this.props.perClose)/this.props.perOpen * 100));
     let percentClass = percent === '-' ? '' : percent === 0 ? '' : percent > 0 ? 'percentUp' : 'percentDown';
     let arrowImage = percentClass === 'percentUp' ? '/img/greenArrow.svg' : '/img/redArrow.svg';

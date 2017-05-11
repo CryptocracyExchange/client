@@ -57,7 +57,6 @@ class History extends React.Component {
       closedOrders: {},
       openOrders: {}
     }
-
     const queryStringClosed = JSON.stringify({
       table: 'closed',
       query: [
@@ -138,9 +137,9 @@ class History extends React.Component {
             </div>
           </Tab>
           <Tab id='closed' title="Closed" >
-          <div className='tableWrapper'>
-            <OrderTable orders={this.state.closedOrders} />
-          </div>
+            <div className='tableWrapper'>
+              <OrderTable orders={this.state.closedOrders} />
+            </div>
           </Tab>
         </Tabs>
       </div>

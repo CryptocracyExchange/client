@@ -30,7 +30,7 @@ const config = {
     ],
   }
 };
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'prod') {
   config.plugins = [
     new CompressionPlugin({
       asset: "[path].gz[query]",
@@ -58,7 +58,7 @@ if (process.env.NODE_ENV === 'production') {
   ]
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'prod') {
   config.entry.unshift(
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     'webpack/hot/only-dev-server'

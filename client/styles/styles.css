@@ -275,13 +275,18 @@ nav .tabs .indicator { border-bottom: 2px solid #DA4E28 !important; }
   justify-content: space-between;
   height: 2rem !important;
   border-bottom:0.5px solid #D0D0D0;
-
+  overflow-y:scroll;
 }
 
 .historyTable a {
   font-size:0.85rem !important;
   padding:3px !important;
   line-height:2;
+}
+
+.tableWrapper {
+  overflow-y: scroll;
+  height:250px;
 }
 
 .historyEntries {

@@ -6,14 +6,10 @@ class Transaction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      marketValue: 902,
+      marketValue: 0,
       price: 0,
       amount: 1
     };
-  }
-
-  componentDidMount() {
-    console.log('tr', this.props)
   }
 
   clickHandler(e, type) {
